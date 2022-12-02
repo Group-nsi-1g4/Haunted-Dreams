@@ -19,7 +19,7 @@ Player1 = {'position':[x1,y1] , 'Vitesse': 2,}
 bot2 = {'position':[x2,y2] , 'Vitesse': 0.09}
 bot1= {'position':[x3,y3] , 'Vitesse': 0.05}
 
-
+test
 
 def deplacement1():
     global x1,y1
