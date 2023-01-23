@@ -1,1 +1,0 @@
-pyxel edit media.pyxres
