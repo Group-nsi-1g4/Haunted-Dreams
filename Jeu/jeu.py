@@ -37,6 +37,26 @@ def FrameDep(entity,s):                                                         
         entity['Frame'] = 2
     elif pyxel.frame_count % s >= (s*0.75) :
         entity['Frame'] = 3
+        
+def Draw32px(entity,u,v,inverse):                                               #Fonction permettant d'afficher une entité de 32 pixels et 4 frame d'animations.
+    if entity['Sens']=='Droite':                                                    #Regarde si il regarde à Gauche
+        if entity['Frame']==0:                                                           #Les différentes Frames d'animations
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,inverse*32,32,1)
+        elif entity['Frame']==1:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,inverse*32,32,1)
+        elif entity['Frame']==2:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,inverse*32,32,1)
+        else:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,inverse*32,32,1)
+    if entity['Sens']=='Gauche':                                                    #Regarde si il regarde à Droite
+        if entity['Frame']==0:                                                            #Les différentes Frames d'animations
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,-inverse*32,32,1)
+        elif entity['Frame']==1:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,-inverse*32,32,1)
+        elif entity['Frame']==2:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,-inverse*32,32,1)
+        else:
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,-inverse*32,32,1)
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -60,7 +80,7 @@ Player['Fatigue']= 0
 
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
-    if Player['y']+15<319:                                                      #Déplacement Vers le bas 
+    if Player['y']+15<319 :                                                      #Déplacement Vers le bas 
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             Player['y']=Player['y']+Player['Vitesse']
     if Player['x']+13<639 :                                                     #Déplacement Vers la Droite et modifie le sens vers la droite    
@@ -84,7 +104,7 @@ def deplacement():                                                              
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
         Player['Vitesse']=4
-        Player['Stamina']= Player['Stamina']-2
+        Player['Stamina']= Player['Stamina']-1.75
         FrameDep(Player,12)
         if Player['Stamina']<=5:
             Player['Fatigue']= 1
@@ -101,6 +121,24 @@ def Course():                                                                   
     if  Player['Stamina'] <= 0 :                                                #Stamina ne passe pas 0%
         Player['Stamina']= Player['Stamina']+2  
 
+def drawSprint():
+    if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,0,32,16,1)
+        
+    elif Player['Stamina']<=85 and Player['Stamina']>60 and Player['Fatigue']!=1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,16,32,16,1)
+        
+    elif Player['Stamina']<=60 and Player['Stamina']>45 and Player['Fatigue']!=1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,32,32,16,1)
+        
+    elif Player['Stamina']<= 45 and Player['Stamina']>25 and Player['Fatigue']!=1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,48,32,16,1)
+        
+    elif Player['Stamina']<=25 and Player['Fatigue']!=1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,64,32,16,1)
+        
+    elif Player['Fatigue']==1:
+        pyxel.blt(Player['x']-75,Player['y']-68,2,96,80,32,16,1)
 '''
                                                                                 ██████╗░░█████╗░████████╗
                                                                                 ██╔══██╗██╔══██╗╚══██╔══╝
@@ -120,8 +158,9 @@ Bot1['Frame']= 0
 Bot2=dict()
 Bot2['x']=50                                                                    #Indique l'emplacement X du Bot2
 Bot2['y']=57                                                                    #Indique l'emplacement Y du Bot2
-Bot2['Vitesse']=1                                                               #Indique la Vitesse du Bot2
+Bot2['Vitesse']=2.05                                                               #Indique la Vitesse du Bot2
 Bot2['Sens']= 'Droite'                                                          #Indique le Sens du Bot2
+Bot2['Frame']=0
 
 def ai2():                                                                      #Fait en sorte que le bot2 pourusit le joueur en fonction de sa vitesse 
     timer=0                                                                     #met le timer a 0 
@@ -135,11 +174,7 @@ def ai2():                                                                      
         Bot2['y']=Bot2['y']+1*Bot2['Vitesse']
     if Player['y']-Bot2['y'] <= 0:
         Bot2['y']=Bot2['y']-1*Bot2['Vitesse']
-    timer=timer+1                                                               #fait de changer x ticks de design (essai et non final)
-    if pyxel.frame_count%2 == 0:
-        Bot2['Frame']= 1
-    else:
-        Bot2['Frame']= 0
+    FrameDep(Bot2,36)
         
         
         
@@ -188,14 +223,20 @@ def Batterie():                                                                 
         Player['Batterie']=Player['Batterie']-0.01
     if Player['Batterie']<=100:
         Player['Vue']=60
+        Bat=(str('Batterie : '))+(str(round(Player['Batterie'])))
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,0,32,16,1)    
     if Player['Batterie']<=80:
         Player['Vue']=55
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,16,32,16,1)
     if Player['Batterie']<=60:
         Player['Vue']=45
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,32,32,16,1)
     if Player['Batterie']<=40:
         Player['Vue']=35
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,48,32,16,1)
     if Player['Batterie']<=20:
         Player['Vue']=20
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,64,32,16,1)
     if Player['Batterie']<=3:
         Player['Batterie']=2
     if pyxel.btn(pyxel.KEY_B):
@@ -209,12 +250,23 @@ def Lampe():                                                                    
     for x in range(Player['x']-75,Player['x']+75):
         for y in range(Player['y']-75,Player['y']+75):
             b=pyxel.sqrt((x-Player['x'])**2+(y-Player['y'])**2)
-            if b>Player['Vue']+6:
+            if b>Player['Vue']:
                 pyxel.pset(x,y,0)
-            if b>=Player['Vue'] and b<Player['Vue']+4:
+            if b>=Player['Vue']-7 and b<=Player['Vue'] and pyxel.pget(x,y)==4:
+                pyxel.pset(x,y,1)
+                
+def LampeLum():
+    for x in range(Player['x']-66,Player['x']+66):
+        for y in range(Player['y']-66,Player['y']+66):
+            b=pyxel.sqrt((x-Player['x'])**2+(y-Player['y'])**2)
+            if b<Player['Vue']-22:
                 pyxel.pset(x,y,10)
-            if b>=Player['Vue']+4 and b<Player['Vue']+6:
+            if b>=Player['Vue']-22 and b<Player['Vue']-16:
                 pyxel.pset(x,y,9)
+            if b>=Player['Vue']-16 and b<=Player['Vue']-7:
+                pyxel.pset(x,y,4)
+            if b>=Player['Vue']-7 and b<=Player['Vue']:
+                pyxel.pset(x,y,1)
 
 '''
                                                                                 ███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗
@@ -319,7 +371,6 @@ class App:
             ai1()
             curseur()
             Course()
-            Batterie()
 
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
@@ -341,62 +392,29 @@ class App:
         global start
 
         if start==1:                                                            #Si la partie est démarrée
-            pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   #affiche qu'une certaine partie de la map a l'écran
-            pyxel.cls(0)                                                        #colorie toute la map en noir 
-            pyxel.blt(0,0,0,0,0,640,320,0)                                      #imprime """la map"""
-            Lampe()
-                                                                                #Si le bot regarde a droite : sprite a droite et inversement            
-            if Player['Sens']=='Droite':
-                if Player['Frame'] == 0 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,0,32,32,1)
-                elif Player['Frame'] == 1 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,32,32,32,1)
-                elif Player['Frame'] == 2 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,64,32,32,1)
-                elif Player['Frame'] == 3 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,96,32,32,1)
-            elif Player['Sens']=='Gauche':
-                if Player['Frame'] == 0 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,0,-32,32,1)
-                elif Player['Frame'] == 1 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,32,-32,32,1)
-                elif Player['Frame'] == 2 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,64,-32,32,1)
-                elif Player['Frame'] == 3 :
-                    pyxel.blt(Player['x']-16,Player['y']-16,1,0,96,-32,32,1)
-                
-                                                                                #Si l'ennemis est dans le flash : il est visible
-                                                                                # + Srpite change si sa Frame est de 1 ou de 0
-            if ((-Bot2['x']+Player['x']) < Player['Vue'] and (Bot2['x']-Player['x']) < Player['Vue']) and ((-Bot2['y']+Player['y']) < Player['Vue'] and (Bot2['y']-Player['y']) < Player['Vue'])  :
-                if Bot2['Frame']== 1 :
-                    pyxel.blt(Bot2['x'],Bot2['y'],1,48,0,16,16,0)
-                elif Bot2['Frame']== 0:
-                    pyxel.blt(Bot2['x'],Bot2['y'],1,48,16,16,16,0)
+            pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   
+            pyxel.cls(0)                                                        #colorie toute la map en noir
+            LampeLum()                                                          #affiche les couleurs de la lampe  
+            pyxel.bltm(0,0,0,0,0,640,320,1)                                     #imprime la tilemap
+            Lampe()                                                             #affiche qu'une certaine partie de la map a l'écran
+                                                                                           
+            Draw32px(Player,0,0,1)                                              #affiche le joueur et des animations
             
-        
+            
+                                                                                #Si l'ennemis est dans le flash : il est visible
+            if ((-Bot2['x']+Player['x']) < Player['Vue'] and (Bot2['x']-Player['x']) < Player['Vue']) and ((-Bot2['y']+Player['y']) < Player['Vue'] and (Bot2['y']-Player['y']) < Player['Vue'])  :
+                Draw32px(Bot2,224,0,-1)
+            
+            
                                                                                 #Si le bot regarde a droite : sprite a droite et inversement + Flash (comme au-dessus)
             if ((-Bot1['x']+Player['x']) < Player['Vue'] and (Bot1['x']-Player['x']) < Player['Vue']) and ((-Bot1['y']+Player['y']) < Player['Vue'] and (Bot1['y']-Player['y']) < Player['Vue'])  :
-                if Bot1['Sens']=='Droite':
-                    pyxel.blt(Bot1['x'],Bot1['y'],1,32,0,16,16,0)
-                if Bot1['Sens']=='Gauche':
-                    pyxel.blt(Bot1['x'],Bot1['y'],1,32,16,16,16,0)
+                Draw32px(Bot1,192,0,1)
                     
+            Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
+                                                                                #Ce changement était nessessaire pour que la batterie s'affiche.
 
-            XX=(str('X : '))+(str(Xsouris))                                     
-            YY=(str('Y : '))+(str(Ysouris))                                     
-            pyxel.text(Player['x']-75,Player['y']-75,XX,2)                                                #Position Y du curseur en haut a droite de l'écran                                   
-            pyxel.text(Player['x']-45,Player['y']-75,YY,2)                                               #Position Y du curseur en haut a droite de l'écran 
-
-
-            Bat=(str('Batterie : '))+(str(round(Player['Batterie'])))
-            pyxel.text(Player['x']-75,Player['y']-61,Bat,2)                                              #Batterie restante en haut a droite de l'écran           
-
-
-            Stam=(str('Stamina : '))+(str(round(Player['Stamina'])))                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
-            if Player['Stamina'] >= 25 :
-                pyxel.text(Player['x']-75,Player['y']-68,Stam,2)
-            else:
-                pyxel.text(Player['x']-75,Player['y']-68,Stam,8)
+            drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
+           
                 
 
             pyxel.pset(Xsouris,Ysouris,14)                                      #Curseur Visible pendant le jeu avec un point et dans le menu principal et les options avec un curseur
@@ -406,3 +424,10 @@ class App:
         
 
 App()
+
+'''
+            XX=(str('X : '))+(str(Xsouris))                                     
+            YY=(str('Y : '))+(str(Ysouris))                                     
+            pyxel.text(Player['x']-75,Player['y']-75,XX,2)                                                #Position Y du curseur en haut a droite de l'écran                                   
+            pyxel.text(Player['x']-45,Player['y']-75,YY,2)                                               #Position Y du curseur en haut a droite de l'écran 
+'''
