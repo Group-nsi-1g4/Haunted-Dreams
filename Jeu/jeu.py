@@ -257,31 +257,46 @@ def Batterie():                                                                 
         Player['Batterie']=Player['Batterie']-0.01
     if Player['Batterie']<=100:                                                      #Si la batterie est entre 100% et 80%:
         Player['Vue']=60                                                                  #la vue passe a 60 pixels
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,0,32,16,1)                           #le barre de pile est pleine (vert foncé)
         
     if Player['Batterie']<=80:                                                       #Si la batterie est entre 80% et 60%:
         Player['Vue']=55                                                                  #la vue passe a 55 pixels
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
         
     if Player['Batterie']<=60:                                                       #Si la batterie est entre 60% et 40%:
         Player['Vue']=45                                                                  #la vue passe a 45 pixels
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
         
     if Player['Batterie']<=40:                                                       #Si la batterie est entre 40% et 20%:
         Player['Vue']=35                                                                  #la vue passe a 35 pixels
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
         
     if Player['Batterie']<=20:                                                       #Si la batterie est à 20% ou moins:
         Player['Vue']=20                                                                  #la vue passe a 20 pixels
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
         
     if Player['Batterie']<=3:                                                        #La batterie ne va pas en dessous de 2%
         Player['Batterie']=2
+
+    if Player['Vue']<20:
+        Player['Vue']=20
     if pyxel.btn(pyxel.KEY_B):                                                  #Test de la batterie avec des touches
         Player['Batterie']=100
     if pyxel.btn(pyxel.KEY_N):
         Player['Batterie']=Player['Batterie']-10
+  
+
+def BatterieAffichage():                                                                 #Diminue la luminosité de la lampe torche en fonction de la Batterie
+    if Player['Batterie']<=100:                                                      #Si la batterie est entre 100% et 80%:
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,0,32,16,1)                           #le barre de pile est pleine (vert foncé)
         
+    if Player['Batterie']<=80:                                                       #Si la batterie est entre 80% et 60%:
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
+        
+    if Player['Batterie']<=60:                                                       #Si la batterie est entre 60% et 40%:
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
+        
+    if Player['Batterie']<=40:                                                       #Si la batterie est entre 40% et 20%:
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
+        
+    if Player['Batterie']<=20:                                                       #Si la batterie est à 20% ou moins:
+        pyxel.blt(Player['x']-80,Player['y']-80,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
+
         
         
 
@@ -296,8 +311,8 @@ def Lampe():                                                                    
                 pyxel.pset(x,y,1)
                 
 def LampeLum():
-    for x in range(Player['x']-66,Player['x']+66):
-        for y in range(Player['y']-66,Player['y']+66):
+    for x in range(Player['x']-75,Player['x']+75):
+        for y in range(Player['y']-75,Player['y']+75):
             b=pyxel.sqrt((x-Player['x'])**2+(y-Player['y'])**2)                 #place différents pixels de couleurs selon la distance avec le joueur: 
             if b<Player['Vue']-22:                                                   #à 22 pixels ou moins, couleur jaune
                 pyxel.pset(x,y,10)
@@ -307,6 +322,34 @@ def LampeLum():
                 pyxel.pset(x,y,4)
             if b>=Player['Vue']-7 and b<=Player['Vue']:                              #à 7 pixel jusqu'a la limite, couleur bleu foncé
                 pyxel.pset(x,y,1)
+            if pyxel.btn(pyxel.KEY_F):                                          #affiche le rayon blanc du flash 
+                if b<Player['Vue']-40:                                                   
+                    pyxel.pset(x,y,7)
+
+
+def flash():                                                                    #Flash les enemie 
+        if pyxel.btn(pyxel.KEY_F):                                              #si la touche F est pressé alors 
+                Player['Batterie']=Player['Batterie']-0.7                       #enlève 20% de batterie par seconde de flash 
+                Player['Vue']=Player['Vue']+5                                   #augmente la vue par 5 a chaque seconde 
+                if Player['Vue']>85:                                            #permet de ne pas dépassé le clip 
+                    Player['Vue']=Player['Vue']-5
+                if Player['Batterie']<5:                                        #permet de faire une transition si le joueur na plus de batterie 
+                    Player['Vue']=Player['Vue']-10
+                if not pyxel.btn(pyxel.KEY_F):                                        #permet de faire une transition si le joueur na plus de batterie 
+                    Player['Vue']=Player['Vue']-10
+
+
+
+            
+
+
+
+
+
+
+
+
+
 
 '''
                                                                                 ███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗
@@ -442,10 +485,10 @@ class App:
             Lampe()                                                             #affiche qu'une certaine partie de la map a l'écran
                                                                                            
             Draw32px(Player,0,0,1)                                              #affiche le joueur et des animations
-            
-            
-            Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
-                                                                                #Ce changement était nessessaire pour que la batterie s'affiche.
+            BatterieAffichage()
+            if not pyxel.btn(pyxel.KEY_F) and Player['Batterie']>5:             #si la touche flash et la battetrie est supérierur a 5
+                Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
+            flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
 
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
 
