@@ -87,6 +87,7 @@ Player['Batterie']= 100                                                         
 Player['Frame']= 0
 Player['Fatigue']= 0
 Player['StamDepletion']=1
+Player['PV']=6
 
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
@@ -109,8 +110,32 @@ def deplacement():                                                              
     else:
         Player['Frame']= 0
         
-        
-        
+def PointdeVie():
+    if Player['PV']==6:
+       pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
+    
+    if Player['PV']==5:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,39,16,1)
+    
+    if Player['PV']==4:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,29,16,1)
+
+    if Player['PV']==3:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,23,16,1)
+
+    if Player['PV']==2:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,13,16,1)
+
+    if Player['PV']==1:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
+    
+    if Player['PV']==0:
+        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,0,16,1)
+    
+    if pyxel.btn(pyxel.KEY_W):
+        Player['PV']=Player['PV']-1
+
+
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
         Player['Vitesse']=4
@@ -131,24 +156,24 @@ def Course():                                                                   
     if  Player['Stamina'] <= 0 :                                                #Stamina ne passe pas 0%
         Player['Stamina']= Player['Stamina']+2  
 
-def drawSprint():
+def     drawSprint():
     if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:                   #Si la stamina restante est entre 100% et 80% et que le joueur n'est pas fatiguer :
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,0,32,16,1)                                          #Montrer la barre remplie
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,0,32,16,1)                                          #Montrer la barre remplie
         
     elif Player['Stamina']<=85 and Player['Stamina']>60 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 80% et 60% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,16,32,16,1)                                         #Montrer la barre asser remplie
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,16,32,16,1)                                         #Montrer la barre asser remplie
         
     elif Player['Stamina']<=60 and Player['Stamina']>45 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 60% et 45% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,32,32,16,1)                                         #Montrer la barre à moitié vide
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,32,32,16,1)                                         #Montrer la barre à moitié vide
         
     elif Player['Stamina']<= 45 and Player['Stamina']>25 and Player['Fatigue']!=1:                 #Si la stamina restante est entre 45% et 25% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,48,32,16,1)                                         #Montrer la barre presque vide
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,48,32,16,1)                                         #Montrer la barre presque vide
         
     elif Player['Stamina']<=25 and Player['Fatigue']!=1:                                           #Si la stamina restante est entre 25% et 0% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,64,32,16,1)                                         #Montrer la barre rouge et vide
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,64,32,16,1)                                         #Montrer la barre rouge et vide
         
     elif Player['Fatigue']==1:                                                                     #Si le joueur est fatiguer peut importe sa stamina restante :
-        pyxel.blt(Player['x']-75,Player['y']-68,2,96,80,32,16,1)                                         #Montrer la barre casser
+        pyxel.blt(Player['x']-77,Player['y']-63,2,96,80,32,16,1)                                         #Montrer la barre casser
 
 def BougeMap():                                                                          #Illusion de se déplacer sur la map
     global Xmap,Ymap
@@ -283,19 +308,19 @@ def Batterie():                                                                 
 
 def BatterieAffichage():                                                                 #Diminue la luminosité de la lampe torche en fonction de la Batterie
     if Player['Batterie']<=100:                                                      #Si la batterie est entre 100% et 80%:
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,0,32,16,1)                           #le barre de pile est pleine (vert foncé)
+        pyxel.blt(Player['x']-80,Player['y']-50,2,64,0,32,16,1)                           #le barre de pile est pleine (vert foncé)
         
     if Player['Batterie']<=80:                                                       #Si la batterie est entre 80% et 60%:
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
+        pyxel.blt(Player['x']-80,Player['y']-55,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
         
     if Player['Batterie']<=60:                                                       #Si la batterie est entre 60% et 40%:
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
+        pyxel.blt(Player['x']-80,Player['y']-55,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
         
     if Player['Batterie']<=40:                                                       #Si la batterie est entre 40% et 20%:
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
+        pyxel.blt(Player['x']-80,Player['y']-55,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
         
     if Player['Batterie']<=20:                                                       #Si la batterie est à 20% ou moins:
-        pyxel.blt(Player['x']-80,Player['y']-80,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
+        pyxel.blt(Player['x']-80,Player['y']-55,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
 
         
         
@@ -482,16 +507,17 @@ class App:
             types(Bot2)
             types(Bot3)
             
-            Lampe()                                                             #affiche qu'une certaine partie de la map a l'écran
+            Lampe()
+                                                                         #affiche qu'une certaine partie de la map a l'écran
                                                                                            
             Draw32px(Player,0,0,1)                                              #affiche le joueur et des animations
             BatterieAffichage()
-            if not pyxel.btn(pyxel.KEY_F) and Player['Batterie']>5:             #si la touche flash et la battetrie est supérierur a 5
+            if not pyxel.btn(pyxel.KEY_F)   :             #si la touche flash et la battetrie est supérierur a 5
                 Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
             flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
 
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
-
+            PointdeVie()
         if start==0 or start==-1 :
             pyxel.blt(Xsouris,Ysouris,2,48,0,6,6,0)
             pyxel.clip()
