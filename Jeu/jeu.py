@@ -17,10 +17,11 @@ import pyxel,random                                                             
                                                                                 ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░
                                                                                 Autres fonctions multitâches ou détectant des choses.
 '''
-global Xmap,Ymap        
+global Xmap,Ymap,XResol,YResol        
 Xmap=0
 Ymap=0
-
+XResol=640
+YResol=350
 def Detectdeplace() :                                                               #Fonction retournant True si le joueur se déplace
     if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):                         #Test en Bas
         return True
@@ -87,22 +88,22 @@ Player['Batterie']= 100                                                         
 Player['Frame']= 0
 Player['Fatigue']= 0
 Player['StamDepletion']=1
-Player['PV']=6
+Player['PV']=100
 
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
-    if Player['y']<=320 :                                                       #Déplacement Vers le bas 
+    if Player['y']<=320  :                                                       #Déplacement Vers le bas 
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             Player['y']=Player['y']+Player['Vitesse']
-    if Player['x']<=640 :                                                       #Déplacement Vers la Droite et modifie le sens vers la droite    
+    if Player['x']<=640   :                                                       #Déplacement Vers la Droite et modifie le sens vers la droite    
         if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
             Player['x']=Player['x']+Player['Vitesse']
             Player['Sens']='Droite'
-    if Player['x']>=0 :                                                         #Déplacement Vers la gauche et modifie le sens vers la gauche 
+    if Player['x']>=0  :                                                         #Déplacement Vers la gauche et modifie le sens vers la gauche 
         if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_Q):
             Player['x']=Player['x']-Player['Vitesse']
             Player['Sens']='Gauche'
-    if Player['y']>=0 :                                                         #Déplacement Vers le haut 
+    if Player['y']>=0  :                                                         #Déplacement Vers le haut 
         if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_Z):
             Player['y']=Player['y']-Player['Vitesse']
     if Detectdeplace() == True and pyxel.btn(pyxel.KEY_SHIFT) != True :
@@ -111,30 +112,30 @@ def deplacement():                                                              
         Player['Frame']= 0
         
 def PointdeVie():
-    if Player['PV']==6:
+    if Player['PV']>=100:
        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
     
-    if Player['PV']==5:
+    if Player['PV']>=80:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,39,16,1)
     
-    if Player['PV']==4:
+    if Player['PV']>=60:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,29,16,1)
 
-    if Player['PV']==3:
+    if Player['PV']>=40:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,23,16,1)
 
-    if Player['PV']==2:
+    if Player['PV']>=20:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,13,16,1)
 
-    if Player['PV']==1:
+    if Player['PV']>=10:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
     
-    if Player['PV']==0:
+    if Player['PV']>=0:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,0,16,1)
     
     if pyxel.btn(pyxel.KEY_W):
-        Player['PV']=Player['PV']-1
-
+        Player['PV']=100
+    Player['PV']=Player['PV']+0.1
 
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
@@ -192,6 +193,42 @@ def BougeMap():                                                                 
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
         Player['y']+=310                                                                           #le joueur passe en haut
+#Hitbox 
+
+#liste de la hitbox 
+
+
+def playerhitbox():
+    for i in range (-10,9):
+        p=pyxel.pget(Player['x']+i,Player['y']-16,)
+        if p==4:
+            
+            return True
+    for i in range (-10,9):
+        p=pyxel.pget(Player['x']+i,Player['y']+14)
+        if p==4:
+            
+            return True
+             
+    for y in range(-16,14):
+            p=pyxel.pget(Player['x']-10,Player['y']+y,)
+            if p==4:
+                
+                return True 
+    for y in range(-16,14):
+            p=pyxel.pget(Player['x']+9,Player['y']+y,)
+            if p==4:
+                
+                return True
+    return False  
+
+
+
+def test():
+    if playerhitbox()==True:
+        pyxel.blt(Player['x']-10,Player['y']-10,0,40,56,16,16,0)
+        Player['PV']=Player['PV']-1
+
 '''
                                                                                 ██████╗░░█████╗░████████╗
                                                                                 ██╔══██╗██╔══██╗╚══██╔══╝
@@ -214,6 +251,8 @@ Bot2['y']=57                                                                    
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
 Bot2['Type']='Phantom'
+Bot2['V']=1
+
 
 Bot3=dict()
 Bot3['x']=250                                                                    #Indique l'emplacement X du Bot2
@@ -249,7 +288,7 @@ def Phantom(entity):                                                            
     bot(entity)
 
 def Amogus(entity):                                                             #Fait les caractéristique de l'Amogus (rien)
-    entity['Vitesse']=1.5
+    entity['Vitesse']=0
     Draw32px(entity,192,0,1)
     bot(entity)
 
@@ -266,6 +305,32 @@ def curseur():                                                                  
     Xsouris,Ysouris=100,100
     Xsouris=pyxel.mouse_x
     Ysouris=pyxel.mouse_y
+
+def PhatomHitbox():
+    for i in range (-10,9):
+        pyxel.pset(Bot2['x']+i,Bot2['y']-16,5)
+        p=pyxel.pget(Bot2['x']+i,Bot2['y']-16,)
+        if p==4:
+            
+            return True
+    for i in range (-10,9):
+        p=pyxel.pget(Bot2['x']+i,Bot2['y']+14)
+        if p==4:
+            
+            return True
+             
+    for y in range(-16,14):
+            pyxel.pget(Bot2['x']-10,Bot2['y']+y)
+            p=pyxel.pget(Bot2['x']-10,Bot2['y']+y,)
+            if p==4:
+                
+                return True 
+    for y in range(-16,14):
+            p=pyxel.pget(Bot2['x']+9,Bot2['y']+y,)
+            if p==4:
+                
+                return True
+    return False  
 
 
 '''
@@ -442,6 +507,11 @@ def options():                                                                  
     
     else:
         pyxel.line(232,48,258,48,7)
+
+def mort():                                                                                 #test de mort 
+    pyxel.cls(1)
+    #affiche mort 
+
 '''
 
                                                                                 ░█████╗░██████╗░██████╗░
@@ -453,7 +523,7 @@ def options():                                                                  
 '''
 class App:
     def __init__(self):                                                         #Initialisation du Jeu 
-        pyxel.init(640,320 , title="Nom du jeu")                                #Initialisation de la résolution du jeu et de son titre
+        pyxel.init(XResol,YResol, title="Nom du jeu")                                #Initialisation de la résolution du jeu et de son titre
         pyxel.load("media.pyxres")                                              #charge les graphisme depuis le fichier media 
         pyxel.run(self.update, self.draw)                                       #lance l'update et le draw en continue 
 
@@ -470,8 +540,8 @@ class App:
         global start
         if pyxel.btnp(pyxel.KEY_TAB):                                           #Stop le jeu et ouvre le Menu quand on appui sur tab
             start=0
-            
-
+        if pyxel.btnp(pyxel.KEY_U):                                           #Stop le jeu et ouvre le Menu Mort quand on appui sur 
+            start=2    
         if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
             deplacement()
             curseur()
@@ -485,6 +555,10 @@ class App:
         elif start==-1:                                                         #Si on est dans le menu des options
             options()
             curseur()
+        
+        elif start==2:
+            mort()
+
 
     def draw(self):
         '''
@@ -506,7 +580,6 @@ class App:
             types(Bot1)
             types(Bot2)
             types(Bot3)
-            
             Lampe()
                                                                          #affiche qu'une certaine partie de la map a l'écran
                                                                                            
@@ -517,7 +590,11 @@ class App:
             flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
 
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
-            PointdeVie()
+            PointdeVie()           
+            playerhitbox()
+            PhatomHitbox()
+            test()
+
         if start==0 or start==-1 :
             pyxel.blt(Xsouris,Ysouris,2,48,0,6,6,0)
             pyxel.clip()
