@@ -44,25 +44,31 @@ def FrameDep(entity,s):                                                         
     elif pyxel.frame_count % s >= (s*0.75) :
         entity['Frame'] = 3
         
-def Draw32px(entity,u,v,inverse):                                               #Fonction permettant d'afficher une entité de 32 pixels et 4 frame d'animations.
+def Draw32px(entity,u,v,inverse,col):                                               #Fonction permettant d'afficher une entité de 32 pixels et 4 frame d'animations.
     if entity['Sens']=='Droite':                                                    #Regarde si il regarde à Gauche
         if entity['Frame']==0:                                                           #Les différentes Frames d'animations
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,inverse*32,32,col)
         elif entity['Frame']==1:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,inverse*32,32,col)
         elif entity['Frame']==2:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,inverse*32,32,col)
         else:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,inverse*32,32,col)
     if entity['Sens']=='Gauche':                                                    #Regarde si il regarde à Droite
         if entity['Frame']==0:                                                            #Les différentes Frames d'animations
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,-inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v,-inverse*32,32,col)
         elif entity['Frame']==1:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,-inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+32,-inverse*32,32,col)
         elif entity['Frame']==2:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,-inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+64,-inverse*32,32,col)
         else:
-            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,-inverse*32,32,1)
+            pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,-inverse*32,32,col)
+
+def Draw64px(entity,u,v,col):
+    if entity['Frame']<=1:
+        pyxel.blt(entity['x']-32,entity['y']-32,1,u,v,64,64,col)
+    else:
+        pyxel.blt(entity['x']-32,entity['y']-32,1,u,v+64,64,64,col)
             
 def BoutonMenu(x1,x2,xdetec1,xdetec2,y1,y2,ydetec1,ydetec2):
     if (Xsouris>=xdetec1 and Xsouris<=xdetec2) and (Ysouris>=ydetec1 and Ysouris<=ydetec2):       #Si la souris est sur Le bouton: afficher les flèches et active la detection des clicks
@@ -91,7 +97,7 @@ Player['Frame']= 0
 Player['Fatigue']= 0
 Player['StamDepletion']=1
 Player['PV']=100
-
+Player['Immune']=0
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if Player['y']<=320  :                                                       #Déplacement Vers le bas 
@@ -198,9 +204,16 @@ def BougeMap():                                                                 
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
         Player['y']+=310                                                                           #le joueur passe en haut
-#Hitbox 
 
-#liste de la hitbox 
+def Immunite():
+    if pyxel.frame_count %10 == 0:
+        if Player['Immune']%2==0:
+            pyxel.pal()
+        else:
+            pyxel.pal(10,8)
+        Player['Immune']-=1
+    if Player['Immune']==-1:
+        Player['Immune']=0
 
 
 def playerhitbox():
@@ -247,24 +260,22 @@ Bot1['x']=60                                                                    
 Bot1['y']=57                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
 Bot1['Frame']= 0
-Bot1['Type']='Amogus'
+Bot1['Type']='Zombie'
 
 
 Bot2=dict()
-Bot2['x']=50                                                                    #Indique l'emplacement X du Bot2
-Bot2['y']=57                                                                    #Indique l'emplacement Y du Bot2
+Bot2['x']=500                                                                    #Indique l'emplacement X du Bot2
+Bot2['y']=257                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
-Bot2['Type']='Phantom'
-Bot2['V']=1
-
+Bot2['Type']='Arabe'
 
 Bot3=dict()
 Bot3['x']=250                                                                    #Indique l'emplacement X du Bot2
 Bot3['y']=157                                                                    #Indique l'emplacement Y du Bot2
 Bot3['Sens']='Droite'
 Bot3['Frame']=0
-Bot3['Type']='Phantom'
+Bot3['Type']='Golem'
 
 def bot(entity):                                                                 #Fait en sorte que les bots pourusivent le joueur en fonction de leur vitesse 
     if Player['x']-entity['x'] >= 0:
@@ -281,20 +292,59 @@ def bot(entity):                                                                
         
         
         
+        
 def types(entity):                                                              #Utilise les différentes fonction selon le type du bot 
     if entity['Type']=='Phantom':                                               #Détecte si le bot est un Fantome
         Phantom(entity)
-    if entity['Type']=='Amogus':                                                #Détecte si le bot est un Amogus (On ne va pas garder ce type)
-        Amogus(entity)
+    if entity['Type']=='Zombie':                                                #Détecte si le bot est un Zombie
+        Zombie(entity)
+    if entity['Type']=='Arabe':                                                #Détecte si le bot est un Arabe
+        Arabe(entity)
+    if entity['Type']=='Mage':                                                #Détecte si le bot est un Mage
+        Mage(entity)
+    if entity['Type']=='Golem':                                                #Détecte si le bot est un Golem
+        Golem(entity)
+    if entity['Type']=='Cauchemare':                                                #Détecte si le bot est un Cauchemare
+        Cauchemare(entity)
+    if entity['Type']=='Mort':
+        pass
     
 def Phantom(entity):                                                            #Fait les caractéristique du Fantome
     entity['Vitesse']=random.uniform(0.05,1)+random.uniform(0.05,1)             #Sa vitesse change aléatoirement entre 0.1 et 2.
-    Draw32px(entity,224,0,-1)
+    Draw32px(entity,224,0,-1,1)
     bot(entity)
 
-def Amogus(entity):                                                             #Fait les caractéristique de l'Amogus (rien)
-    entity['Vitesse']=0
-    Draw32px(entity,192,0,1)
+def Zombie(entity):                                                             #Fait les caractéristique du Zombie
+    entity['Vitesse']=1.25
+    Draw32px(entity,128,0,1,1)
+    bot(entity)
+    if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
+        Player['PV']-=1
+        Player['Immune']=3
+
+def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
+    entity['Vitesse']=1.75
+    Draw32px(entity,96,0,1,1)
+    bot(entity)
+    if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32:
+        pyxel.play(0,6)
+        Player['PV']-=4
+        entity['Type']='Mort'
+        Player['Immune']=5
+    
+def Mage(entity):                                                             #Fait les caractéristique de Mage
+    entity['Vitesse']=0.5
+    Draw32px(entity,192,0,1,1)
+    bot(entity)
+    
+def Golem(entity):                                                             #Fait les caractéristique de l'Amogus (rien)
+    entity['Vitesse']=0.001
+    Draw64px(entity,192,128,4)
+    bot(entity)
+    
+def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
+    entity['Vitesse']=2.1
+    Draw32px(entity,160,0,1,1)
     bot(entity)
 
 
@@ -578,6 +628,7 @@ class App:
             Course()
             BougeMap()
             PointdeVie()
+            Immunite()
             
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
@@ -614,7 +665,7 @@ class App:
             Lampe()
                                                                          #affiche qu'une certaine partie de la map a l'écran
                                                                                            
-            Draw32px(Player,0,0,1)                                              #affiche le joueur et des animations
+            Draw32px(Player,0,0,1,1)                                              #affiche le joueur et des animations
             BatterieAffichage()
             if not pyxel.btn(pyxel.KEY_F)   :             #si la touche flash et la battetrie est supérierur a 5
                 Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
