@@ -17,6 +17,8 @@ import pyxel,random                                                             
                                                                                 ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░
                                                                                 Autres fonctions multitâches ou détectant des choses.
 '''
+global start                                                                    #Met en place La variable Global start 
+start=0                                                                         #Indique si le jeu est commencer ou non (0 pour non)
 global Xmap,Ymap,XResol,YResol        
 Xmap=0
 Ymap=0
@@ -130,12 +132,16 @@ def PointdeVie():
     if Player['PV']>=10:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
     
-    if Player['PV']>=0:
-        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,0,16,1)
-    
+    if Player['PV']<=1:
+        pyxel.cls(0)
+        pyxel.text(320,160,'test',7)
+
+
     if pyxel.btn(pyxel.KEY_W):
         Player['PV']=100
-    Player['PV']=Player['PV']+0.1
+
+    if Player['PV']>1 and Player['PV']<100:
+        Player['PV']=Player['PV']+0.1
 
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
@@ -292,8 +298,7 @@ def Amogus(entity):                                                             
     Draw32px(entity,192,0,1)
     bot(entity)
 
-global start                                                                    #Met en place La variable Global start 
-start=0                                                                         #Indique si le jeu est commencer ou non (0 pour non)
+
 
 
 
@@ -331,6 +336,24 @@ def PhatomHitbox():
                 
                 return True
     return False  
+
+'''
+#Levier 
+Levier1=dict
+Levier1['x']=100 
+Levier1['y']=100
+Levier2=dict
+Levier2['x']=1
+Levier2['y']=1
+
+Levier3=dict
+Levier3['x']=1
+Levier3['y']=1
+'''
+
+
+
+
 
 
 '''
@@ -513,7 +536,7 @@ def mort():                                                                     
     #affiche mort 
 
 '''
-
+image.png
                                                                                 ░█████╗░██████╗░██████╗░
                                                                                 ██╔══██╗██╔══██╗██╔══██╗
                                                                                 ███████║██████╔╝██████╔╝
@@ -556,7 +579,7 @@ class App:
             options()
             curseur()
         
-        elif start==2:
+        elif mort==True:
             mort()
 
 
@@ -594,7 +617,6 @@ class App:
             playerhitbox()
             PhatomHitbox()
             test()
-
         if start==0 or start==-1 :
             pyxel.blt(Xsouris,Ysouris,2,48,0,6,6,0)
             pyxel.clip()
