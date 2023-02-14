@@ -131,17 +131,16 @@ def PointdeVie():
 
     if Player['PV']>=10:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
-    
-    if Player['PV']<=1:
-        pyxel.cls(0)
-        pyxel.text(320,160,'test',7)
 
 
     if pyxel.btn(pyxel.KEY_W):
         Player['PV']=100
-
+    if pyxel.btn(pyxel.KEY_X):
+        Player['PV']=0
     if Player['PV']>1 and Player['PV']<100:
         Player['PV']=Player['PV']+0.1
+
+
 
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
@@ -313,7 +312,6 @@ def curseur():                                                                  
 
 def PhatomHitbox():
     for i in range (-10,9):
-        pyxel.pset(Bot2['x']+i,Bot2['y']-16,5)
         p=pyxel.pget(Bot2['x']+i,Bot2['y']-16,)
         if p==4:
             
@@ -492,6 +490,7 @@ def menu():                                                                     
     
     if pyxel.btn(pyxel.KEY_E):
         start=1
+        Player['PV']=100
 
 
 
@@ -531,9 +530,17 @@ def options():                                                                  
     else:
         pyxel.line(232,48,258,48,7)
 
-def mort():                                                                                 #test de mort 
-    pyxel.cls(1)
-    #affiche mort 
+def mort():
+    global start                                                                                 #test de mort 
+    if Player ['PV']<1:
+        Player['PV']=2    
+        start=2
+        pyxel.clip()
+        pyxel.cls(0)
+        pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
+        pyxel.text(280,150,'L bozo',7)
+        if pyxel.btn(pyxel.KEY_SPACE):
+            start=0
 
 '''
 image.png
@@ -570,6 +577,7 @@ class App:
             curseur()
             Course()
             BougeMap()
+            PointdeVie()
             
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
@@ -578,9 +586,9 @@ class App:
         elif start==-1:                                                         #Si on est dans le menu des options
             options()
             curseur()
+        mort()
         
-        elif mort==True:
-            mort()
+
 
 
     def draw(self):
@@ -598,7 +606,7 @@ class App:
             pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   
             pyxel.cls(0)                                                        #colorie toute la map en noir
             LampeLum()                                                          #affiche les couleurs de la lampe  
-            pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,1)                                     #imprime la tilemap
+            pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
                                                                                             #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)
