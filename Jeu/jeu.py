@@ -150,8 +150,6 @@ def PointdeVie():
 
     if pyxel.btn(pyxel.KEY_W):
         Player['PV']=6
-    if pyxel.btn(pyxel.KEY_X):
-        Player['PV']=0
     if Player['PV']>1 and Player['PV']<100:
         Player['PV']=Player['PV']+0.001
 
