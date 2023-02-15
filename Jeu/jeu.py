@@ -34,6 +34,10 @@ def Detectdeplace() :                                                           
     if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_Z):                           #Test en Haut
         return True
 
+def Detectflash(entity):                                                            #Detecte si le joueur flash proche d'une entité quelquonque
+    if pyxel.btn(pyxel.KEY_F) and (Player['x']<entity['x']+48 and Player['x']>entity['x']-48 and Player['y']>entity['y']-48 and Player['y']<entity['y']+48) and Player['Batterie']>=5 :
+        return True
+    
 def FrameDep(entity,s):                                                             #Fonction permetant de changer les Sprites d'entités par intervale de s ticks 
     if pyxel.frame_count % s >= 0 and pyxel.frame_count % s < (s//4) :
         entity['Frame'] = 0
@@ -271,12 +275,15 @@ def test():
                                                                                 ██████╦╝╚█████╔╝░░░██║░░░
                                                                                 ╚═════╝░░╚════╝░░░░╚═╝░░░
 '''
+global StunCauch
+StunCauch=0
+
 Bot1=dict()
 Bot1['x']=60                                                                    #Indique l'emplacement X du Bot1
 Bot1['y']=57                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
 Bot1['Frame']= 0
-Bot1['Type']='Zombie'
+Bot1['Type']='Phantom'
 
 
 Bot2=dict()
@@ -284,26 +291,26 @@ Bot2['x']=500                                                                   
 Bot2['y']=257                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
-Bot2['Type']='Arabe'
+Bot2['Type']='Cauchemare'
 
 Bot3=dict()
 Bot3['x']=250                                                                    #Indique l'emplacement X du Bot2
 Bot3['y']=157                                                                    #Indique l'emplacement Y du Bot2
 Bot3['Sens']='Droite'
 Bot3['Frame']=0
-Bot3['Type']='Golem'
+Bot3['Type']='Mort'
 
 def bot(entity):                                                                 #Fait en sorte que les bots pourusivent le joueur en fonction de leur vitesse 
     if Player['x']-entity['x'] >= 0:
         entity['Sens']='Droite'
-        entity['x']=entity['x']+1*entity['Vitesse']
+        entity['x']=entity['x']+entity['Vitesse']
     if Player['x']-entity['x'] <= 0:
         entity['Sens']='Gauche'
-        entity['x']=entity['x']-1*entity['Vitesse']
+        entity['x']=entity['x']-entity['Vitesse']
     if Player['y']-entity['y'] >= 0:
-        entity['y']=entity['y']+1*entity['Vitesse']
+        entity['y']=entity['y']+entity['Vitesse']
     if Player['y']-entity['y'] <= 0:
-        entity['y']=entity['y']-1*entity['Vitesse']
+        entity['y']=entity['y']-entity['Vitesse']
     FrameDep(entity,36)
         
         
@@ -314,13 +321,13 @@ def types(entity):                                                              
         Phantom(entity)
     if entity['Type']=='Zombie':                                                #Détecte si le bot est un Zombie
         Zombie(entity)
-    if entity['Type']=='Arabe':                                                #Détecte si le bot est un Arabe
+    if entity['Type']=='Arabe':                                                 #Détecte si le bot est un Arabe
         Arabe(entity)
-    if entity['Type']=='Mage':                                                #Détecte si le bot est un Mage
+    if entity['Type']=='Mage':                                                  #Détecte si le bot est un Mage
         Mage(entity)
-    if entity['Type']=='Golem':                                                #Détecte si le bot est un Golem
+    if entity['Type']=='Golem':                                                 #Détecte si le bot est un Golem
         Golem(entity)
-    if entity['Type']=='Cauchemare':                                                #Détecte si le bot est un Cauchemare
+    if entity['Type']=='Cauchemare':                                            #Détecte si le bot est un Cauchemare
         Cauchemare(entity)
     if entity['Type']=='Mort':
         pass
@@ -329,23 +336,31 @@ def Phantom(entity):                                                            
     entity['Vitesse']=random.uniform(0.05,1)+random.uniform(0.05,1)             #Sa vitesse change aléatoirement entre 0.1 et 2.
     Draw32px(entity,224,0,-1,1)
     bot(entity)
-
+    if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
+        Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
+        Player['Immune']=3
+        pyxel.play(0,1)
+    if Detectflash(entity):                                                     #Si le Phantom se fait Flash : Il devient Mort
+        entity['Type']='Mort'
+        pyxel.play(0,3)
+        
 def Zombie(entity):                                                             #Fait les caractéristique du Zombie
-    entity['Vitesse']=0 #1.25
+    entity['Vitesse']=1.25
     Draw32px(entity,128,0,1,1)
     bot(entity)
-    if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
-        Player['PV']-=1
+    if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
+        Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
+        pyxel.play(0,1)
 
 def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
-    entity['Vitesse']=0   #1.75
+    entity['Vitesse']=1.75
     Draw32px(entity,96,0,1,1)
     bot(entity)
-    if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32:
-        pyxel.play(0,6)
+    if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28:
+        pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['PV']-=4
-        entity['Type']='Mort'
+        entity['Type']='Mort'                                                   #Meur si il réussit a faire des dégats (Comme un Kamikaze)
         Player['Immune']=5
     
 def Mage(entity):                                                             #Fait les caractéristique de Mage
@@ -353,16 +368,27 @@ def Mage(entity):                                                             #F
     Draw32px(entity,192,0,1,1)
     bot(entity)
     
-def Golem(entity):                                                             #Fait les caractéristique de l'Amogus (rien)
-    entity['Vitesse']=0.001
+def Golem(entity):                                                             #Fait les caractéristique du golem
+    entity['Vitesse']=0                                                        #Il est immobile
     Draw64px(entity,192,128,4)
     bot(entity)
+    if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
+        Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
+        pyxel.play(0,7)
     
 def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
-    entity['Vitesse']=2.1
+    global StunCauch
+    entity['Vitesse']=3.25
     Draw32px(entity,160,0,1,1)
-    bot(entity)
-
+    if StunCauch<=0:                                                            #Si le Cauchemare n'est pas Stun (Flash) alors il peut bouger
+        bot(entity)
+    elif pyxel.frame_count%10==0:
+        StunCauch-=1                                                            #Timer du Stun qui baisse
+    if Player['x']<entity['x']+16 and Player['x']>entity['x']-16 and Player['y']>entity['y']-25 and Player['y']<entity['y']+25 and pyxel.frame_count %2==0:
+        Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
+        pyxel.play(0,5)
+    if Detectflash(entity) and pyxel.frame_count%5==0 :
+        StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
 
 
 
