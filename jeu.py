@@ -556,7 +556,7 @@ class App:
             pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   
             pyxel.cls(0)                                                        #colorie toute la map en noir
             LampeLum()                                                          #affiche les couleurs de la lampe  
-            pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,1)                                     #imprime la tilemap
+            pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
                                                                                             #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)

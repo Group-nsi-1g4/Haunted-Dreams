@@ -96,55 +96,64 @@ Player['Batterie']= 100                                                         
 Player['Frame']= 0
 Player['Fatigue']= 0
 Player['StamDepletion']=1
-Player['PV']=100
+Player['PV']=6
 Player['Immune']=0
 
+
+
 def deplacement():                                                              #Déplacement Du joueur                                                                             
-    if Player['y']<=320  :                                                       #Déplacement Vers le bas 
+    if (pyxel.pget(Player['x']-10,Player['y']+14)!=5 and pyxel.pget(Player['x']-9,Player['y']+14)!=5 and pyxel.pget(Player['x']-8,Player['y']+14)!=5 and pyxel.pget(Player['x']-7,Player['y']+14)!=5 and pyxel.pget(Player['x']-6,Player['y']+14)!=5 and pyxel.pget(Player['x']-5,Player['y']+14)!=5 and pyxel.pget(Player['x']-4,Player['y']+14)!=5 and pyxel.pget(Player['x']-3,Player['y']+14)!=5 and pyxel.pget(Player['x']-2,Player['y']+14)!=5 and pyxel.pget(Player['x']-1,Player['y']+14)!=5 and pyxel.pget(Player['x']+9,Player['y']+14)!=5 and pyxel.pget(Player['x']+8,Player['y']+14)!=5 and pyxel.pget(Player['x']+7,Player['y']+14)!=5 and pyxel.pget(Player['x']+6,Player['y']+14)!=5 and pyxel.pget(Player['x']+5,Player['y']+14)!=5 and pyxel.pget(Player['x'],Player['y']+14)!=5 and pyxel.pget(Player['x']+1,Player['y']+14)!=5 and pyxel.pget(Player['x']+2,Player['y']+14)!=5 and pyxel.pget(Player['x']+3,Player['y']+14)!=5 and pyxel.pget(Player['x']+4,Player['y']+14)!=5):
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             Player['y']=Player['y']+Player['Vitesse']
-    if Player['x']<=640   :                                                       #Déplacement Vers la Droite et modifie le sens vers la droite    
-        if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
+    
+    
+    
+    
+    
+        
+    if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
             Player['x']=Player['x']+Player['Vitesse']
             Player['Sens']='Droite'
     if Player['x']>=0  :                                                         #Déplacement Vers la gauche et modifie le sens vers la gauche 
         if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_Q):
             Player['x']=Player['x']-Player['Vitesse']
             Player['Sens']='Gauche'
-    if Player['y']>=0  :                                                         #Déplacement Vers le haut 
+    if (pyxel.pget(Player['x']-10,Player['y']-16)!=5 , 1 and pyxel.pget(Player['x']-9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-4,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x'],Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+4,Player['y']-16)!=5 ,1): 
         if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_Z):
             Player['y']=Player['y']-Player['Vitesse']
+
+
     if Detectdeplace() == True and pyxel.btn(pyxel.KEY_SHIFT) != True :
         FrameDep(Player,24)
     else:
         Player['Frame']= 0
         
 def PointdeVie():
-    if Player['PV']>=100:
+    if Player['PV']>=6:
        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
     
-    if Player['PV']>=80:
+    if Player['PV']>=5:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,39,16,1)
     
-    if Player['PV']>=60:
+    if Player['PV']>=4:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,29,16,1)
 
-    if Player['PV']>=40:
+    if Player['PV']>=3:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,23,16,1)
 
-    if Player['PV']>=20:
+    if Player['PV']>=2:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,13,16,1)
 
-    if Player['PV']>=10:
+    if Player['PV']>=1:
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
 
 
     if pyxel.btn(pyxel.KEY_W):
-        Player['PV']=100
+        Player['PV']=6
     if pyxel.btn(pyxel.KEY_X):
         Player['PV']=0
     if Player['PV']>1 and Player['PV']<100:
-        Player['PV']=Player['PV']+0.1
+        Player['PV']=Player['PV']+0.001
 
 
 
@@ -217,6 +226,15 @@ def Immunite():
 
 
 def playerhitbox():
+    
+    for i in range (-10,9):
+        pyxel.pset(Player['x']+i,Player['y']-16,1)
+    
+    
+
+
+
+'''
     for i in range (-10,9):
         p=pyxel.pget(Player['x']+i,Player['y']-16,)
         if p==4:
@@ -239,7 +257,7 @@ def playerhitbox():
                 
                 return True
     return False  
-
+'''
 
 
 def test():
@@ -315,7 +333,7 @@ def Phantom(entity):                                                            
     bot(entity)
 
 def Zombie(entity):                                                             #Fait les caractéristique du Zombie
-    entity['Vitesse']=1.25
+    entity['Vitesse']=0 #1.25
     Draw32px(entity,128,0,1,1)
     bot(entity)
     if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
@@ -323,7 +341,7 @@ def Zombie(entity):                                                             
         Player['Immune']=3
 
 def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
-    entity['Vitesse']=1.75
+    entity['Vitesse']=0   #1.75
     Draw32px(entity,96,0,1,1)
     bot(entity)
     if Player['x']<entity['x']+32 and Player['x']>entity['x']-32 and Player['y']>entity['y']-32 and Player['y']<entity['y']+32:
@@ -520,27 +538,44 @@ def flash():                                                                    
                                                                                 ██║░╚═╝░██║███████╗██║░╚███║╚██████╔╝
                                                                                 ╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░
 '''
+global Choix
+Choix=1
 def menu():                                                                     #Le Menu principale dans sont intégralité : Jouer et Quitter pour l'instant
-    global Xsouris,Ysouris,start
+    global Xsouris,Ysouris,start,Choix
     pyxel.cls(0)
     pyxel.text(120,40,str("Start Game"),7)
     pyxel.text(120,80,str("Options"),7)
     pyxel.text(120,120,str("Quit Game"),7)
-    
-    BoutonMenu(110,160,120,160,39,39,38,47)                                     #La fonction permettant de faire fonctionner le bouton Start Game
-    if BoutonMenu(110,160,120,160,39,39,38,47)==True:
+    if pyxel.btnp(pyxel.KEY_DOWN):
+        Choix=Choix+1
+    if pyxel.btnp(pyxel.KEY_UP):
+        Choix=Choix-1
+    if Choix>=4:
+        Choix=1
+    if Choix<=0:
+        Choix=3   
+    if Choix==1:
+        pyxel.blt(110,39,2,0,1,6,8,0)
+        pyxel.blt(160,39,2,8,1,6,8,0)
+        if pyxel.btn(pyxel.KEY_RETURN): 
             start=1
-    BoutonMenu(110,160,120,160,79,79,78,87)                                     #La fonction permettant de faire fonctionner le bouton Options
-    if BoutonMenu(110,160,120,160,79,79,78,87)==True:                                                                            
-        start=-1
-        
-    BoutonMenu(110,160,120,160,119,119,118,127)                                 #La fonction permettant de faire fonctionner le bouton Quit Game
-    if BoutonMenu(110,160,120,160,119,119,118,127)==True:
-        pyxel.quit()
+            Player['PV']=6
+    if Choix==2:
+        pyxel.blt(110,79,2,0,1,6,8,0)
+        pyxel.blt(160,79,2,8,1,6,8,0)
+        if pyxel.btn(pyxel.KEY_RETURN): 
+            start=-1
+    if Choix==3:
+        pyxel.blt(110,119,2,0,1,6,8,0)
+        pyxel.blt(160,119,2,8,1,6,8,0)
+        if pyxel.btn(pyxel.KEY_RETURN): 
+            pyxel.quit()
     
-    if pyxel.btn(pyxel.KEY_E):
-        start=1
-        Player['PV']=100
+    pyxel.text(120,130,str(Choix),7)
+
+
+
+
 
 
 
@@ -589,6 +624,7 @@ def mort():
         pyxel.cls(0)
         pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
         pyxel.text(280,150,'L bozo',7)
+        pyxel.text(280,100,str(start),7)
         if pyxel.btn(pyxel.KEY_SPACE):
             start=0
 
@@ -624,20 +660,20 @@ class App:
             start=2    
         if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
             deplacement()
-            curseur()
             Course()
             BougeMap()
             PointdeVie()
             Immunite()
-            
+            mort()
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
-            curseur()
 
         elif start==-1:                                                         #Si on est dans le menu des options
             options()
             curseur()
-        mort()
+        elif start==2:
+            if pyxel.btn(pyxel.KEY_SPACE):
+                start=0
         
 
 
@@ -676,10 +712,16 @@ class App:
             playerhitbox()
             PhatomHitbox()
             test()
+            pyxel.pset(Player['x']+5,Player['y']+14,7)
+            if pyxel.btn(pyxel.KEY_0):
+                pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
+                pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
+                pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
+                pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(start),7)
+
         if start==0 or start==-1 :
-            pyxel.blt(Xsouris,Ysouris,2,48,0,6,6,0)
             pyxel.clip()
-        
+            
 
 App()
 
