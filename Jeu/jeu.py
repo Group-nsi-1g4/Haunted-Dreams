@@ -48,6 +48,10 @@ def FrameDep(entity,s):                                                         
     elif pyxel.frame_count % s >= (s*0.75) :
         entity['Frame'] = 3
         
+def WarioApparition():
+    if Bot1['Type']=='Wario':
+        return True
+        
 def Draw32px(entity,u,v,inverse,col):                                               #Fonction permettant d'afficher une entité de 32 pixels et 4 frame d'animations.
     if entity['Sens']=='Droite':                                                    #Regarde si il regarde à Gauche
         if entity['Frame']==0:                                                           #Les différentes Frames d'animations
@@ -203,18 +207,26 @@ def BougeMap():                                                                 
     if Player['x']>=635:                                                                      #Dès que le joueur est asser à droite de l'écran
         Xmap-=640                                                                                  #la tilemap va 1 écran à droite
         Player['x']-=630                                                                           #le joueur passe à gauche
+        if WarioApparition() == True :
+            Bot1['x']-=630
         
     elif Player['x']<=5:                                                                      #Dès que le joueur est asser à gauche de l'écran
         Xmap=Xmap+640                                                                              #la tilemap va 1 écran à gauche
         Player['x']+=630                                                                           #le joueur passe à droite
+        if WarioApparition() == True :
+            Bot1['x']+=630
         
     elif Player['y']>=315:                                                                    #Dès que le joueur est asser en haut de l'écran
         Ymap-=320                                                                                  #la tilemap va 1 écran en haut
         Player['y']-=310                                                                           #le joueur passe en bas
+        if WarioApparition() == True :
+            Bot1['y']-=310
         
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
         Player['y']+=310                                                                           #le joueur passe en haut
+        if WarioApparition() == True :
+            Bot1['y']+=310
 
 def Immunite():
     if pyxel.frame_count %10 == 0:
@@ -283,7 +295,7 @@ Bot1['x']=60                                                                    
 Bot1['y']=57                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
 Bot1['Frame']= 0
-Bot1['Type']='Phantom'
+Bot1['Type']='Arabe'
 
 
 Bot2=dict()
@@ -291,14 +303,21 @@ Bot2['x']=500                                                                   
 Bot2['y']=257                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
-Bot2['Type']='Cauchemare'
+Bot2['Type']='Phantom'
 
 Bot3=dict()
 Bot3['x']=250                                                                    #Indique l'emplacement X du Bot2
 Bot3['y']=157                                                                    #Indique l'emplacement Y du Bot2
 Bot3['Sens']='Droite'
 Bot3['Frame']=0
-Bot3['Type']='Mort'
+Bot3['Type']='Golem'
+
+bouledefeu=dict()
+bouledefeu['x']=0
+bouledefeu['y']=0
+bouledefeu['Type']='Mort'
+bouledefeu['Sens']='Droite'
+bouledefeu['Frame']=0
 
 def bot(entity):                                                                 #Fait en sorte que les bots pourusivent le joueur en fonction de leur vitesse 
     if Player['x']-entity['x'] >= 0:
@@ -331,12 +350,27 @@ def types(entity):                                                              
         Cauchemare(entity)
     if entity['Type']=='Mort':
         pass
+    if entity['Type']=='Wario':
+        Wario()
+    
+def boulelance(entity):
+    FrameDep(bouledefeu,16)
+    if bouledefeu['Type']=='Lancer':
+        Draw32px(bouledefeu,160,128,-1,0)
+        bouledefeu['x']+=bouledefeu['vx']
+        bouledefeu['y']+=bouledefeu['vy']
+        if Player['x']<bouledefeu['x']+14 and Player['x']>bouledefeu['x']-14 and Player['y']>bouledefeu['y']-14 and Player['y']<bouledefeu['y']+14 and Player['Immune'] == 0:
+            pyxel.play(0,10)                                                         #Infliger des dégats si le joueur est proche (+ Son)
+            Player['PV']-=1
+            bouledefeu['Type']='Mort'                                                   #Meur si il réussit a faire des dégats (Comme un Kamikaze)
+        if pyxel.pget(bouledefeu['x']+bouledefeu['vx'],bouledefeu['y']+bouledefeu['vy'])==5:
+            bouledefeu['Type']='Mort'
     
 def Phantom(entity):                                                            #Fait les caractéristique du Fantome
     entity['Vitesse']=random.uniform(0.05,1)+random.uniform(0.05,1)             #Sa vitesse change aléatoirement entre 0.1 et 2.
     Draw32px(entity,224,0,-1,1)
     bot(entity)
-    if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
+    if Player['x']<entity['x']+30 and Player['x']>entity['x']-30 and Player['y']>entity['y']-30 and Player['y']<entity['y']+30 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
         Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
         pyxel.play(0,1)
@@ -348,7 +382,7 @@ def Zombie(entity):                                                             
     entity['Vitesse']=1.25
     Draw32px(entity,128,0,1,1)
     bot(entity)
-    if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %10==0 and Player['Immune'] == 0:
+    if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
         Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
         pyxel.play(0,1)
@@ -364,17 +398,29 @@ def Arabe(entity):                                                             #
         Player['Immune']=5
     
 def Mage(entity):                                                             #Fait les caractéristique de Mage
+    boulelance(entity)
     entity['Vitesse']=0.5
     Draw32px(entity,192,0,1,1)
     bot(entity)
-    
+    if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
+        Player['PV']-=2                                                         #Infliger des dégats si le joueur est proche (+ Son)
+        Player['Immune']=3
+        pyxel.play(0,1)
+    if pyxel.frame_count % 50 == 0 :
+        pyxel.play(0,7)
+        bouledefeu['Type']='Lancer'
+        bouledefeu['vx']=(Player['x']-entity['x'])*0.05
+        bouledefeu['vy']=(Player['y']-entity['y'])*0.05
+        bouledefeu['y']=entity['y']
+        bouledefeu['x']=entity['x']
+
 def Golem(entity):                                                             #Fait les caractéristique du golem
     entity['Vitesse']=0                                                        #Il est immobile
     Draw64px(entity,192,128,4)
     bot(entity)
     if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
         Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
-        pyxel.play(0,7)
+        pyxel.play(0,4)
     
 def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
     global StunCauch
@@ -390,10 +436,27 @@ def Cauchemare(entity):                                                         
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
 
+def Wario():
+    boulelance(Bot1)
+    Bot2['Type']='Mort'
+    Bot3['Type']='Mort'
+    Bot1['Vitesse']=2.8
+    if pyxel.frame_count%36==18:
+        pyxel.play(1,9)
+    if pyxel.frame_count % 50 == 0 :
+        pyxel.play(0,7)
+        bouledefeu['Type']='Lancer'
+        bouledefeu['vx']=(Player['x']-Bot1['x'])*0.075
+        bouledefeu['vy']=(Player['y']-Bot1['y'])*0.075
+        bouledefeu['y']=Bot1['y']
+        bouledefeu['x']=Bot1['x']
+    Draw64px(Bot1,32,128,11)
+    bot(Bot1)
+    if Player['x']<Bot1['x']+36 and Player['x']>Bot1['x']-36 and Player['y']>Bot1['y']-40 and Player['y']<Bot1['y']+40 and pyxel.frame_count %20==0:
+        Player['PV']-=1.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
+        pyxel.play(0,4)
 
 
-
- 
 global Xsouris,Ysouris                                                          #Met en place la variable Global Xsouris, Ysouris 
 Xsouris,Ysouris=100,100                                                         
 def curseur():                                                                  #Position du curseur 
