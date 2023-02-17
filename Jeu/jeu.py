@@ -110,23 +110,19 @@ Player['Immune']=0
 
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
-    if (pyxel.pget(Player['x']-10,Player['y']+14)!=5 and pyxel.pget(Player['x']-9,Player['y']+14)!=5 and pyxel.pget(Player['x']-8,Player['y']+14)!=5 and pyxel.pget(Player['x']-7,Player['y']+14)!=5 and pyxel.pget(Player['x']-6,Player['y']+14)!=5 and pyxel.pget(Player['x']-5,Player['y']+14)!=5 and pyxel.pget(Player['x']-4,Player['y']+14)!=5 and pyxel.pget(Player['x']-3,Player['y']+14)!=5 and pyxel.pget(Player['x']-2,Player['y']+14)!=5 and pyxel.pget(Player['x']-1,Player['y']+14)!=5 and pyxel.pget(Player['x']+9,Player['y']+14)!=5 and pyxel.pget(Player['x']+8,Player['y']+14)!=5 and pyxel.pget(Player['x']+7,Player['y']+14)!=5 and pyxel.pget(Player['x']+6,Player['y']+14)!=5 and pyxel.pget(Player['x']+5,Player['y']+14)!=5 and pyxel.pget(Player['x'],Player['y']+14)!=5 and pyxel.pget(Player['x']+1,Player['y']+14)!=5 and pyxel.pget(Player['x']+2,Player['y']+14)!=5 and pyxel.pget(Player['x']+3,Player['y']+14)!=5 and pyxel.pget(Player['x']+4,Player['y']+14)!=5):
+    if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             Player['y']=Player['y']+Player['Vitesse']
-    
-    
-    
-    
-    
-        
-    if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
-            Player['x']=Player['x']+Player['Vitesse']
-            Player['Sens']='Droite'
-    if Player['x']>=0  :                                                         #Déplacement Vers la gauche et modifie le sens vers la gauche 
+
+    if (pyxel.pget(Player['x']-16,Player['y']+9)!=1 and pyxel.pget(Player['x']-15,Player['y']+9)!=1 and pyxel.pget(Player['x']-14,Player['y']+9)!=1 and pyxel.pget(Player['x']-13,Player['y']+9)!=1 and pyxel.pget(Player['x']-12,Player['y']+9)!=1 and pyxel.pget(Player['x']-11,Player['y']+9)!=1 and pyxel.pget(Player['x']-10,Player['y']+9)!=1 and pyxel.pget(Player['x']-9,Player['y']+9)!=1 and pyxel.pget(Player['x']-8,Player['y']+9)!=1 and pyxel.pget(Player['x']-7,Player['y']+9)!=1 and pyxel.pget(Player['x']-6,Player['y']+9)!=1 and pyxel.pget(Player['x']-5,Player['y']+9)!=1 and pyxel.pget(Player['x']-4,Player['y']+9)!=1 and pyxel.pget(Player['x']-3,Player['y']+9)!=1 and pyxel.pget(Player['x']-2,Player['y']+9)!=1 and pyxel.pget(Player['x']-1,Player['y']+9)!=1 and pyxel.pget(Player['x'],Player['y']+9)!=1 and pyxel.pget(Player['x']+1,Player['y']+9)!=1 and pyxel.pget(Player['x']+2,Player['y']+9)!=1 and pyxel.pget(Player['x']+3,Player['y']+9)!=1 and pyxel.pget(Player['x']+4,Player['y']+9)!=1 and pyxel.pget(Player['x']+5,Player['y']+9)!=1 and pyxel.pget(Player['x']+6,Player['y']+9)!=1 and pyxel.pget(Player['x']+7,Player['y']+9)!=1 and pyxel.pget(Player['x']+8,Player['y']+9)!=1 and pyxel.pget(Player['x']+9,Player['y']+9)!=1 and pyxel.pget(Player['x']+10,Player['y']+9)!=1 and pyxel.pget(Player['x']+11,Player['y']+9)!=1 and pyxel.pget(Player['x']+12,Player['y']+9)!=1 and pyxel.pget(Player['x']+13,Player['y']+9)!=1 and pyxel.pget(Player['x']+14,Player['y']+9)!=1): 
+        if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
+                Player['x']=Player['x']+Player['Vitesse']
+                Player['Sens']='Droite'
+    if (pyxel.pget(Player['x']-16,Player['y']-10)!=1 and pyxel.pget(Player['x']-15,Player['y']-10)!=1 and pyxel.pget(Player['x']-14,Player['y']-10)!=1 and pyxel.pget(Player['x']-13,Player['y']-10)!=1 and pyxel.pget(Player['x']-12,Player['y']-10)!=1 and pyxel.pget(Player['x']-11,Player['y']-10)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']-9,Player['y']-10)!=1 and pyxel.pget(Player['x']-8,Player['y']-10)!=1 and pyxel.pget(Player['x']-7,Player['y']-10)!=1 and pyxel.pget(Player['x']-6,Player['y']-10)!=1 and pyxel.pget(Player['x']-5,Player['y']-10)!=1 and pyxel.pget(Player['x']-4,Player['y']-10)!=1 and pyxel.pget(Player['x']-3,Player['y']-10)!=1 and pyxel.pget(Player['x']-2,Player['y']-10)!=1 and pyxel.pget(Player['x']-1,Player['y']-10)!=1 and pyxel.pget(Player['x'],Player['y']-10)!=1 and pyxel.pget(Player['x']+1,Player['y']-10)!=1 and pyxel.pget(Player['x']+2,Player['y']-10)!=1 and pyxel.pget(Player['x']+3,Player['y']-10)!=1 and pyxel.pget(Player['x']+4,Player['y']-10)!=1 and pyxel.pget(Player['x']+5,Player['y']-10)!=1 and pyxel.pget(Player['x']+6,Player['y']-10)!=1 and pyxel.pget(Player['x']+7,Player['y']-10)!=1 and pyxel.pget(Player['x']+8,Player['y']-10)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']+10,Player['y']-10)!=1 and pyxel.pget(Player['x']+11,Player['y']-10)!=1 and pyxel.pget(Player['x']+12,Player['y']-10)!=1 and pyxel.pget(Player['x']+13,Player['y']-10)!=1 and pyxel.pget(Player['x']+14,Player['y']-10)!=1): 
         if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_Q):
             Player['x']=Player['x']-Player['Vitesse']
             Player['Sens']='Gauche'
-    if (pyxel.pget(Player['x']-10,Player['y']-16)!=5 , 1 and pyxel.pget(Player['x']-9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-4,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x'],Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+4,Player['y']-16)!=5 ,1): 
+    if (pyxel.pget(Player['x']-10,Player['y']-16)!=1 and pyxel.pget(Player['x']-9,Player['y']-16)!=1 and pyxel.pget(Player['x']-8,Player['y']-16)!=1 and pyxel.pget(Player['x']-7,Player['y']-16)!=1 and pyxel.pget(Player['x']-6,Player['y']-16)!=1 and pyxel.pget(Player['x']-5,Player['y']-16)!=1 and pyxel.pget(Player['x']-4,Player['y']-16)!=1 and pyxel.pget(Player['x']-3,Player['y']-16)!=1 and pyxel.pget(Player['x']-2,Player['y']-16)!=1 and pyxel.pget(Player['x']-1,Player['y']-16)!=1 and pyxel.pget(Player['x']+9,Player['y']-16)!=1 and pyxel.pget(Player['x']+8,Player['y']-16)!=1 and pyxel.pget(Player['x']+7,Player['y']-16)!=1 and pyxel.pget(Player['x']+6,Player['y']-16)!=1 and pyxel.pget(Player['x']+5,Player['y']-16)!=1 and pyxel.pget(Player['x'],Player['y']-16)!=1 and pyxel.pget(Player['x']+1,Player['y']-16)!=1 and pyxel.pget(Player['x']+2,Player['y']-16)!=1 and pyxel.pget(Player['x']+3,Player['y']-16)!=1 and pyxel.pget(Player['x']+4,Player['y']-16)!=1): 
         if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_Z):
             Player['y']=Player['y']-Player['Vitesse']
 
@@ -135,7 +131,44 @@ def deplacement():                                                              
         FrameDep(Player,24)
     else:
         Player['Frame']= 0
-        
+''' Ne marche pas doit être continuer (jsp dutout pk ça marche pas je vais tout casser )
+def HitboxJBas():
+    for X in range(-10,9):
+        pyxel.pset(Player['x']+X,Player['y']+13,7)
+        p=pyxel.pset(Player['x']+X,Player['y']+14,7)
+        if p==1:
+            return True
+        else: 
+            return False
+
+def HitboxJHaut():
+    for X in range(-10,9):
+        pyxel.pset(Player['x']+X,Player['y']-15,7)
+        p=pyxel.pget(Player['x']+X,Player['y']-16)
+        if p==1:
+            return True
+        else: 
+            return False 
+
+def HitboxJDroite():
+    for X in range(-16,14):
+        pyxel.pset(Player['x']+X,Player['y']+9,7)
+        p=pyxel.pget(Player['x']+X,Player['y']+14)
+        if p==1:
+            return True
+        else: 
+            return False 
+
+def HitboxJGauche():
+    for X in range(-16,14):
+        pyxel.pset(Player['x']+X,Player['y']-10,7)
+        p=pyxel.pget(Player['x']+X,Player['y']+14)
+        if p==1:
+            return True
+        else: 
+            return False 
+
+'''
 def PointdeVie():
     if Player['PV']>=6:
        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
@@ -239,45 +272,6 @@ def Immunite():
         Player['Immune']=0
 
 
-def playerhitbox():
-    
-    for i in range (-10,9):
-        pyxel.pset(Player['x']+i,Player['y']-16,1)
-    
-    
-
-
-
-'''
-    for i in range (-10,9):
-        p=pyxel.pget(Player['x']+i,Player['y']-16,)
-        if p==4:
-            
-            return True
-    for i in range (-10,9):
-        p=pyxel.pget(Player['x']+i,Player['y']+14)
-        if p==4:
-            
-            return True
-             
-    for y in range(-16,14):
-            p=pyxel.pget(Player['x']-10,Player['y']+y,)
-            if p==4:
-                
-                return True 
-    for y in range(-16,14):
-            p=pyxel.pget(Player['x']+9,Player['y']+y,)
-            if p==4:
-                
-                return True
-    return False  
-'''
-
-
-def test():
-    if playerhitbox()==True:
-        pyxel.blt(Player['x']-10,Player['y']-10,0,40,56,16,16,0)
-        Player['PV']=Player['PV']-1
 
 '''
                                                                                 ██████╗░░█████╗░████████╗
@@ -295,7 +289,7 @@ Bot1['x']=60                                                                    
 Bot1['y']=57                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
 Bot1['Frame']= 0
-Bot1['Type']='Arabe'
+Bot1['Type']='None'
 
 
 Bot2=dict()
@@ -303,14 +297,14 @@ Bot2['x']=500                                                                   
 Bot2['y']=257                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
-Bot2['Type']='Phantom'
+Bot2['Type']='None'
 
 Bot3=dict()
 Bot3['x']=250                                                                    #Indique l'emplacement X du Bot2
 Bot3['y']=157                                                                    #Indique l'emplacement Y du Bot2
 Bot3['Sens']='Droite'
 Bot3['Frame']=0
-Bot3['Type']='Golem'
+Bot3['Type']='None'
 
 bouledefeu=dict()
 bouledefeu['x']=0
@@ -352,6 +346,8 @@ def types(entity):                                                              
         pass
     if entity['Type']=='Wario':
         Wario()
+    if entity['Type']=='None':
+        pass
     
 def boulelance(entity):
     FrameDep(bouledefeu,16)
@@ -464,31 +460,7 @@ def curseur():                                                                  
     Xsouris,Ysouris=100,100
     Xsouris=pyxel.mouse_x
     Ysouris=pyxel.mouse_y
-
-def PhatomHitbox():
-    for i in range (-10,9):
-        p=pyxel.pget(Bot2['x']+i,Bot2['y']-16,)
-        if p==4:
-            
-            return True
-    for i in range (-10,9):
-        p=pyxel.pget(Bot2['x']+i,Bot2['y']+14)
-        if p==4:
-            
-            return True
-             
-    for y in range(-16,14):
-            pyxel.pget(Bot2['x']-10,Bot2['y']+y)
-            p=pyxel.pget(Bot2['x']-10,Bot2['y']+y,)
-            if p==4:
-                
-                return True 
-    for y in range(-16,14):
-            p=pyxel.pget(Bot2['x']+9,Bot2['y']+y,)
-            if p==4:
-                
-                return True
-    return False  
+ 
 
 '''
 #Levier 
@@ -517,6 +489,8 @@ Levier3['y']=1
                                                                                 ███████╗██║░░██║██║░╚═╝░██║██║░░░░░███████╗
                                                                                 ╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝
 '''
+global Jour
+Jour=0
 
 def Batterie():                                                                 #Diminue la luminosité de la lampe torche en fonction de la Batterie
     if Player['Batterie']>0:
@@ -552,22 +526,23 @@ def BatterieAffichage():                                                        
         pyxel.blt(Player['x']-80,Player['y']-50,2,64,0,32,16,1)                           #le barre de pile est pleine (vert foncé)
         
     if Player['Batterie']<=80:                                                       #Si la batterie est entre 80% et 60%:
-        pyxel.blt(Player['x']-80,Player['y']-55,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
+        pyxel.blt(Player['x']-80,Player['y']-50,2,64,16,32,16,1)                          #le barre de pile est 1 barre vide (vert clair)
         
     if Player['Batterie']<=60:                                                       #Si la batterie est entre 60% et 40%:
-        pyxel.blt(Player['x']-80,Player['y']-55,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
+        pyxel.blt(Player['x']-80,Player['y']-50,2,64,32,32,16,1)                          #le barre de pile est 2 barres vide (jaune)
         
     if Player['Batterie']<=40:                                                       #Si la batterie est entre 40% et 20%:
-        pyxel.blt(Player['x']-80,Player['y']-55,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
+        pyxel.blt(Player['x']-80,Player['y']-50,2,64,48,32,16,1)                          #le barre de pile à 2 barres restantes (orange)
         
     if Player['Batterie']<=20:                                                       #Si la batterie est à 20% ou moins:
-        pyxel.blt(Player['x']-80,Player['y']-55,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
+        pyxel.blt(Player['x']-80,Player['y']-50,2,64,64,32,16,1)                          #le barre de pile à 1 barre restante (rouge)
 
         
         
 
 #prototype lampe V1
 def Lampe():                                                                    #Affiche une partie de la map autour du joueur en fonction de la visibilité 
+    global Jour
     for x in range(Player['x']-75,Player['x']+75):
         for y in range(Player['y']-75,Player['y']+75):
             b=pyxel.sqrt((x-Player['x'])**2+(y-Player['y'])**2)
@@ -657,7 +632,7 @@ def menu():                                                                     
         pyxel.blt(160,119,2,8,1,6,8,0)
         if pyxel.btn(pyxel.KEY_RETURN): 
             pyxel.quit()
-    
+
     pyxel.text(120,130,str(Choix),7)
 
 
@@ -740,7 +715,7 @@ class App:
                                                                                 ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
         '''
 
-        global start
+        global start,Jour
         if pyxel.btnp(pyxel.KEY_TAB):                                           #Stop le jeu et ouvre le Menu quand on appui sur tab
             start=0
         if pyxel.btnp(pyxel.KEY_U):                                           #Stop le jeu et ouvre le Menu Mort quand on appui sur 
@@ -761,7 +736,12 @@ class App:
         elif start==2:
             if pyxel.btn(pyxel.KEY_SPACE):
                 start=0
-        
+        if pyxel.btnp(pyxel.KEY_HOME):
+            Jour=Jour+1
+        if pyxel.btnp(pyxel.KEY_END):
+            Jour=Jour-1
+        if Jour>=2 or Jour<0:
+            Jour=0
 
 
 
@@ -774,47 +754,80 @@ class App:
                                                                                 ██████╔╝██║░░██║██║░░██║░░╚██╔╝░╚██╔╝░
                                                                                 ╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░
         '''
-        global start
+        global start,Jour
 
         if start==1:                                                            #Si la partie est démarrée
-            pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   
-            pyxel.cls(0)                                                        #colorie toute la map en noir
-            LampeLum()                                                          #affiche les couleurs de la lampe  
+            if Jour==0:
+                pyxel.clip(Player['x']-75,Player['y']-75,150,150)                   
+                pyxel.cls(0)                                                        #colorie toute la map en noir
+            if Jour==1:
+                pyxel.cls(4)
+            if Jour==0:
+                LampeLum()                                                          #affiche les couleurs de la lampe  
             pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
                                                                                             #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)
             types(Bot3)
-            Lampe()
+            if Jour==0:
+                Lampe()
                                                                          #affiche qu'une certaine partie de la map a l'écran
                                                                                            
             Draw32px(Player,0,0,1,1)                                              #affiche le joueur et des animations
             BatterieAffichage()
             if not pyxel.btn(pyxel.KEY_F)   :             #si la touche flash et la battetrie est supérierur a 5
                 Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
-            flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
-
+            if Jour==0:
+                flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
+            
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
             PointdeVie()           
-            playerhitbox()
-            PhatomHitbox()
-            test()
-            pyxel.pset(Player['x']+5,Player['y']+14,7)
+            
             if pyxel.btn(pyxel.KEY_0):
                 pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
                 pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
                 pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
-                pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(start),7)
+                pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
 
-        if start==0 or start==-1 :
+        if start==0 or start==-1 or Jour==1:
             pyxel.clip()
             
 
 App()
 
 '''
+code de côté au cas ou 
             XX=(str('X : '))+(str(Xsouris))                                     
             YY=(str('Y : '))+(str(Ysouris))                                     
             pyxel.text(Player['x']-75,Player['y']-75,XX,2)                                                #Position Y du curseur en haut a droite de l'écran                                   
             pyxel.text(Player['x']-45,Player['y']-75,YY,2)                                               #Position Y du curseur en haut a droite de l'écran 
+
+    if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=5 and pyxel.pget(Player['x']-8,Player['y']+14)!=5 and pyxel.pget(Player['x']-7,Player['y']+14)!=5 and pyxel.pget(Player['x']-6,Player['y']+14)!=5 and pyxel.pget(Player['x']-5,Player['y']+14)!=5 and pyxel.pget(Player['x']-4,Player['y']+14)!=5 and pyxel.pget(Player['x']-3,Player['y']+14)!=5 and pyxel.pget(Player['x']-2,Player['y']+14)!=5 and pyxel.pget(Player['x']-1,Player['y']+14)!=5 and pyxel.pget(Player['x']+9,Player['y']+14)!=5 and pyxel.pget(Player['x']+8,Player['y']+14)!=5 and pyxel.pget(Player['x']+7,Player['y']+14)!=5 and pyxel.pget(Player['x']+6,Player['y']+14)!=5 and pyxel.pget(Player['x']+5,Player['y']+14)!=5 and pyxel.pget(Player['x'],Player['y']+14)!=5 and pyxel.pget(Player['x']+1,Player['y']+14)!=5 and pyxel.pget(Player['x']+2,Player['y']+14)!=5 and pyxel.pget(Player['x']+3,Player['y']+14)!=5 and pyxel.pget(Player['x']+4,Player['y']+14)!=5):
+     if (pyxel.pget(Player['x']-10,Player['y']-16)!=5 , 1 and pyxel.pget(Player['x']-9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-4,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x'],Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+4,Player['y']-16)!=5 ,1): 
+
+    for i in range (-10,9):
+        p=pyxel.pget(Player['x']+i,Player['y']-16,)
+        if p==4:
+            
+            return True
+    for i in range (-10,9):
+        p=pyxel.pget(Player['x']+i,Player['y']+14)
+        if p==4:
+            
+            return True
+             
+    for y in range(-16,14):
+            p=pyxel.pget(Player['x']-10,Player['y']+y,)
+            if p==4:
+                
+                return True 
+    for y in range(-16,14):
+            p=pyxel.pget(Player['x']+9,Player['y']+y,)
+            if p==4:
+                
+                return True
+    return False  
+
+
+
 '''
