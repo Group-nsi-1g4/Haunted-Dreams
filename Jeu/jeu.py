@@ -19,11 +19,14 @@ import pyxel,random                                                             
 '''
 global start                                                                    #Met en place La variable Global start 
 start=0                                                                         #Indique si le jeu est commencer ou non (0 pour non)
-global Xmap,Ymap,XResol,YResol        
+global Xmap,Ymap,XResol,YResol,MapMob        
 Xmap=0
 Ymap=0
 XResol=640
 YResol=350
+MapMob=[[random.randint(1,3),random.randint(1,3),random.randint(1,3)] for _ in range(6)]
+MapMob[0][0]=0
+
 def Detectdeplace() :                                                               #Fonction retournant True si le joueur se déplace
     if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):                         #Test en Bas
         return True
@@ -48,7 +51,7 @@ def FrameDep(entity,s):                                                         
     elif pyxel.frame_count % s >= (s*0.75) :
         entity['Frame'] = 3
         
-def WarioApparition():
+def WarioApparition():                                                              #La fonction Wario non fonctionnel pour la early acces
     if Bot1['Type']=='Wario':
         return True
         
@@ -72,9 +75,9 @@ def Draw32px(entity,u,v,inverse,col):                                           
         else:
             pyxel.blt(entity['x']-16,entity['y']-16,1,u,v+96,-inverse*32,32,col)
 
-def Draw64px(entity,u,v,col):
+def Draw64px(entity,u,v,col):                                                               #Fonction dessinant les objets de taille 64 pixels
     if entity['Frame']<=1:
-        pyxel.blt(entity['x']-32,entity['y']-32,1,u,v,64,64,col)
+        pyxel.blt(entity['x']-32,entity['y']-32,1,u,v,64,64,col)                            #echange entre 2 frames (prend beaucoup de place sur le pyxres)
     else:
         pyxel.blt(entity['x']-32,entity['y']-32,1,u,v+64,64,64,col)
             
@@ -84,6 +87,50 @@ def BoutonMenu(x1,x2,xdetec1,xdetec2,y1,y2,ydetec1,ydetec2):
         pyxel.blt(x2,y2,2,8,1,6,8,0)
         if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):                                                   #Si le joueur clique : Active peut importe ce qu'il y a après
             return True
+        
+def MapMobSet():                                                                                  #Fonction mettant les preset des Mobs des Maps
+    global MapMob
+    if MapMob[Player['Xmob']][Player['Ymob']]==1:                                                 #Le preset1
+        MobSet1()
+    elif MapMob[Player['Xmob']][Player['Ymob']]==0:                                               #Les salles vides
+        Bot1['Type']='Mort'
+        Bot2['Type']='Mort'
+        Bot3['Type']='Mort'
+    elif MapMob[Player['Xmob']][Player['Ymob']]==2:                                               #Le preset2
+        MobSet2()
+    elif MapMob[Player['Xmob']][Player['Ymob']]==3:                                               #Le preset3
+        MobSet3()
+
+def MobSet1():                                                                                    #Les mobs du preset1 
+    Bot1['Type']='Phantom'
+    Bot2['Type']='Phantom'
+    Bot3['Type']='Golem'
+    Bot1['x']=240
+    Bot1['y']=80
+    Bot2['x']=500
+    Bot2['y']=280
+    Bot3['x']=320
+    Bot3['y']=160
+
+def MobSet2():                                                                                    #Les mobs du preset2
+    Bot1['Type']='Zombie'
+    Bot2['Type']='Mage'
+    Bot3['Type']='Mort'
+    Bot1['x']=160
+    Bot1['y']=160
+    Bot2['x']=320
+    Bot2['y']=160
+    
+def MobSet3():                                                                                    #Les mobs du preset3
+    Bot1['Type']='Arabe'
+    Bot2['Type']='Zombie'
+    Bot3['Type']='Zombie'
+    Bot1['x']=320
+    Bot1['y']=160
+    Bot2['x']=460
+    Bot2['y']=240
+    Bot3['x']=460
+    Bot3['y']=80
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -106,7 +153,8 @@ Player['Fatigue']= 0
 Player['StamDepletion']=1
 Player['PV']=6
 Player['Immune']=0
-
+Player['Xmob']=0
+Player['Ymob']=0
 
 
 def deplacement():                                                              #Déplacement Du joueur                                                                             
@@ -127,9 +175,9 @@ def deplacement():                                                              
             Player['y']=Player['y']-Player['Vitesse']
 
 
-    if Detectdeplace() == True and pyxel.btn(pyxel.KEY_SHIFT) != True :
+    if Detectdeplace() == True and pyxel.btn(pyxel.KEY_SHIFT) != True :                     #Si le joueur ce deplace : il a des frames d'animations
         FrameDep(Player,24)
-    else:
+    else:                                                                                   #Sinon : il ne bouge pas
         Player['Frame']= 0
 ''' Ne marche pas doit être continuer (jsp dutout pk ça marche pas je vais tout casser )
 def HitboxJBas():
@@ -170,38 +218,38 @@ def HitboxJGauche():
 
 '''
 def PointdeVie():
-    if Player['PV']>=6:
+    if Player['PV']>=6:                                                   #Montre 3 coueur pour 6 pv
        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
     
-    if Player['PV']>=5:
+    if Player['PV']>=5:                                                   #Montre 2,5 coueur pour 5 pv
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,39,16,1)
     
-    if Player['PV']>=4:
+    if Player['PV']>=4:                                                   #Montre 2 coueur pour 4 pv
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,29,16,1)
 
-    if Player['PV']>=3:
+    if Player['PV']>=3:                                                   #Montre 1,5 coueur pour 3 pv
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,23,16,1)
 
-    if Player['PV']>=2:
+    if Player['PV']>=2:                                                   #Montre 1 coueur pour 2 pv
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,13,16,1)
 
-    if Player['PV']>=1:
+    if Player['PV']>=1:                                                   #Montre 0,5 coueur pour 1 pv
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
 
 
-    if pyxel.btn(pyxel.KEY_W):
+    if pyxel.btn(pyxel.KEY_W):                                            #Touche de test
         Player['PV']=6
-    if Player['PV']>1 and Player['PV']<100:
+    if Player['PV']>1 and Player['PV']<6:                                 #le joueur regenere ses PVs petit a petit
         Player['PV']=Player['PV']+0.001
 
 
 
 def Course():                                                                   #Course et système de Stamina
-    if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:
+    if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:                      #Le joueur cours si il n'est pas fatiguer
         Player['Vitesse']=4
-        Player['Stamina']= Player['Stamina']-Player['StamDepletion']
+        Player['Stamina']= Player['Stamina']-Player['StamDepletion']               #il perd de la stamina
         FrameDep(Player,12)
-        if Player['Stamina']<=5:
+        if Player['Stamina']<=5:                                                   #Si il a - de 5 stamina : il devient fatiguer
             Player['Fatigue']= 1
     else:
         if Player['Stamina']<=25:                                               #Si le joueur a peu de Stamina : sa vitesse est réduite temporairement
@@ -242,28 +290,36 @@ def BougeMap():                                                                 
         Player['x']-=630                                                                           #le joueur passe à gauche
         if WarioApparition() == True :
             Bot1['x']-=630
+        Player['Xmob']-=1                                                                     #On change de salles sur la Map des Mobs
+        MapMobSet()                                                                           #Ont met en place le preset cesser etre sur la map
         
     elif Player['x']<=5:                                                                      #Dès que le joueur est asser à gauche de l'écran
         Xmap=Xmap+640                                                                              #la tilemap va 1 écran à gauche
         Player['x']+=630                                                                           #le joueur passe à droite
         if WarioApparition() == True :
             Bot1['x']+=630
+        Player['Xmob']+=1                                                                     #On change de salles sur la Map des Mobs
+        MapMobSet()                                                                           #Ont met en place le preset cesser etre sur la map
         
     elif Player['y']>=315:                                                                    #Dès que le joueur est asser en haut de l'écran
         Ymap-=320                                                                                  #la tilemap va 1 écran en haut
         Player['y']-=310                                                                           #le joueur passe en bas
         if WarioApparition() == True :
             Bot1['y']-=310
+        Player['Ymob']-=1                                                                     #On change de salles sur la Map des Mobsc
+        MapMobSet()                                                                           #Ont met en place le preset cesser etre sur la map
         
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
         Player['y']+=310                                                                           #le joueur passe en haut
         if WarioApparition() == True :
             Bot1['y']+=310
+        Player['Ymob']+=1                                                                     #On change de salles sur la Map des Mobs
+        MapMobSet()                                                                           #Ont met en place le preset cesser etre sur la map
 
 def Immunite():
-    if pyxel.frame_count %10 == 0:
-        if Player['Immune']%2==0:
+    if pyxel.frame_count %10 == 0:                                                            #L'immunité baisse toute les demi-seconde
+        if Player['Immune']%2==0:                                                             #Avoir de l'immunité procure des effets rouge
             pyxel.pal()
         else:
             pyxel.pal(10,8)
@@ -314,15 +370,15 @@ bouledefeu['Sens']='Droite'
 bouledefeu['Frame']=0
 
 def bot(entity):                                                                 #Fait en sorte que les bots pourusivent le joueur en fonction de leur vitesse 
-    if Player['x']-entity['x'] >= 0:
+    if Player['x']-entity['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
         entity['Sens']='Droite'
         entity['x']=entity['x']+entity['Vitesse']
-    if Player['x']-entity['x'] <= 0:
+    if Player['x']-entity['x'] <= 0:                                                 #si le joueur est a gauche : le bot va a gauche
         entity['Sens']='Gauche'
         entity['x']=entity['x']-entity['Vitesse']
-    if Player['y']-entity['y'] >= 0:
+    if Player['y']-entity['y'] >= 0:                                                 #si le joueur est en haut : le bot va en haut
         entity['y']=entity['y']+entity['Vitesse']
-    if Player['y']-entity['y'] <= 0:
+    if Player['y']-entity['y'] <= 0:                                                 #si le joueur est en bas : le bot va en bas
         entity['y']=entity['y']-entity['Vitesse']
     FrameDep(entity,36)
         
@@ -342,18 +398,18 @@ def types(entity):                                                              
         Golem(entity)
     if entity['Type']=='Cauchemare':                                            #Détecte si le bot est un Cauchemare
         Cauchemare(entity)
-    if entity['Type']=='Mort':
+    if entity['Type']=='Mort':                                                  #Fait rien si il est mort
         pass
-    if entity['Type']=='Wario':
+    if entity['Type']=='Wario':                                                 #Wario (Pas early acces)
         Wario()
     if entity['Type']=='None':
         pass
     
 def boulelance(entity):
     FrameDep(bouledefeu,16)
-    if bouledefeu['Type']=='Lancer':
-        Draw32px(bouledefeu,160,128,-1,0)
-        bouledefeu['x']+=bouledefeu['vx']
+    if bouledefeu['Type']=='Lancer':                                                 #dès que la boule de feu est lancer,
+        Draw32px(bouledefeu,160,128,-1,0)                                            #elle existe
+        bouledefeu['x']+=bouledefeu['vx']                                            #Elle va a une direction donnée
         bouledefeu['y']+=bouledefeu['vy']
         if Player['x']<bouledefeu['x']+14 and Player['x']>bouledefeu['x']-14 and Player['y']>bouledefeu['y']-14 and Player['y']<bouledefeu['y']+14 and Player['Immune'] == 0:
             pyxel.play(0,10)                                                         #Infliger des dégats si le joueur est proche (+ Son)
@@ -402,12 +458,12 @@ def Mage(entity):                                                             #F
         Player['PV']-=2                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
         pyxel.play(0,1)
-    if pyxel.frame_count % 50 == 0 :
-        pyxel.play(0,7)
-        bouledefeu['Type']='Lancer'
-        bouledefeu['vx']=(Player['x']-entity['x'])*0.05
+    if pyxel.frame_count % 50 == 0 :                                            #Toutes les 2.5 secondes, le mage fait :
+        pyxel.play(0,7)                                                             #un son
+        bouledefeu['Type']='Lancer'                                                 #lance la boule de feu
+        bouledefeu['vx']=(Player['x']-entity['x'])*0.05                             #trouve la direction pour la boule de feu
         bouledefeu['vy']=(Player['y']-entity['y'])*0.05
-        bouledefeu['y']=entity['y']
+        bouledefeu['y']=entity['y']                                                 #et la fait partir de son corps
         bouledefeu['x']=entity['x']
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
@@ -432,7 +488,7 @@ def Cauchemare(entity):                                                         
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
 
-def Wario():
+def Wario():                                                                    #Le wario n'est pas fini pour l'early acces
     boulelance(Bot1)
     Bot2['Type']='Mort'
     Bot3['Type']='Mort'
