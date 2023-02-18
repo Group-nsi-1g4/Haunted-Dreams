@@ -131,6 +131,13 @@ def MobSet3():                                                                  
     Bot2['y']=240
     Bot3['x']=460
     Bot3['y']=80
+    
+def DebugMenu():
+    if pyxel.btn(pyxel.KEY_0):
+    pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
+    pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
+    pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
+    pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -157,6 +164,15 @@ Player['Xmob']=0
 Player['Ymob']=0
 
 
+
+def JoueurComplet():
+    deplacement()
+    Course()
+    mort()
+    Bougemap()
+    PointdeVie()
+    Immunite()
+    
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
@@ -777,12 +793,7 @@ class App:
         if pyxel.btnp(pyxel.KEY_U):                                           #Stop le jeu et ouvre le Menu Mort quand on appui sur 
             start=2    
         if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
-            deplacement()
-            Course()
-            BougeMap()
-            PointdeVie()
-            Immunite()
-            mort()
+            JoueurComplet()
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
 
@@ -839,11 +850,7 @@ class App:
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
             PointdeVie()           
             
-            if pyxel.btn(pyxel.KEY_0):
-                pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
-                pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
-                pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
-                pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
+            DebugMenu()
 
         if start==0 or start==-1 or Jour==1:
             pyxel.clip()
