@@ -1,14 +1,5 @@
 import pyxel,random                                                              #Mathieu brodard, Mathieu vilmot, Mohamed Latreche, Sailan Sivakumar
-'''
-███╗░░██╗░█████╗░███╗░░░███╗░░░░░░██████╗░██╗░░░██╗░░░░░░░░░██╗███████╗██╗░░░██╗
-████╗░██║██╔══██╗████╗░████║░░░░░░██╔══██╗██║░░░██║░░░░░░░░░██║██╔════╝██║░░░██║
-██╔██╗██║██║░░██║██╔████╔██║░░░░░░██║░░██║██║░░░██║░░░░░░░░░██║█████╗░░██║░░░██║
-██║╚████║██║░░██║██║╚██╔╝██║░░░░░░██║░░██║██║░░░██║░░░░██╗░░██║██╔══╝░░██║░░░██║
-██║░╚███║╚█████╔╝██║░╚═╝░██║░░░░░░██████╔╝╚██████╔╝░░░░╚█████╔╝███████╗╚██████╔╝
-╚═╝░░╚══╝░╚════╝░╚═╝░░░░░╚═╝░░░░░░╚═════╝░░╚═════╝░░░░░░╚════╝░╚══════╝░╚═════╝░
-
-
-                                                                                
+'''                                                                                
                                                                                 ██╗░░░██╗████████╗██╗██╗░░░░░██╗████████╗░█████╗░██╗██████╗░███████╗░██████╗
                                                                                 ██║░░░██║╚══██╔══╝██║██║░░░░░██║╚══██╔══╝██╔══██╗██║██╔══██╗██╔════╝██╔════╝
                                                                                 ██║░░░██║░░░██║░░░██║██║░░░░░██║░░░██║░░░███████║██║██████╔╝█████╗░░╚█████╗░
@@ -16,6 +7,25 @@ import pyxel,random                                                             
                                                                                 ╚██████╔╝░░░██║░░░██║███████╗██║░░░██║░░░██║░░██║██║██║░░██║███████╗██████╔╝
                                                                                 ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░
                                                                                 Autres fonctions multitâches ou détectant des choses.
+Bonjour, le jeu n'est pas dutout fini, il reste énormement de chose a faire, ceci dit c'est une demo fonctionnel de ce que nous immaginions pour le jeu.
+merci d'être indulgent 
+et désoler du manque de commenttaire (spécifiquement le menu)
+beaucoup de méchanique de jeu reste a programmer et a aprofondire (exemple : les attaque du joueur)
+si vous avez des suggestions elle sont les bien venu
+on espère que le jeu vous plaira  
+
+coeur <3
+touche actuelle  (peuvent être changé):
+zqsd et flèche directionnel pour se déplacer 
+F pour le flash (rester appuyer, consomme beaucoup de batterie et permet d'impacter certain mob )
+shift pour courrir (consomme de l'endurence)
+tab pour retourner au menu 
+
+touche devlopeur
+debut/home pour mettre le jour 
+W pour mettre la vie au max 
+et plein d'autre a découvrir ! 
+
 '''
 global start                                                                    #Met en place La variable Global start 
 start=0                                                                         #Indique si le jeu est commencer ou non (0 pour non)
@@ -134,10 +144,10 @@ def MobSet3():                                                                  
     
 def DebugMenu():
     if pyxel.btn(pyxel.KEY_0):
-    pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
-    pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
-    pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
-    pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
+        pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
+        pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
+        pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
+        pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -169,20 +179,19 @@ def JoueurComplet():
     deplacement()
     Course()
     mort()
-    Bougemap()
+    BougeMap()
     PointdeVie()
     Immunite()
-    
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             Player['y']=Player['y']+Player['Vitesse']
 
-    if (pyxel.pget(Player['x']-16,Player['y']+9)!=1 and pyxel.pget(Player['x']-15,Player['y']+9)!=1 and pyxel.pget(Player['x']-14,Player['y']+9)!=1 and pyxel.pget(Player['x']-13,Player['y']+9)!=1 and pyxel.pget(Player['x']-12,Player['y']+9)!=1 and pyxel.pget(Player['x']-11,Player['y']+9)!=1 and pyxel.pget(Player['x']-10,Player['y']+9)!=1 and pyxel.pget(Player['x']-9,Player['y']+9)!=1 and pyxel.pget(Player['x']-8,Player['y']+9)!=1 and pyxel.pget(Player['x']-7,Player['y']+9)!=1 and pyxel.pget(Player['x']-6,Player['y']+9)!=1 and pyxel.pget(Player['x']-5,Player['y']+9)!=1 and pyxel.pget(Player['x']-4,Player['y']+9)!=1 and pyxel.pget(Player['x']-3,Player['y']+9)!=1 and pyxel.pget(Player['x']-2,Player['y']+9)!=1 and pyxel.pget(Player['x']-1,Player['y']+9)!=1 and pyxel.pget(Player['x'],Player['y']+9)!=1 and pyxel.pget(Player['x']+1,Player['y']+9)!=1 and pyxel.pget(Player['x']+2,Player['y']+9)!=1 and pyxel.pget(Player['x']+3,Player['y']+9)!=1 and pyxel.pget(Player['x']+4,Player['y']+9)!=1 and pyxel.pget(Player['x']+5,Player['y']+9)!=1 and pyxel.pget(Player['x']+6,Player['y']+9)!=1 and pyxel.pget(Player['x']+7,Player['y']+9)!=1 and pyxel.pget(Player['x']+8,Player['y']+9)!=1 and pyxel.pget(Player['x']+9,Player['y']+9)!=1 and pyxel.pget(Player['x']+10,Player['y']+9)!=1 and pyxel.pget(Player['x']+11,Player['y']+9)!=1 and pyxel.pget(Player['x']+12,Player['y']+9)!=1 and pyxel.pget(Player['x']+13,Player['y']+9)!=1 and pyxel.pget(Player['x']+14,Player['y']+9)!=1): 
+    if (pyxel.pget(Player['x']+9,Player['y']-16)!=1 and pyxel.pget(Player['x']+9,Player['y']-15)!=1 and pyxel.pget(Player['x']+9,Player['y']-14)!=1 and pyxel.pget(Player['x']+9,Player['y']-13)!=1 and pyxel.pget(Player['x']+9,Player['y']-12)!=1 and pyxel.pget(Player['x']+9,Player['y']-11)!=1 and pyxel.pget(Player['x']+9,Player['y']-10)!=1 and pyxel.pget(Player['x']+9,Player['y']+-9)!=1 and pyxel.pget(Player['x']+9,Player['y']+-8)!=1 and pyxel.pget(Player['x']+9,Player['y']+-7)!=1 and pyxel.pget(Player['x']+9,Player['y']+-6)!=1 and pyxel.pget(Player['x']+9,Player['y']+-5)!=1 and pyxel.pget(Player['x']+9,Player['y']+-4)!=1 and pyxel.pget(Player['x']+9,Player['y']+-3)!=1 and pyxel.pget(Player['x']+9,Player['y']+-2)!=1 and pyxel.pget(Player['x']+9,Player['y']+-1)!=1 and pyxel.pget(Player['x']+9,Player['y']+9)!=1 and pyxel.pget(Player['x']+9,Player['y']++1)!=1 and pyxel.pget(Player['x']+9,Player['y']++2)!=1 and pyxel.pget(Player['x']+9,Player['y']++3)!=1 and pyxel.pget(Player['x']+9,Player['y']++4)!=1 and pyxel.pget(Player['x']+9,Player['y']++5)!=1 and pyxel.pget(Player['x']+9,Player['y']++6)!=1 and pyxel.pget(Player['x']+9,Player['y']++7)!=1 and pyxel.pget(Player['x']+9,Player['y']++8)!=1 and pyxel.pget(Player['x']+9,Player['y']++9)!=1 and pyxel.pget(Player['x']+9,Player['y']+10)!=1 and pyxel.pget(Player['x']+9,Player['y']+11)!=1 and pyxel.pget(Player['x']+9,Player['y']+12)!=1 and pyxel.pget(Player['x']+9,Player['y']+13)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1): 
         if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
                 Player['x']=Player['x']+Player['Vitesse']
                 Player['Sens']='Droite'
-    if (pyxel.pget(Player['x']-16,Player['y']-10)!=1 and pyxel.pget(Player['x']-15,Player['y']-10)!=1 and pyxel.pget(Player['x']-14,Player['y']-10)!=1 and pyxel.pget(Player['x']-13,Player['y']-10)!=1 and pyxel.pget(Player['x']-12,Player['y']-10)!=1 and pyxel.pget(Player['x']-11,Player['y']-10)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']-9,Player['y']-10)!=1 and pyxel.pget(Player['x']-8,Player['y']-10)!=1 and pyxel.pget(Player['x']-7,Player['y']-10)!=1 and pyxel.pget(Player['x']-6,Player['y']-10)!=1 and pyxel.pget(Player['x']-5,Player['y']-10)!=1 and pyxel.pget(Player['x']-4,Player['y']-10)!=1 and pyxel.pget(Player['x']-3,Player['y']-10)!=1 and pyxel.pget(Player['x']-2,Player['y']-10)!=1 and pyxel.pget(Player['x']-1,Player['y']-10)!=1 and pyxel.pget(Player['x'],Player['y']-10)!=1 and pyxel.pget(Player['x']+1,Player['y']-10)!=1 and pyxel.pget(Player['x']+2,Player['y']-10)!=1 and pyxel.pget(Player['x']+3,Player['y']-10)!=1 and pyxel.pget(Player['x']+4,Player['y']-10)!=1 and pyxel.pget(Player['x']+5,Player['y']-10)!=1 and pyxel.pget(Player['x']+6,Player['y']-10)!=1 and pyxel.pget(Player['x']+7,Player['y']-10)!=1 and pyxel.pget(Player['x']+8,Player['y']-10)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']+10,Player['y']-10)!=1 and pyxel.pget(Player['x']+11,Player['y']-10)!=1 and pyxel.pget(Player['x']+12,Player['y']-10)!=1 and pyxel.pget(Player['x']+13,Player['y']-10)!=1 and pyxel.pget(Player['x']+14,Player['y']-10)!=1): 
+    if (pyxel.pget(Player['x']-10,Player['y']-15)!=1 and pyxel.pget(Player['x']-10,Player['y']-15)!=1 and pyxel.pget(Player['x']-10,Player['y']-14)!=1 and pyxel.pget(Player['x']-10,Player['y']-13)!=1 and pyxel.pget(Player['x']-10,Player['y']-12)!=1 and pyxel.pget(Player['x']-10,Player['y']-11)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']-9,Player['y']-9)!=1 and pyxel.pget(Player['x']-8,Player['y']-8)!=1 and pyxel.pget(Player['x']-7,Player['y']-7)!=1 and pyxel.pget(Player['x']-6,Player['y']-6)!=1 and pyxel.pget(Player['x']-5,Player['y']-5)!=1 and pyxel.pget(Player['x']-4,Player['y']-4)!=1 and pyxel.pget(Player['x']-3,Player['y']-3)!=1 and pyxel.pget(Player['x']-2,Player['y']-2)!=1 and pyxel.pget(Player['x']-1,Player['y']-1)!=1 and pyxel.pget(Player['x'],Player['y']-10)!=1 and pyxel.pget(Player['x']+1,Player['y']+1)!=1 and pyxel.pget(Player['x']+2,Player['y']+2)!=1 and pyxel.pget(Player['x']+3,Player['y']+3)!=1 and pyxel.pget(Player['x']+4,Player['y']+4)!=1 and pyxel.pget(Player['x']+5,Player['y']+5)!=1 and pyxel.pget(Player['x']+6,Player['y']+6)!=1 and pyxel.pget(Player['x']+7,Player['y']+7)!=1 and pyxel.pget(Player['x']+8,Player['y']+8)!=1 and pyxel.pget(Player['x']-10,Player['y']-10)!=1 and pyxel.pget(Player['x']+10,Player['y']+10)!=1 and pyxel.pget(Player['x']+10,Player['y']+11)!=1 and pyxel.pget(Player['x']+10,Player['y']+12)!=1 and pyxel.pget(Player['x']+10,Player['y']+13)!=1 and pyxel.pget(Player['x']+10,Player['y']+14)!=1): 
         if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_Q):
             Player['x']=Player['x']-Player['Vitesse']
             Player['Sens']='Gauche'
@@ -338,7 +347,7 @@ def Immunite():
         if Player['Immune']%2==0:                                                             #Avoir de l'immunité procure des effets rouge
             pyxel.pal()
         else:
-            pyxel.pal(10,8)
+            pyxel.pal()
         Player['Immune']-=1
     if Player['Immune']==-1:
         Player['Immune']=0
@@ -677,6 +686,7 @@ Choix=1
 def menu():                                                                     #Le Menu principale dans sont intégralité : Jouer et Quitter pour l'instant
     global Xsouris,Ysouris,start,Choix
     pyxel.cls(0)
+    pyxel.text(0,0,'Early Early Early acces',7)
     pyxel.text(120,40,str("Start Game"),7)
     pyxel.text(120,80,str("Options"),7)
     pyxel.text(120,120,str("Quit Game"),7)
@@ -705,7 +715,7 @@ def menu():                                                                     
         if pyxel.btn(pyxel.KEY_RETURN): 
             pyxel.quit()
 
-    pyxel.text(120,130,str(Choix),7)
+    
 
 
 
@@ -757,8 +767,7 @@ def mort():
         pyxel.clip()
         pyxel.cls(0)
         pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
-        pyxel.text(280,150,'L bozo',7)
-        pyxel.text(280,100,str(start),7)
+        pyxel.text(280,150,'Vous êtes mort !',7)
         if pyxel.btn(pyxel.KEY_SPACE):
             start=0
 
@@ -773,7 +782,7 @@ image.png
 '''
 class App:
     def __init__(self):                                                         #Initialisation du Jeu 
-        pyxel.init(XResol,YResol, title="Nom du jeu")                                #Initialisation de la résolution du jeu et de son titre
+        pyxel.init(XResol,YResol, title="jeu")                                #Initialisation de la résolution du jeu et de son titre
         pyxel.load("media.pyxres")                                              #charge les graphisme depuis le fichier media 
         pyxel.run(self.update, self.draw)                                       #lance l'update et le draw en continue 
 
