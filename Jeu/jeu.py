@@ -141,13 +141,22 @@ def MobSet3():                                                                  
     Bot2['y']=240
     Bot3['x']=460
     Bot3['y']=80
-    
+
+global debug
+debug=0
 def DebugMenu():
-    if pyxel.btn(pyxel.KEY_0):
-        pyxel.text(Player['x']-10, Player['y']+10,str('PV:')+str(Player['PV']),7)
-        pyxel.text(Player['x']-10, Player['y']+20,str('Batterie:')+str(Player['Batterie']),7)
-        pyxel.text(Player['x']-10, Player['y']+30,str('Stamina:')+str(Player['Stamina']),7)
-        pyxel.text(Player['x']-10, Player['y']+40,str('Start:')+str(Jour),7)
+    global debug
+    if debug>1 or debug<0:
+        debug=0
+    if debug==1:
+        pyxel.text(0,0,str('PV:')+str(Player['PV']),7)
+        pyxel.text(0,10,str('Batterie:')+str(Player['Batterie']),7)
+        pyxel.text(0,20,str('Stamina:')+str(Player['Stamina']),7)
+        pyxel.text(0,30,str('start:')+str(start),7)
+        pyxel.text(0,40,str('Xsalle:')+str(Player['XSalle']),7)
+        pyxel.text(0,50,str('Ysalle:')+str(Player['YSalle']),7)
+        pyxel.text(0,60,str('Devmode:')+str(Devmode),7)
+        pyxel.text(0,70,str('Porte:')+str(Porte),7)
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -172,6 +181,8 @@ Player['PV']=6
 Player['Immune']=0
 Player['Xmob']=0
 Player['Ymob']=0
+Player['XSalle']=0
+Player['YSalle']=0
 
 
 
@@ -243,6 +254,7 @@ def HitboxJGauche():
 
 '''
 def PointdeVie():
+    global Devmode
     if Player['PV']>=6:                                                   #Montre 3 coueur pour 6 pv
        pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,44,16,1)
     
@@ -266,7 +278,7 @@ def PointdeVie():
         Player['PV']=6
     if Player['PV']>1 and Player['PV']<6:                                 #le joueur regenere ses PVs petit a petit
         Player['PV']=Player['PV']+0.001
-
+    
 
 
 def Course():                                                                   #Course et système de Stamina
@@ -288,7 +300,7 @@ def Course():                                                                   
             Player['Stamina']= Player['Stamina']-1
     if  Player['Stamina'] <= 0 :                                                #Stamina ne passe pas 0%
         Player['Stamina']= Player['Stamina']+2  
-
+    
 def     drawSprint():
     if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:                   #Si la stamina restante est entre 100% et 80% et que le joueur n'est pas fatiguer :
         pyxel.blt(Player['x']-77,Player['y']-63,2,96,0,32,16,1)                                          #Montrer la barre remplie
@@ -308,11 +320,27 @@ def     drawSprint():
     elif Player['Fatigue']==1:                                                                     #Si le joueur est fatiguer peut importe sa stamina restante :
         pyxel.blt(Player['x']-77,Player['y']-63,2,96,80,32,16,1)                                         #Montrer la barre casser
 
+global Devmode
+Devmode=0
+
+def GODmode():
+    global Devmode,Jour,debug
+    if pyxel.btnp(pyxel.KEY_END):
+        Devmode=Devmode+1
+        Jour=Jour+1
+    if Devmode>1 or Devmode<0:
+        Devmode=0
+    if Devmode==1:    
+        Player['StamDepletion']=0
+        Player['PV']=6
+        debug=1
+
 def BougeMap():                                                                          #Illusion de se déplacer sur la map
     global Xmap,Ymap
     if Player['x']>=635:                                                                      #Dès que le joueur est asser à droite de l'écran
         Xmap-=640                                                                                  #la tilemap va 1 écran à droite
-        Player['x']-=630                                                                           #le joueur passe à gauche
+        Player['x']-=630 
+        Player['XSalle']=Player['XSalle']+1                                                                          #le joueur passe à gauche
         if WarioApparition() == True :
             Bot1['x']-=630
         Player['Xmob']-=1                                                                     #On change de salles sur la Map des Mobs
@@ -320,7 +348,8 @@ def BougeMap():                                                                 
         
     elif Player['x']<=5:                                                                      #Dès que le joueur est asser à gauche de l'écran
         Xmap=Xmap+640                                                                              #la tilemap va 1 écran à gauche
-        Player['x']+=630                                                                           #le joueur passe à droite
+        Player['x']+=630
+        Player['XSalle']=Player['XSalle']-1                                                                            #le joueur passe à droite
         if WarioApparition() == True :
             Bot1['x']+=630
         Player['Xmob']+=1                                                                     #On change de salles sur la Map des Mobs
@@ -328,7 +357,8 @@ def BougeMap():                                                                 
         
     elif Player['y']>=315:                                                                    #Dès que le joueur est asser en haut de l'écran
         Ymap-=320                                                                                  #la tilemap va 1 écran en haut
-        Player['y']-=310                                                                           #le joueur passe en bas
+        Player['y']-=310
+        Player['YSalle']=Player['YSalle']+1                                                                           #le joueur passe en bas
         if WarioApparition() == True :
             Bot1['y']-=310
         Player['Ymob']-=1                                                                     #On change de salles sur la Map des Mobsc
@@ -336,7 +366,8 @@ def BougeMap():                                                                 
         
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
-        Player['y']+=310                                                                           #le joueur passe en haut
+        Player['y']+=310
+        Player['YSalle']=Player['YSalle']-1                                                                           #le joueur passe en haut
         if WarioApparition() == True :
             Bot1['y']+=310
         Player['Ymob']+=1                                                                     #On change de salles sur la Map des Mobs
@@ -541,26 +572,6 @@ def curseur():                                                                  
     Xsouris,Ysouris=100,100
     Xsouris=pyxel.mouse_x
     Ysouris=pyxel.mouse_y
- 
-
-'''
-#Levier 
-Levier1=dict
-Levier1['x']=100 
-Levier1['y']=100
-Levier2=dict
-Levier2['x']=1
-Levier2['y']=1
-
-Levier3=dict
-Levier3['x']=1
-Levier3['y']=1
-'''
-
-
-
-
-
 
 '''
                                                                                 ██╗░░░░░░█████╗░███╗░░░███╗██████╗░███████╗
@@ -662,14 +673,66 @@ def flash():                                                                    
 
 
 
-            
 
 
+global Porte
+Porte=0
+def LevierDraw(XL,YL,XS,YS,L):                                              #affiche les leviers sur la map 
+    if Player['XSalle']==XS and Player['YSalle']==YS:                       #si le joueur est dans la salle du levier 
+        if L==0:                                                            #postition du levioer (on/off)
+            pyxel.blt(XL,YL,0,136,72,24,16,14)
+        if L==1:
+            pyxel.blt(XL+6,YL,0,142,88,24,23,14)
+
+def LevierConfig(XL,YL,XS,YS,L):                                            #Permet l'activation des  leviers
+    global Porte
+    if Player['XSalle']==XS and Player['YSalle']==YS:                       #si le joueur est dans la salle du levier 
+        if Player['x']>XL-30 and Player['x']<XL+30 and Player['y']>YL-30 and Player['y']<YL+30: #si le joueur est pret du levier 
+                if pyxel.btnp(pyxel.KEY_E) and L['Statut']!=1:
+                    L['Statut']=1                                           #active le levier
+                    Porte=Porte+1                                           #ajoute 1 a porte 
+    
+                
 
 
+             
 
+Levier1=dict()                                                              #Levier1
+Levier1['x']=100                                                            #Position du Levier    
+Levier1['y']=100
+Levier1['XSalle']=0                                                         #Salle du levier
+Levier1['YSalle']=0
+Levier1['Statut']=0                                                         #statut du levier (on/off)
 
+Levier2=dict()                                                              #Levier2
+Levier2['x']=300                                                            #Position du Levier 
+Levier2['y']=120
+Levier2['XSalle']=0                                                         #Salle du levier
+Levier2['YSalle']=1
+Levier2['Statut']=0                                                         #statut du levier (on/off)
 
+Levier3=dict()                                                              #Levier3
+Levier3['x']=500                                                            #Position du Levier 
+Levier3['y']=300
+Levier3['XSalle']=1                                                         #Salle du levier
+Levier3['YSalle']=0
+Levier3['Statut']=0                                                         #statut du levier (on/off)
+
+def Levier():
+    LevierDraw(Levier1['x'],Levier1['y'],Levier1['XSalle'],Levier1['YSalle'],Levier1['Statut'])
+    LevierConfig(Levier1['x'],Levier1['y'],Levier1['XSalle'],Levier1['YSalle'],Levier1)
+    
+    LevierDraw(Levier2['x'],Levier2['y'],Levier2['XSalle'],Levier2['YSalle'],Levier2['Statut'])
+    LevierConfig(Levier2['x'],Levier2['y'],Levier2['XSalle'],Levier2['YSalle'],Levier2)
+    
+    LevierDraw(Levier3['x'],Levier3['y'],Levier3['XSalle'],Levier3['YSalle'],Levier3['Statut'])
+    LevierConfig(Levier3['x'],Levier3['y'],Levier3['XSalle'],Levier3['YSalle'],Levier3)
+
+def porte():                                                                #porte
+    global Porte
+    if  Player['XSalle']==0 and Player['YSalle']==0:                        #si le joueur est dans la salle de la porte 
+        if Porte!=3:                                                        #si trois levier ne sont pas activer  
+            pyxel.blt(0,160,0,64,32,32,64,14)                               #fermer la porte 
 
 
 
@@ -812,13 +875,12 @@ class App:
         elif start==2:
             if pyxel.btn(pyxel.KEY_SPACE):
                 start=0
+        GODmode()
         if pyxel.btnp(pyxel.KEY_HOME):
             Jour=Jour+1
-        if pyxel.btnp(pyxel.KEY_END):
-            Jour=Jour-1
         if Jour>=2 or Jour<0:
             Jour=0
-
+        
 
 
     def draw(self):
@@ -841,7 +903,8 @@ class App:
             if Jour==0:
                 LampeLum()                                                          #affiche les couleurs de la lampe  
             pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
-                                                                                            #Si l'ennemis est dans le flash : il est visible
+            Levier()
+            porte()                                                                                #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)
             types(Bot3)
@@ -860,7 +923,6 @@ class App:
             PointdeVie()           
             
             DebugMenu()
-
         if start==0 or start==-1 or Jour==1:
             pyxel.clip()
             
