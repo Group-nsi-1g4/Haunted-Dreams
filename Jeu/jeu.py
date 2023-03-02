@@ -111,8 +111,8 @@ def DebugMenu():
         pyxel.text(0,10,str('Batterie:')+str(Player['Batterie']),7)
         pyxel.text(0,20,str('Stamina:')+str(Player['Stamina']),7)
         pyxel.text(0,30,str('start:')+str(start),7)
-        pyxel.text(0,40,str('Xsalle:')+str(Player['XSalle']),7)
-        pyxel.text(0,50,str('Ysalle:')+str(Player['YSalle']),7)
+        pyxel.text(0,40,str('Xmob:')+str(Player['Xmob']),7)
+        pyxel.text(0,50,str('Ymob:')+str(Player['Ymob']),7)
         pyxel.text(0,60,str('Devmode:')+str(Devmode),7)
         pyxel.text(0,70,str('Porte:')+str(Porte),7)
         
@@ -131,92 +131,109 @@ def DebugMenu():
 Salle2={'Bot1Map':{'Type':'Zombie','x':320,'y':160}                                      #réglage Salle 2
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':'Levier1','x':240,'y':240}}
 
 Salle3={'Bot1Map':{'Type':'Mage','x':320,'y':160}                                      #réglage Salle 3
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':'Levier2','x':240,'y':240}}
 
 
 Salle4={'Bot1Map':{'Type':'Arabe','x':320,'y':160}                                      #réglage Salle 4
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':'Levier3','x':240,'y':240}}
 
 Salle5={'Bot1Map':{'Type':'Golem','x':320,'y':160}                                      #réglage Salle 5
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle6={'Bot1Map':{'Type':'Cauchemare','x':320,'y':160}                                      #réglage Salle 6
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
 Salle7={'Bot1Map':{'Type':'Phantom','x':320,'y':160}                                      #réglage Salle 7
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle8={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 8
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle9={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 9
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
 Salle10={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 10
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle11={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 11
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle12={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 12
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
 Salle13={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 13
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle14={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 14
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle15={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 15
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
 Salle16={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 16
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle17={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 17
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 Salle18={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 18
        ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
 MapMob= [[None   ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
@@ -234,6 +251,7 @@ def MapMobSet():                                                                
         Bot1['Type']='Mort'
         Bot2['Type']='Mort'
         Bot3['Type']='Mort'
+        Objet['Type']=None
     else:                                                                                          #La salle 1
         Salle(MapMob[Player['Ymob']][Player['Xmob']])
 
@@ -250,6 +268,9 @@ def Salle(m):                                                                   
     Bot4['Type']=m['Bot4Map']['Type']                                                             #Bot4 avec sont Type, x et y de départ
     Bot4['x']=m['Bot4Map']['x']
     Bot4['y']=m['Bot4Map']['y']
+    Objet['x']=m['ObjetMap']['x']
+    Objet['y']=m['ObjetMap']['y']
+    Objet['Type']=m['ObjetMap']['Type']
     
 '''
 
@@ -277,8 +298,6 @@ Player['PV']=6
 Player['Immune']=0
 Player['Xmob']=0
 Player['Ymob']=0
-Player['XSalle']=0
-Player['YSalle']=0
 Player['Frappe']=dict()                                                         #Tous Player['frappe'][qqose] sont pour l'attaque du joueur.
 Player['Frappe']['Status']=False
 Player['Frappe']['Frame']=0
@@ -442,8 +461,7 @@ def BougeMap():                                                                 
     global Xmap,Ymap
     if Player['x']>=635:                                                                      #Dès que le joueur est asser à droite de l'écran
         Xmap-=640                                                                                  #la tilemap va 1 écran à droite
-        Player['x']-=630 
-        Player['XSalle']=Player['XSalle']+1                                                                          #le joueur passe à gauche
+        Player['x']-=630                                                                         #le joueur passe à gauche
         if WarioApparition() == True :
             Bot1['x']-=630
         Player['Xmob']+=1                                                                     #On change de salles sur la Map des Mobs
@@ -451,8 +469,7 @@ def BougeMap():                                                                 
         
     elif Player['x']<=5:                                                                      #Dès que le joueur est asser à gauche de l'écran
         Xmap=Xmap+640                                                                              #la tilemap va 1 écran à gauche
-        Player['x']+=630
-        Player['XSalle']=Player['XSalle']-1                                                                            #le joueur passe à droite
+        Player['x']+=630                                                                           #le joueur passe à droite
         if WarioApparition() == True :
             Bot1['x']+=630
         Player['Xmob']-=1                                                                     #On change de salles sur la Map des Mobs
@@ -460,8 +477,7 @@ def BougeMap():                                                                 
         
     elif Player['y']>=315:                                                                    #Dès que le joueur est asser en haut de l'écran
         Ymap-=320                                                                                  #la tilemap va 1 écran en haut
-        Player['y']-=310
-        Player['YSalle']=Player['YSalle']+1                                                                           #le joueur passe en bas
+        Player['y']-=310                                                                           #le joueur passe en bas
         if WarioApparition() == True :
             Bot1['y']-=310
         Player['Ymob']+=1                                                                     #On change de salles sur la Map des Mobsc
@@ -469,8 +485,7 @@ def BougeMap():                                                                 
         
     elif Player['y']<=5:                                                                      #Dès que le joueur est asser en bas de l'écran
         Ymap=Ymap+320                                                                              #la tilemap va 1 écran en bas
-        Player['y']+=310
-        Player['YSalle']=Player['YSalle']-1                                                                           #le joueur passe en haut
+        Player['y']+=310                                                                           #le joueur passe en haut
         if WarioApparition() == True :
             Bot1['y']+=310
         Player['Ymob']-=1                                                                     #On change de salles sur la Map des Mobs
@@ -593,12 +608,8 @@ def types(entity):                                                              
         Golem(entity)
     if entity['Type']=='Cauchemare':                                            #Détecte si le bot est un Cauchemare
         Cauchemare(entity)
-    if entity['Type']=='Mort':                                                  #Fait rien si il est mort
-        pass
     if entity['Type']=='Wario':                                                 #Wario (Pas early acces)
         Wario()
-    if entity['Type']=='None':
-        pass
     
 def boulelance(entity):
     FrameDep(bouledefeu,16)
@@ -695,7 +706,7 @@ def Cauchemare(entity):                                                         
         pyxel.play(0,5)
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
-"""
+
 def Wario():                                                                    #Le wario n'est pas fini pour l'early acces
     boulelance(Bot1)
     Bot2['Type']='Mort'
@@ -715,7 +726,7 @@ def Wario():                                                                    
     if Player['x']<Bot1['x']+36 and Player['x']>Bot1['x']-36 and Player['y']>Bot1['y']-40 and Player['y']<Bot1['y']+40 and pyxel.frame_count %20==0:
         Player['PV']-=1.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
         pyxel.play(0,4)
-"""
+
 
 global Xsouris,Ysouris                                                          #Met en place la variable Global Xsouris, Ysouris 
 Xsouris,Ysouris=100,100                                                         
@@ -829,62 +840,65 @@ def flash():                                                                    
 
 global Porte
 Porte=0
-def LevierDraw(XL,YL,XS,YS,L):                                              #affiche les leviers sur la map 
-    if Player['XSalle']==XS and Player['YSalle']==YS:                       #si le joueur est dans la salle du levier 
-        if L==0:                                                            #postition du levioer (on/off)
-            pyxel.blt(XL,YL,0,136,72,24,16,14)
-        if L==1:
-            pyxel.blt(XL+6,YL,0,142,88,24,23,14)
 
-def LevierConfig(XL,YL,XS,YS,L):                                            #Permet l'activation des  leviers
+Objet=dict()
+Objet['x']=0
+Objet['y']=0
+Objet['Type']=None
+Objet['Rammasser']=0
+
+
+Levier1={'Status':0}                                                         #statut du levier (on/off)
+Levier2={'Status':0}                                                         #statut du levier (on/off)
+Levier3={'Status':0}                                                         #statut du levier (on/off)
+
+
+def typesobj(objet):                                                              #Utilise les différentes fonction selon le type du bot 
+    if objet['Type']=='Levier1':                                                #Détecte si l'objet est le 1er levier
+        Levier(objet,1)
+    if objet['Type']=='Levier2':                                                #Détecte si l'objet est le 2e levier 
+        Levier(objet,2)
+    if objet['Type']=='Levier3':                                                #Détecte si l'objet est le 3e levier
+        Levier(objet,3)
+    if objet['Type']=='Boisson':                                                #Détecte si l'objet est une boisson
+        Boisson(objet)
+    if objet['Type']=='Batterie':                                               #Détecte si l'objet est une batterie
+        Batterie(objet)
+    if objet['Type']=='Jambon':                                                 #Détecte si l'objet est du jambon
+        Jambon(objet)
+    
+def Levier(objet,nb):
+    if nb==1:
+        LevierDraw(objet['x'],objet['y'],Levier1)
+        LevierConfig(objet['x'],objet['y'],Levier1)
+    elif nb==2:
+        LevierDraw(objet['x'],objet['y'],Levier2)
+        LevierConfig(objet['x'],objet['y'],Levier2)
+    else:
+        LevierDraw(objet['x'],objet['y'],Levier3)
+        LevierConfig(objet['x'],objet['y'],Levier3)
+
+def LevierDraw(XL,YL,L):                                              #affiche les leviers sur la map                       
+    if L['Status']==0:                                                            #postition du levioer (on/off)
+        pyxel.blt(XL,YL,0,136,72,24,16,14)
+    if L['Status']==1:
+        pyxel.blt(XL+6,YL,0,142,88,24,23,14)
+
+def LevierConfig(XL,YL,L):                                            #Permet l'activation des  leviers
     global Porte
-    if Player['XSalle']==XS and Player['YSalle']==YS:                       #si le joueur est dans la salle du levier 
-        if Player['x']>XL-30 and Player['x']<XL+30 and Player['y']>YL-30 and Player['y']<YL+30: #si le joueur est pret du levier 
-                if pyxel.btnp(pyxel.KEY_E) and L['Statut']!=1:
-                    L['Statut']=1                                           #active le levier
-                    Porte=Porte+1                                           #ajoute 1 a porte 
-    
-                
+    if Player['x']>XL-30 and Player['x']<XL+30 and Player['y']>YL-30 and Player['y']<YL+30: #si le joueur est pret du levier 
+            if pyxel.btnp(pyxel.KEY_E) and L['Status']!=1:
+                L['Status']=1                                           #active le levier
+                Porte+=1
 
-
-             
-
-Levier1=dict()                                                              #Levier1
-Levier1['x']=100                                                            #Position du Levier    
-Levier1['y']=100
-Levier1['XSalle']=0                                                         #Salle du levier
-Levier1['YSalle']=0
-Levier1['Statut']=0                                                         #statut du levier (on/off)
-
-Levier2=dict()                                                              #Levier2
-Levier2['x']=300                                                            #Position du Levier 
-Levier2['y']=120
-Levier2['XSalle']=0                                                         #Salle du levier
-Levier2['YSalle']=1
-Levier2['Statut']=0                                                         #statut du levier (on/off)
-
-Levier3=dict()                                                              #Levier3
-Levier3['x']=500                                                            #Position du Levier 
-Levier3['y']=300
-Levier3['XSalle']=1                                                         #Salle du levier
-Levier3['YSalle']=0
-Levier3['Statut']=0                                                         #statut du levier (on/off)
-
-def Levier():
-    LevierDraw(Levier1['x'],Levier1['y'],Levier1['XSalle'],Levier1['YSalle'],Levier1['Statut'])
-    LevierConfig(Levier1['x'],Levier1['y'],Levier1['XSalle'],Levier1['YSalle'],Levier1)
-    
-    LevierDraw(Levier2['x'],Levier2['y'],Levier2['XSalle'],Levier2['YSalle'],Levier2['Statut'])
-    LevierConfig(Levier2['x'],Levier2['y'],Levier2['XSalle'],Levier2['YSalle'],Levier2)
-    
-    LevierDraw(Levier3['x'],Levier3['y'],Levier3['XSalle'],Levier3['YSalle'],Levier3['Statut'])
-    LevierConfig(Levier3['x'],Levier3['y'],Levier3['XSalle'],Levier3['YSalle'],Levier3)
 
 def porte():                                                                #porte
     global Porte
-    if  Player['XSalle']==0 and Player['YSalle']==0:                        #si le joueur est dans la salle de la porte 
+    if  Player['Xmob']==0 and Player['Ymob']==0:                        #si le joueur est dans la salle de la porte 
         if Porte!=3:                                                        #si trois levier ne sont pas activer  
-            pyxel.blt(0,160,0,64,32,32,64,14)                               #fermer la porte 
+            pyxel.blt(288,-6,0,192,64,64,64,3)                               #fermer la porte
+        else:
+            pyxel.blt(288,-6,0,192,0,64,64,3)
 
 
 
@@ -1055,7 +1069,7 @@ class App:
             if Jour==0:
                 LampeLum()                                                          #affiche les couleurs de la lampe  
             pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
-            Levier()
+            typesobj(Objet)
             porte()                                                                                #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)
