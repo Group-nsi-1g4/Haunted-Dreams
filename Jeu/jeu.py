@@ -133,116 +133,121 @@ def DebugMenu():
 
 #Le début des 100 lignes de l'enfer
 
+Salle1={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':0,'y':0}}
 
-Salle2={'Bot1Map':{'Type':'Zombie','x':320,'y':160}                                      #réglage Salle 2
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle2={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':3}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':'Levier1','x':240,'y':240}}
 
-Salle3={'Bot1Map':{'Type':'Mage','x':320,'y':160}                                      #réglage Salle 3
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle3={'Bot1Map':{'Type':'Mage','x':320,'y':160,'PV':1}                                      #réglage Salle 3
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':'Levier2','x':240,'y':240}}
 
 
-Salle4={'Bot1Map':{'Type':'Arabe','x':320,'y':160}                                      #réglage Salle 4
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle4={'Bot1Map':{'Type':'Arabe','x':320,'y':160,'PV':2}                                      #réglage Salle 4
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':'Jambon','x':50,'y':300}}
+
+Salle5={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':10}                                      #réglage Salle 5
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':'Levier3','x':240,'y':240}}
 
-Salle5={'Bot1Map':{'Type':'Golem','x':320,'y':160}                                      #réglage Salle 5
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle6={'Bot1Map':{'Type':'Cauchemare','x':320,'y':160}                                      #réglage Salle 6
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle6={'Bot1Map':{'Type':'Cauchemare','x':320,'y':160,'PV':30}                                      #réglage Salle 6
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
-Salle7={'Bot1Map':{'Type':'Phantom','x':320,'y':160}                                      #réglage Salle 7
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle7={'Bot1Map':{'Type':'Phantom','x':320,'y':160,'PV':1}                                      #réglage Salle 7
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
-Salle8={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 8
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle8={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 8
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
-Salle9={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 9
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-Salle10={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 10
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle11={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 11
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle12={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 12
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle9={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 9
+       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
-Salle13={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 13
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle10={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 10
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
-Salle14={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 14
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle11={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 11
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
-Salle15={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 15
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-Salle16={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 16
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle17={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 17
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle18={'Bot1Map':{'Type':'Mort','x':0,'y':0}                                      #réglage Salle 18
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0}
+Salle12={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 12
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
 
 
-MapMob= [[None   ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
+Salle13={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 13
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+Salle14={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 14
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+Salle15={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 15
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+
+Salle16={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 16
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+Salle17={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 17
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+Salle18={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 18
+        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
+        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+
+
+MapMob= [[Salle1 ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
         ,[Salle4 ,Salle5 ,Salle6 ,None]
         ,[Salle7 ,Salle8 ,Salle9 ,None]
         ,[Salle10,Salle11,Salle12,None]
@@ -257,6 +262,7 @@ def MapMobSet():                                                                
         Bot1['Type']='Mort'
         Bot2['Type']='Mort'
         Bot3['Type']='Mort'
+        Bot4['Type']='Mort'
         Objet['Type']=None
     else:                                                                                          #La salle 1
         Salle(MapMob[Player['Ymob']][Player['Xmob']])
@@ -265,15 +271,19 @@ def Salle(m):                                                                   
     Bot1['Type']=m['Bot1Map']['Type']                                                             #Bot1 avec sont Type, x et y de départ
     Bot1['x']=m['Bot1Map']['x']
     Bot1['y']=m['Bot1Map']['y']
+    Bot1['PV']=m['Bot1Map']['PV']
     Bot2['Type']=m['Bot2Map']['Type']                                                             #Bot2 avec sont Type, x et y de départ
     Bot2['x']=m['Bot2Map']['x']
     Bot2['y']=m['Bot2Map']['y']
+    Bot2['PV']=m['Bot2Map']['PV']
     Bot3['Type']=m['Bot3Map']['Type']                                                             #Bot3 avec sont Type, x et y de départ
     Bot3['x']=m['Bot3Map']['x']
     Bot3['y']=m['Bot3Map']['y']
+    Bot3['PV']=m['Bot3Map']['PV']
     Bot4['Type']=m['Bot4Map']['Type']                                                             #Bot4 avec sont Type, x et y de départ
     Bot4['x']=m['Bot4Map']['x']
     Bot4['y']=m['Bot4Map']['y']
+    Bot4['PV']=m['Bot4Map']['PV']
     Objet['x']=m['ObjetMap']['x']
     Objet['y']=m['ObjetMap']['y']
     Objet['Type']=m['ObjetMap']['Type']
@@ -285,7 +295,7 @@ Lock=0
 def SPorte():
     global Lock
     if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
-        if Bot1['Type']=='Mort' and Bot2['Type']=='Mort' and Bot3['Type']=='Mort' and Bot4['Type']=='Mort' :
+        if Bot1['Type']=='Mort' or Bot1['Type']=='Golem' and Bot2['Type']=='Mort' or Bot2['Type']=='Golem' and Bot3['Type']=='Mort' or Bot3['Type']=='Golem' and Bot4['Type']=='Mort' or Bot4['Type']=='Golem' :
             Lock=0
         else :
             Lock=1
@@ -341,9 +351,13 @@ Player['Frappe']['Frame']=0
 Player['Frappe']['x']=0
 Player['Frappe']['y']=0
 Player['Frappe']['Sens']='Droite'
-
+Player['Objet']=None
+global XYmap
+XYmap=MapMob[Player['Ymob']][Player['Xmob']]
 
 def JoueurComplet():
+    global XYmap
+    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
     deplacement()
     Course()
     mort()
@@ -566,6 +580,12 @@ def Attaque():                                                                  
         Coup=-1
         Player['StamRegen']=0.5
     
+def drawObjets():
+    if Player['Objet']=='Jambon':
+        if Player['Sens']=='Droite':
+            pyxel.blt(Player['x'],Player['y']-8,2,0,40,16,16,1)
+        else:
+            pyxel.blt(Player['x']-16,Player['y']-8,2,0,40,-16,16,1)
 
 
 
@@ -585,8 +605,9 @@ Bot1['x']=0                                                                    #
 Bot1['y']=0                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
 Bot1['Frame']= 0
-Bot1['Type']='None'
+Bot1['Type']='Mort'
 Bot1['Vitesse']=0
+Bot1['PV']=0
 
 
 Bot2=dict()
@@ -594,24 +615,27 @@ Bot2['x']=0                                                                    #
 Bot2['y']=0                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
 Bot2['Frame']=0
-Bot2['Type']='None'
+Bot2['Type']='Mort'
 Bot2['Vitesse']=0
+Bot2['PV']=0
 
 Bot3=dict()
 Bot3['x']=0                                                                    #Indique l'emplacement X du Bot3
 Bot3['y']=0                                                                    #Indique l'emplacement Y du Bot3
 Bot3['Sens']='Droite'
 Bot3['Frame']=0
-Bot3['Type']='None'
+Bot3['Type']='Mort'
 Bot3['Vitesse']=0
+Bot3['PV']=0
 
 Bot4=dict()
 Bot4['x']=0                                                                    #Indique l'emplacement X du Bot4
 Bot4['y']=0                                                                    #Indique l'emplacement Y du Bot4
 Bot4['Sens']='Droite'
 Bot4['Frame']=0
-Bot4['Type']='None'
+Bot4['Type']='Mort'
 Bot4['Vitesse']=0
+Bot4['PV']=0
 
 
 bouledefeu=dict()
@@ -637,7 +661,8 @@ def bot(entity):                                                                
         
         
         
-def types(entity):                                                              #Utilise les différentes fonction selon le type du bot 
+def types(entity):                                                              #Utilise les différentes fonction selon le type du bot
+    global XYmap
     if entity['Type']=='Phantom':                                               #Détecte si le bot est un Fantome
         Phantom(entity)
     if entity['Type']=='Zombie':                                                #Détecte si le bot est un Zombie
@@ -652,6 +677,16 @@ def types(entity):                                                              
         Cauchemare(entity)
     if entity['Type']=='Wario':                                                 #Wario (Pas early acces)
         Wario()
+    if entity['PV']<=0:
+        entity['Type']='Mort'
+        if entity==Bot1:
+            XYmap['Bot1Map']['Type']='Mort'
+        if entity==Bot2:
+            XYmap['Bot2Map']['Type']='Mort'
+        if entity==Bot3:
+            XYmap['Bot3Map']['Type']='Mort'
+        else:
+            XYmap['Bot4Map']['Type']='Mort'
     
 def boulelance(entity):
     FrameDep(bouledefeu,16)
@@ -680,7 +715,7 @@ def Phantom(entity):                                                            
         Player['Immune']=3
         pyxel.play(0,1)
     if Detectflash(entity):                                                     #Si le Phantom se fait Flash : Il devient Mort
-        entity['Type']='Mort'
+        entity['PV']=0
         pyxel.play(0,3)
         
 def Zombie(entity):                                                             #Fait les caractéristique du Zombie
@@ -693,8 +728,11 @@ def Zombie(entity):                                                             
         Player['Immune']=3
         pyxel.play(0,1)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
+        if entity['Vitesse']==1.25:
+            entity['PV']-=1
         entity['Vitesse']=-2                                                   #Si le zombie se fait tapper : il recul
         pyxel.play(0,1)
+        
 
 def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
     if Player['Frappe']['Status']==False:
@@ -702,14 +740,19 @@ def Arabe(entity):                                                             #
     Draw32px(entity,96,0,1,1)
     bot(entity)
     if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28:
-        pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
-        Player['PV']-=4
-        entity['Type']='Mort'                                                   #Meur si il réussit a faire des dégats (Comme un Kamikaze)
-        Player['Immune']=5
+        if Player['Objet']=='Jambon':
+            pyxel.play(0,3)
+            Player['Objet']=None
+        else:
+            pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
+            Player['PV']-=4
+            Player['Immune']=5
+        entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Comme un Kamikaze)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         entity['Vitesse']=-0.75                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
         pyxel.play(0,1)
-    
+        
+
 def Mage(entity):                                                             #Fait les caractéristique de Mage
     boulelance(entity)
     entity['Vitesse']=0.5
@@ -726,6 +769,9 @@ def Mage(entity):                                                             #F
         bouledefeu['vy']=(Player['y']-entity['y'])*0.05
         bouledefeu['y']=entity['y']                                                 #et la fait partir de son corps
         bouledefeu['x']=entity['x']
+    if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
+        entity['PV']=0                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
+        pyxel.play(0,1)
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
     entity['Vitesse']=0                                                        #Il est immobile
@@ -748,6 +794,8 @@ def Cauchemare(entity):                                                         
         pyxel.play(0,5)
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
+    if pyxel.frame_count%20==0:
+        entity['PV']-=1
 
 def Wario():                                                                    #Le wario n'est pas fini pour l'early acces
     boulelance(Bot1)
@@ -912,28 +960,35 @@ def typesobj(objet):                                                            
     
 def Levier(objet,nb):
     if nb==1:
-        LevierDraw(objet['x'],objet['y'],Levier1)
-        LevierConfig(objet['x'],objet['y'],Levier1)
+        LevierDraw(objet,Levier1)
+        LevierConfig(objet,Levier1)
     elif nb==2:
-        LevierDraw(objet['x'],objet['y'],Levier2)
-        LevierConfig(objet['x'],objet['y'],Levier2)
+        LevierDraw(objet,Levier2)
+        LevierConfig(objet,Levier2)
     else:
-        LevierDraw(objet['x'],objet['y'],Levier3)
-        LevierConfig(objet['x'],objet['y'],Levier3)
+        LevierDraw(objet,Levier3)
+        LevierConfig(objet,Levier3)
 
-def LevierDraw(XL,YL,L):                                              #affiche les leviers sur la map                       
+def LevierDraw(objet,L):                                              #affiche les leviers sur la map                       
     if L['Status']==0:                                                            #postition du levioer (on/off)
-        pyxel.blt(XL,YL,0,136,72,24,16,14)
+        pyxel.blt(objet['x'],objet['y'],0,136,72,24,16,14)
     if L['Status']==1:
-        pyxel.blt(XL+6,YL,0,142,88,24,23,14)
+        pyxel.blt(objet['x']+6,objet['y'],0,142,88,24,23,14)
 
-def LevierConfig(XL,YL,L):                                            #Permet l'activation des  leviers
+def LevierConfig(objet,L):                                            #Permet l'activation des  leviers
     global Porte
-    if Player['x']>XL-30 and Player['x']<XL+30 and Player['y']>YL-30 and Player['y']<YL+30: #si le joueur est pret du levier 
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
             if pyxel.btnp(pyxel.KEY_E) and L['Status']!=1:
                 L['Status']=1                                           #active le levier
                 Porte+=1
 
+def Jambon(objet):
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+            if pyxel.btnp(pyxel.KEY_E) :
+                Objet['Type']=Player['Objet']
+                XYmap['ObjetMap']['Type']=Player['Objet']
+                Player['Objet']='Jambon'
+    pyxel.blt(objet['x'],objet['y'],2,0,40,16,16,1)
 
 def Portail():                                                                #porte
     global Porte
@@ -1133,15 +1188,22 @@ class App:
             else:
                 Draw32px(Player,0,128,1,1)                                            #Si le joueur attaque : Animations
                 Draw32px(Player['Frappe'],32,0,1,1)
+                
+            drawObjets()                                                 #affiche l'objet que le joueur a actuellement
+            
             BatterieAffichage()
+            
             if not pyxel.btn(pyxel.KEY_F)   :             #si la touche flash et la battetrie est supérierur a 5
                 Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
             if Jour==0:
                 flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
             
             drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
-            PointdeVie()           
+            PointdeVie()
             
+            if Bot1['Type']=='Cauchemare':
+                pyxel.text(Player['x']+65,Player['y']-75,str(Bot1['PV']//3),7)
+        
             DebugMenu()
         if start==0 or start==-1 or Jour==1:
             pyxel.clip()
