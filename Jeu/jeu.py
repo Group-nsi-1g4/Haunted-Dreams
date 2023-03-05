@@ -115,6 +115,12 @@ def DebugMenu():
         pyxel.text(0,50,str('Ymob:')+str(Player['Ymob']),7)
         pyxel.text(0,60,str('Devmode:')+str(Devmode),7)
         pyxel.text(0,70,str('Porte:')+str(Porte),7)
+        pyxel.text(0,80,str('XPointeur:')+str(pyxel.mouse_x),7)
+        pyxel.text(0,90,str('YPointeur:')+str(pyxel.mouse_y),7)
+        pyxel.text(0,100,str('BOT:')+str(Bot1['Type'])+str(Bot2['Type'])+str(Bot3['Type'])+str(Bot4['Type']),7)
+        pyxel.pset(pyxel.mouse_x,pyxel.mouse_y,7)
+
+
         
 '''
                                                                                     ░██████╗░█████╗░██╗░░░░░██╗░░░░░███████╗░██████╗
@@ -246,7 +252,7 @@ MapMob= [[None   ,Salle2 ,Salle3 ,None]                                         
 
 
 def MapMobSet():                                                                                  #Fonction mettant les preset des Mobs des Maps
-    global MapMob
+    global MapMob,Lock
     if MapMob[Player['Ymob']][Player['Xmob']]==None:                                               #La salle de départ
         Bot1['Type']='Mort'
         Bot2['Type']='Mort'
@@ -272,6 +278,37 @@ def Salle(m):                                                                   
     Objet['y']=m['ObjetMap']['y']
     Objet['Type']=m['ObjetMap']['Type']
     
+
+global Lock
+Lock=0
+
+def SPorte():
+    global Lock
+    if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
+        if Bot1['Type']=='Mort' and Bot2['Type']=='Mort' and Bot3['Type']=='Mort' and Bot4['Type']=='Mort' :
+            Lock=0
+        else :
+            Lock=1
+    if pyxel.btn(pyxel.KEY_RCTRL):
+        Lock=0
+    
+        if Lock>1:
+            Lock=0     
+    
+
+    if Lock==1:
+        pyxel.blt(277,314,0,176,72,85,42,3) 
+        pyxel.blt(602,125,0,176,128,48,80,3)
+        pyxel.blt(277,-10,0,176,72,85,42,3)
+        pyxel.blt(-9,125,0,176,128,48,80,3)
+
+
+
+
+
+
+
+
 '''
 
                                                                                 ░░░░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░██╗██████╗░
@@ -489,7 +526,12 @@ def BougeMap():                                                                 
         if WarioApparition() == True :
             Bot1['y']+=310
         Player['Ymob']-=1                                                                     #On change de salles sur la Map des Mobs
-        MapMobSet()                                                                           #Ont met en place le preset cesser etre sur la map
+        MapMobSet()
+    if Player['Ymob']==0 and Player['Xmob']==0:
+        Bot1['Type']='Mort'
+        Bot2['Type']='Mort'
+        Bot3['Type']='Mort'
+        Bot4['Type']='Mort'                                                                          #Ont met en place le preset cesser etre sur la map
 
 def Immunite():
     if pyxel.frame_count %10 == 0:                                                            #L'immunité baisse toute les demi-seconde
@@ -735,6 +777,7 @@ def curseur():                                                                  
     Xsouris,Ysouris=100,100
     Xsouris=pyxel.mouse_x
     Ysouris=pyxel.mouse_y
+    
 
 '''
                                                                                 ██╗░░░░░░█████╗░███╗░░░███╗██████╗░███████╗
@@ -892,13 +935,18 @@ def LevierConfig(XL,YL,L):                                            #Permet l'
                 Porte+=1
 
 
-def porte():                                                                #porte
+def Portail():                                                                #porte
     global Porte
     if  Player['Xmob']==0 and Player['Ymob']==0:                        #si le joueur est dans la salle de la porte 
         if Porte!=3:                                                        #si trois levier ne sont pas activer  
-            pyxel.blt(288,-6,0,192,64,64,64,3)                               #fermer la porte
-        else:
+            pyxel.blt(288,-6,0,96,0,47,64,3)                               #fermer la porte
+        if Porte==1:
+                pyxel.blt(288,10,0,144,0,60,16,3) 
+        if Porte==2:
+            pyxel.blt(288,10,0,144,16,60,16,3)
+        if Porte==3:
             pyxel.blt(288,-6,0,192,0,64,64,3)
+        
 
 
 
@@ -1032,6 +1080,7 @@ class App:
             start=2    
         if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
             JoueurComplet()
+            
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
 
@@ -1068,9 +1117,10 @@ class App:
                 pyxel.cls(4)
             if Jour==0:
                 LampeLum()                                                          #affiche les couleurs de la lampe  
+            SPorte()
             pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
             typesobj(Objet)
-            porte()                                                                                #Si l'ennemis est dans le flash : il est visible
+            Portail()                                                                                #Si l'ennemis est dans le flash : il est visible
             types(Bot1)
             types(Bot2)
             types(Bot3)
