@@ -131,123 +131,111 @@ def DebugMenu():
                                                                                     ╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚══════╝╚═════╝░
 '''
 
-#Le début des 100 lignes de l'enfer
+Preset1={'Bot1Map':{'Type':'Zombie','x':320,'y':80,'PV':2}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Phantom','x':120,'y':160,'PV':1}
+       ,'Bot3Map':{'Type':'Phantom','x':540,'y':160,'PV':1}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
 
-Salle1={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 2
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':0,'y':0}}
+Preset2={'Bot1Map':{'Type':'Phantom','x':320,'y':160,'PV':1}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Mage','x':80,'y':60,'PV':1}
+       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
 
-Salle2={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':3}                                      #réglage Salle 2
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':'Levier1','x':240,'y':240}}
+Preset3={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':6}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Golem','x':160,'y':160,'PV':1}
+       ,'Bot3Map':{'Type':'Golem','x':480,'y':160,'PV':1}
+       ,'Bot4Map':{'Type':'Phantom','x':140,'y':40,'PV':1}}
 
-Salle3={'Bot1Map':{'Type':'Mage','x':320,'y':160,'PV':1}                                      #réglage Salle 3
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':'Levier2','x':240,'y':240}}
+Preset4={'Bot1Map':{'Type':'Zombie','x':60,'y':280,'PV':3}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Phantom','x':320,'y':300,'PV':1}
+       ,'Bot3Map':{'Type':'Zombie','x':320,'y':160,'PV':3}
+       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
 
+Preset5={'Bot1Map':{'Type':'Arabe','x':460,'y':160,'PV':1}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Zombie','x':280,'y':120,'PV':2}
+       ,'Bot3Map':{'Type':'Zombie','x':360,'y':120,'PV':3}
+       ,'Bot4Map':{'Type':'Golem','x':320,'y':160,'PV':1}}
 
-Salle4={'Bot1Map':{'Type':'Arabe','x':320,'y':160,'PV':2}                                      #réglage Salle 4
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':'Jambon','x':50,'y':300}}
+Preset6={'Bot1Map':{'Type':'Phantom','x':260,'y':200,'PV':1}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Phantom','x':380,'y':160,'PV':1}
+       ,'Bot3Map':{'Type':'Mage','x':460,'y':40,'PV':1}
+       ,'Bot4Map':{'Type':'Phantom','x':320,'y':100,'PV':1}}
 
-Salle5={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':10}                                      #réglage Salle 5
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':'Levier3','x':240,'y':240}}
+Preset7={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':1}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Mage','x':320,'y':160,'PV':1}
+       ,'Bot3Map':{'Type':'Zombie','x':240,'y':80,'PV':4}
+       ,'Bot4Map':{'Type':'Zombie','x':460,'y':240,'PV':1}}
 
-Salle6={'Bot1Map':{'Type':'Cauchemare','x':320,'y':160,'PV':30}                                      #réglage Salle 6
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+Preset8={'Bot1Map':{'Type':'Golem','x':300,'y':260,'PV':1}                                      #réglage Salle 2
+       ,'Bot2Map':{'Type':'Zombie','x':40,'y':160,'PV':4}
+       ,'Bot3Map':{'Type':'Phantom','x':280,'y':120,'PV':1}
+       ,'Bot4Map':{'Type':'Phantom','x':360,'y':200,'PV':1}}
 
+Preset=[Preset1.copy(),Preset2.copy(),Preset3.copy(),Preset4.copy(),Preset5.copy(),Preset6.copy(),Preset7.copy(),Preset8.copy()]
 
-Salle7={'Bot1Map':{'Type':'Phantom','x':320,'y':160,'PV':1}                                      #réglage Salle 7
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+ObjetPreset=[None,'Boisson','Jambon','Batterie','Coeur',None]
 
-Salle8={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 8
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
+MapMob=[]
 
-Salle9={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 9
-       ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-Salle10={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 10
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle11={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 11
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle12={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 12
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-Salle13={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 13
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle14={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 14
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle15={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 15
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-Salle16={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 16
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle17={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 17
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-       ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-Salle18={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':0}                                      #réglage Salle 18
-        ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':0}
-        ,'ObjetMap':{'Type':None,'x':240,'y':240}}
-
-
-MapMob= [[Salle1 ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
+def SalleAlea():
+    global MapMob
+    Salle2={}
+    Salle2=Preset[random.randint(0,7)].copy()
+    Salle2['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle3={}
+    Salle3=Preset[random.randint(0,7)].copy()
+    Salle3['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle4={}
+    Salle4=Preset[random.randint(0,7)].copy()
+    Salle4['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle5={}
+    Salle5=Preset[random.randint(0,7)].copy()
+    Salle5['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle6={}
+    Salle6=Preset[random.randint(0,7)].copy()
+    Salle6['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle7={}
+    Salle7=Preset[random.randint(0,7)].copy()
+    Salle7['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle8={}
+    Salle8=Preset[random.randint(0,7)].copy()
+    Salle8['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle9={}
+    Salle9=Preset[random.randint(0,7)].copy()
+    Salle9['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle10={}
+    Salle10=Preset[random.randint(0,7)].copy()
+    Salle10['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle11={}
+    Salle11=Preset[random.randint(0,7)].copy()
+    Salle11['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle12={}
+    Salle12=Preset[random.randint(0,7)].copy()
+    Salle12['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle13={}
+    Salle13=Preset[random.randint(0,7)].copy()
+    Salle13['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle14={}
+    Salle14=Preset[random.randint(0,7)].copy()
+    Salle14['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle15={}
+    Salle15=Preset[random.randint(0,7)].copy()
+    Salle15['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle16={}
+    Salle16=Preset[random.randint(0,7)].copy()
+    Salle16['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle17={}
+    Salle17=Preset[random.randint(0,7)].copy()
+    Salle17['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle18={}
+    Salle18=Preset[random.randint(0,7)].copy()
+    Salle18['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    Salle1={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+           ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+           ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+           ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+           ,'ObjetMap':{'Type':None,'x':0,'y':0}}
+    MapMob= [[Salle1 ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
         ,[Salle4 ,Salle5 ,Salle6 ,None]
         ,[Salle7 ,Salle8 ,Salle9 ,None]
         ,[Salle10,Salle11,Salle12,None]
@@ -255,6 +243,7 @@ MapMob= [[Salle1 ,Salle2 ,Salle3 ,None]                                         
         ,[Salle16,Salle17,Salle18,None]
         ,[None   ,None   ,None   ,None]]
 
+SalleAlea()
 
 def MapMobSet():                                                                                  #Fonction mettant les preset des Mobs des Maps
     global MapMob,Lock
@@ -266,6 +255,7 @@ def MapMobSet():                                                                
         Objet['Type']=None
     else:                                                                                          #La salle 1
         Salle(MapMob[Player['Ymob']][Player['Xmob']])
+    JambonBot['Type']='Mort'
 
 def Salle(m):                                                                                     #cette fonction mets en place les salles selon les réglages donnés.
     Bot1['Type']=m['Bot1Map']['Type']                                                             #Bot1 avec sont Type, x et y de départ
@@ -295,7 +285,7 @@ Lock=0
 def SPorte():
     global Lock
     if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
-        if Bot1['Type']=='Mort' or Bot1['Type']=='Golem' and Bot2['Type']=='Mort' or Bot2['Type']=='Golem' and Bot3['Type']=='Mort' or Bot3['Type']=='Golem' and Bot4['Type']=='Mort' or Bot4['Type']=='Golem' :
+        if (Bot1['Type']=='Mort' or Bot1['Type']=='Golem') and (Bot2['Type']=='Mort' or Bot2['Type']=='Golem') and (Bot3['Type']=='Mort' or Bot3['Type']=='Golem') and (Bot4['Type']=='Mort' or Bot4['Type']=='Golem') :
             Lock=0
         else :
             Lock=1
@@ -352,6 +342,8 @@ Player['Frappe']['x']=0
 Player['Frappe']['y']=0
 Player['Frappe']['Sens']='Droite'
 Player['Objet']=None
+Player['Energisante']=0
+
 global XYmap
 XYmap=MapMob[Player['Ymob']][Player['Xmob']]
 
@@ -365,6 +357,7 @@ def JoueurComplet():
     PointdeVie()
     Immunite()
     Attaque()
+    Objets()
     
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
@@ -475,23 +468,26 @@ def Course():                                                                   
         Player['Stamina']= Player['Stamina']+2  
     
 def     drawSprint():
-    if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:                   #Si la stamina restante est entre 100% et 80% et que le joueur n'est pas fatiguer :
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,0,32,16,1)                                          #Montrer la barre remplie
+    if Player['Energisante']==0:
+        if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:                   #Si la stamina restante est entre 100% et 80% et que le joueur n'est pas fatiguer :
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,0,32,16,1)                                          #Montrer la barre remplie
         
-    elif Player['Stamina']<=85 and Player['Stamina']>60 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 80% et 60% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,16,32,16,1)                                         #Montrer la barre asser remplie
+        elif Player['Stamina']<=85 and Player['Stamina']>60 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 80% et 60% et que le joueur n'est pas fatiguer:
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,16,32,16,1)                                         #Montrer la barre asser remplie
         
-    elif Player['Stamina']<=60 and Player['Stamina']>45 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 60% et 45% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,32,32,16,1)                                         #Montrer la barre à moitié vide
+        elif Player['Stamina']<=60 and Player['Stamina']>45 and Player['Fatigue']!=1:                  #Si la stamina restante est entre 60% et 45% et que le joueur n'est pas fatiguer:
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,32,32,16,1)                                         #Montrer la barre à moitié vide
         
-    elif Player['Stamina']<= 45 and Player['Stamina']>25 and Player['Fatigue']!=1:                 #Si la stamina restante est entre 45% et 25% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,48,32,16,1)                                         #Montrer la barre presque vide
+        elif Player['Stamina']<= 45 and Player['Stamina']>25 and Player['Fatigue']!=1:                 #Si la stamina restante est entre 45% et 25% et que le joueur n'est pas fatiguer:
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,48,32,16,1)                                         #Montrer la barre presque vide
         
-    elif Player['Stamina']<=25 and Player['Fatigue']!=1:                                           #Si la stamina restante est entre 25% et 0% et que le joueur n'est pas fatiguer:
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,64,32,16,1)                                         #Montrer la barre rouge et vide
+        elif Player['Stamina']<=25 and Player['Fatigue']!=1:                                           #Si la stamina restante est entre 25% et 0% et que le joueur n'est pas fatiguer:
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,64,32,16,1)                                         #Montrer la barre rouge et vide
         
-    elif Player['Fatigue']==1:                                                                     #Si le joueur est fatiguer peut importe sa stamina restante :
-        pyxel.blt(Player['x']-77,Player['y']-63,2,96,80,32,16,1)                                         #Montrer la barre casser
+        elif Player['Fatigue']==1:                                                                     #Si le joueur est fatiguer peut importe sa stamina restante :
+            pyxel.blt(Player['x']-77,Player['y']-63,2,96,80,32,16,1)                                         #Montrer la barre casser
+    else:
+        pyxel.blt(Player['x']-77,Player['y']-63,2,128,32,32,16,1)
 
 global Devmode
 Devmode=0
@@ -586,7 +582,38 @@ def drawObjets():
             pyxel.blt(Player['x'],Player['y']-8,2,0,40,16,16,1)
         else:
             pyxel.blt(Player['x']-16,Player['y']-8,2,0,40,-16,16,1)
+    if JambonBot['Type']=='Lancer':
+        pyxel.blt(JambonBot['x'],JambonBot['y'],2,0,40,16,16,1)
+    if Player['Objet']=='Boisson':
+        if Player['Sens']=='Droite':
+            pyxel.blt(Player['x'],Player['y']-8,2,0,56,16,16,1)
+        else:
+            pyxel.blt(Player['x']-16,Player['y']-8,2,0,56,-16,16,1)
 
+def Objets():
+    if Player['Objet']=='Jambon':
+        if pyxel.btnp(pyxel.KEY_R) :
+            JambonBot['Type']='Lancer'
+            JambonBot['x']=Player['x']-8
+            JambonBot['y']=Player['y']-8
+            Player['Objet']=None
+    if JambonBot['Type']=='Lancer':
+        if Bot1['Type']=='Arabe':
+            JambonLancer(JambonBot,Bot1)
+        if Bot2['Type']=='Arabe':
+            JambonLancer(JambonBot,Bot2)
+        if Bot3['Type']=='Arabe':
+            JambonLancer(JambonBot,Bot3)
+        else:
+            JambonLancer(JambonBot,Bot4)
+    if Player['Objet']=='Boisson':
+        if pyxel.btnp(pyxel.KEY_R) :
+            Player['Energisante']=10
+    if Player['Energisante']>0 and pyxel.frame_count%20==0:
+        Player['Energisante']-=1
+        Player['Stamina']=100
+        Player['Objet']=None
+        
 
 
 '''
@@ -687,6 +714,7 @@ def types(entity):                                                              
             XYmap['Bot3Map']['Type']='Mort'
         else:
             XYmap['Bot4Map']['Type']='Mort'
+        entity['PV']=1
     
 def boulelance(entity):
     FrameDep(bouledefeu,16)
@@ -740,13 +768,9 @@ def Arabe(entity):                                                             #
     Draw32px(entity,96,0,1,1)
     bot(entity)
     if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28:
-        if Player['Objet']=='Jambon':
-            pyxel.play(0,3)
-            Player['Objet']=None
-        else:
-            pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
-            Player['PV']-=4
-            Player['Immune']=5
+        pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
+        Player['PV']-=4
+        Player['Immune']=5
         entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Comme un Kamikaze)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         entity['Vitesse']=-0.75                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
@@ -774,7 +798,7 @@ def Mage(entity):                                                             #F
         pyxel.play(0,1)
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
-    entity['Vitesse']=0                                                        #Il est immobile
+    entity['Vitesse']=0.05                                                        #Il est immobile
     Draw64px(entity,192,128,4)
     bot(entity)
     if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
@@ -938,6 +962,11 @@ Objet['y']=0
 Objet['Type']=None
 Objet['Rammasser']=0
 
+JambonBot=dict()
+JambonBot['x']=0
+JambonBot['y']=0
+JambonBot['Type']='Mort'
+
 
 Levier1={'Status':0}                                                         #statut du levier (on/off)
 Levier2={'Status':0}                                                         #statut du levier (on/off)
@@ -954,9 +983,11 @@ def typesobj(objet):                                                            
     if objet['Type']=='Boisson':                                                #Détecte si l'objet est une boisson
         Boisson(objet)
     if objet['Type']=='Batterie':                                               #Détecte si l'objet est une batterie
-        Batterie(objet)
+        Pile(objet)
     if objet['Type']=='Jambon':                                                 #Détecte si l'objet est du jambon
         Jambon(objet)
+    if objet['Type']=='Coeur':
+        Coeur(objet)
     
 def Levier(objet,nb):
     if nb==1:
@@ -989,6 +1020,45 @@ def Jambon(objet):
                 XYmap['ObjetMap']['Type']=Player['Objet']
                 Player['Objet']='Jambon'
     pyxel.blt(objet['x'],objet['y'],2,0,40,16,16,1)
+    
+def JambonLancer(Jambon,Arabe):
+    if Arabe['x']-Jambon['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
+        Jambon['x']=Jambon['x']+2
+    elif Arabe['x']-Jambon['x'] <= 0:                                                 #si le joueur est a gauche : le bot va a gauche
+        Jambon['x']=Jambon['x']-2
+    elif Arabe['y']-Jambon['y'] >= 0:                                                 #si le joueur est en haut : le bot va en haut
+        Jambon['y']=Jambon['y']+2
+    elif Arabe['y']-Jambon['y'] <= 0:                                                 #si le joueur est en bas : le bot va en bas
+        Jambon['y']=Jambon['y']-2
+    if Arabe['x']<Jambon['x']+28 and Arabe['x']>Jambon['x']-28 and Arabe['y']>Jambon['y']-28 and Arabe['y']<Jambon['y']+28:
+        Jambon['Type']='Mort'
+        Arabe['PV']=0
+        pyxel.play(0,3)
+        
+def Coeur(objet):
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+            if pyxel.btnp(pyxel.KEY_E) :
+                objet['Type']=None
+                XYmap['ObjetMap']['Type']=None
+                Player['PV']+=2
+    pyxel.blt(objet['x'],objet['y'],2,16,56,16,16,1)
+
+def Pile(objet):
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+            if pyxel.btnp(pyxel.KEY_E) :
+                objet['Type']=None
+                XYmap['ObjetMap']['Type']=None
+                Player['Batterie']=100
+    pyxel.blt(objet['x'],objet['y'],2,16,40,16,16,1)
+    
+def Boisson(objet):
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+            if pyxel.btnp(pyxel.KEY_E) :
+                Objet['Type']=Player['Objet']
+                XYmap['ObjetMap']['Type']=Player['Objet']
+                Player['Objet']='Boisson'
+    pyxel.blt(objet['x'],objet['y'],2,0,56,16,16,1)
+    
 
 def Portail():                                                                #porte
     global Porte
@@ -1018,10 +1088,30 @@ Choix=1
 def menu():                                                                     #Le Menu principale dans sont intégralité : Jouer et Quitter pour l'instant
     global Xsouris,Ysouris,start,Choix
     pyxel.cls(0)
-    pyxel.text(0,0,'Early Early Early acces',7)
-    pyxel.text(120,40,str("Start Game"),7)
-    pyxel.text(120,80,str("Options"),7)
-    pyxel.text(120,120,str("Quit Game"),7)
+    pyxel.blt(150,100,2,162,176,32,32,1)
+    pyxel.blt(183,100,2,192,176,32,32,1)
+    pyxel.blt(216,100,2,32,112,32,32,1)
+    pyxel.blt(249,100,2,130,176,32,32,1)
+    pyxel.blt(283,100,2,192,176,32,32,1)
+    pyxel.blt(331,100,2,224,112,32,32,1)
+    pyxel.blt(364,100,2,32,112,32,32,1)
+    pyxel.blt(397,100,2,192,144,32,32,1)
+    pyxel.blt(430,100,2,160,112,32,32,1)
+    pyxel.blt(200,175,2,32,176,32,32,1)
+    pyxel.blt(233,175,2,64,176,32,32,1)
+    pyxel.blt(266,175,2,192,176,32,32,1)
+    pyxel.blt(289,175,2,64,144,32,32,1)
+    pyxel.blt(312,175,2,32,176,32,32,1)
+    pyxel.blt(345,175,2,224,144,32,32,1)
+    pyxel.blt(378,175,2,162,176,32,32,1)    
+    pyxel.blt(170,250,2,96,176,32,32,1)
+    pyxel.blt(203,250,2,224,176,32,32,1)
+    pyxel.blt(226,250,2,64,144,32,32,1)
+    pyxel.blt(249,250,2,192,176,32,32,1)   
+    pyxel.blt(306,250,2,224,112,32,32,1)
+    pyxel.blt(339,250,2,32,112,32,32,1)
+    pyxel.blt(372,250,2,192,144,32,32,1)
+    pyxel.blt(405,250,2,160,112,32,32,1)
     if pyxel.btnp(pyxel.KEY_DOWN):
         Choix=Choix+1
     if pyxel.btnp(pyxel.KEY_UP):
@@ -1031,66 +1121,143 @@ def menu():                                                                     
     if Choix<=0:
         Choix=3   
     if Choix==1:
-        pyxel.blt(110,39,2,0,1,6,8,0)
-        pyxel.blt(160,39,2,8,1,6,8,0)
+        pyxel.blt(130,110,2,0,8,16,16,0)
+        pyxel.blt(480,110,2,16,8,16,16,0)
         if pyxel.btn(pyxel.KEY_RETURN): 
             start=1
             Player['PV']=6
     if Choix==2:
-        pyxel.blt(110,79,2,0,1,6,8,0)
-        pyxel.blt(160,79,2,8,1,6,8,0)
+        pyxel.blt(180,185,2,0,8,16,16,0)
+        pyxel.blt(418,185,2,16,8,16,16,0)
         if pyxel.btn(pyxel.KEY_RETURN): 
             start=-1
     if Choix==3:
-        pyxel.blt(110,119,2,0,1,6,8,0)
-        pyxel.blt(160,119,2,8,1,6,8,0)
+        pyxel.blt(150,260,2,0,8,16,16,0)
+        pyxel.blt(445,260,2,16,8,16,16,0)
         if pyxel.btn(pyxel.KEY_RETURN): 
             pyxel.quit()
 
-    
 
-
-
-
-
-
-
-def options():                                                                  #Le menu des Options avec la Stamina modifiable
+def options():
     global start
     pyxel.cls(0)
-    pyxel.text(120,120,str("Return"),7)
-    
-    if (Xsouris>=120 and Xsouris<=160) and (Ysouris>=118 and Ysouris<=127):     #Bouton pour retruner au menu principal
-        pyxel.blt(110,119,2,0,1,6,8,0)
-        pyxel.blt(160,119,2,8,1,6,8,0)
-        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
+    if start==-1:
+        PageI()
+    if start==-2:
+        PageII()
+    if start==-3:
+        PageIII()
+    if pyxel.btnp(pyxel.KEY_RIGHT) :
+        if start!=-3:
+            start-=1
+        else:
             start=0
-    pyxel.text(80,40,str("Stamina : Courte   Moyenne   Longue   Infinie"),7)              #Boutons permettant de changer la Stamina du personnage
-    
-    if (Xsouris>=120 and Xsouris<=142) and (Ysouris>=38 and Ysouris<=47) and pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
-        Player['StamDepletion']=1.5
-    
-    if (Xsouris>=156 and Xsouris<=182) and (Ysouris>=38 and Ysouris<=47) and pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
-        Player['StamDepletion']=1
+    if pyxel.btnp(pyxel.KEY_LEFT):
+        start+=1
         
-    if (Xsouris>=196 and Xsouris<=218) and (Ysouris>=38 and Ysouris<=47) and pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
-        Player['StamDepletion']=0.5
-        
-    if (Xsouris>=232 and Xsouris<=258) and (Ysouris>=38 and Ysouris<=47) and pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
-        Player['StamDepletion']=0
-    
-    if Player['StamDepletion']==1.5:                                                       #montrer la Stamina selectionnée en soulignant celle selectionnée
-        pyxel.line(120,48,142,48,7)
-    
-    elif Player['StamDepletion']==1:
-        pyxel.line(156,48,182,48,7)
-    
-    elif Player['StamDepletion'] == 0.5:
-        pyxel.line(196,48,218,48,7)
-    
-    else:
-        pyxel.line(232,48,258,48,7)
+def PageI():
+    pyxel.text(275,20,str("Touches"),4)
+    pyxel.text(10,50,str("Pour Accelerer Appuyer sur shift gauche"),3)
+    pyxel.text(10,70,"zqsd et fleche directionnel pour se deplacer ",3)
+    pyxel.text(10,110,"F pour le flash (rester appuyer, consomme beaucoup de batterie et permet d'impacter certain mob )",3)
+    pyxel.text(10,90,"shift pour courrir (consomme de l'endurence)",3)
+    pyxel.text(10,310,"tab pour retourner au menu / ouvrir le menu",3)
+    pyxel.text(10,130,"ALT pour frapper (consomme de l'endurence)",3)
+    pyxel.text(10,150,"E pour interagir / prendre un objet",3)
+    pyxel.text(10,170,"R pour utiliser l'objet dans les mains",3)
+    pyxel.text(5,340,"<--   Aller au menu",7)
+    pyxel.text(580,340,"Les Mobs   -->",7)
 
+def PageII():
+    pyxel.text(275,20,str("Mobs"),4)
+    pyxel.circ(26,66,18,1)
+    pyxel.text(50,50,str("Le Zombie :"),4)
+    pyxel.blt(10,50,1,128,0,32,32,1)
+    pyxel.text(60,60,str("Ennemis commun, il attaque si vous êtes trop pres."),3)
+    pyxel.text(60,70,str("Vous devez le tuez en l'attaquant (attention certain peuvent etre coriace)"),3)
+    
+    pyxel.circ(26,106,18,1)
+    pyxel.text(50,90,str("Le Phantome :"),4)
+    pyxel.blt(10,90,1,224,0,-32,32,1)
+    pyxel.text(60,100,str("Ennemis commun, il attaque si vous êtes trop pres et ne peut pas etre attaquer"),3)
+    pyxel.text(60,110,str("Les Phantomes n'aiment vraiment pas la lumiere forte donc flasher le pour qu'il parte"),3)
+    
+    pyxel.circ(26,146,18,1)
+    pyxel.text(50,130,str("L'Arabe :"),4)
+    pyxel.blt(10,130,1,96,0,32,32,1)
+    pyxel.text(60,140,str("Ennemis rare, il s'explose sur vous vous causant d'enorme degats."),3)
+    pyxel.text(60,150,str("Meme si vous pouver le taper, il partira uniquement si vous lui lancer du jambon."),3)
+    
+    pyxel.circ(26,186,18,1)
+    pyxel.text(50,170,str("Le Mage :"),4)
+    pyxel.blt(13,170,1,192,0,32,32,1)
+    pyxel.text(60,180,str("Ennemis rare, il vous lance des boule de magies."),3)
+    pyxel.text(60,190,str("Meme si il sont dangereux, il ne peuvent pas resister plus d'un coup."),3)
+    pyxel.text(60,200,str("Aussi, ses boule de magies peuvent etre arretes si elles ressoivent un coup."),3)
+    
+    pyxel.circ(26,226,18,1)
+    pyxel.text(50,210,str("Le Cauchemare :"),4)
+    pyxel.blt(10,213,1,160,0,32,32,1)
+    pyxel.text(60,220,str("Ennemis unique, il se jettera sur vous a une vitesse tres rapide."),3)
+    pyxel.text(60,230,str("Vous ne pouver pas le tuer, juste attender qu'il parte. (un chrono indique le temps restant en haut a gauche)"),3)
+    pyxel.text(60,240,str("Etant un cauchemare, il ne peut pas se deplacer dans la lumiere forte, flasher le pour l'arreter temporairement."),3)
+    
+    pyxel.circ(42,286,34,2)
+    pyxel.text(82,250,str("Le Golem :"),4)
+    pyxel.blt(10,254,1,192,128,64,64,4)
+    pyxel.text(92,260,str("Se mastodonte Bbouge extremement lentement mais vous bloque votre chemin."),3)
+    pyxel.text(92,270,str("Il ne peut pas etre tuer mais vous attaque si vous vous raprochez trop de lui."),3)
+    pyxel.text(92,280,str("Si un mastodonte est present, il y a surement quelquechose de cacher deriere lui."),3)
+    
+    
+    pyxel.text(5,340,"<--   Les Touches",7)
+    pyxel.text(550,340,"Les Mechaniques   -->",7)
+
+def PageIII():
+    pyxel.text(275,20,str("Mechaniques"),4)
+    pyxel.text(10,50,str("L'Endurence :"),4)
+    pyxel.blt(10,60,2,96,0,32,16,1)
+    pyxel.text(60,60,str("L'endurence est une utilisee pour 2 actions : Courir et Attaquer."),3)
+    pyxel.text(60,70,str("L'endurence doit etre utiliser avec moderation ou vous deviendrer fatiguer."),3)
+    pyxel.text(60,80,str("Si vous etes fatiguer, votre barre sera fissurer et vous ne pourriez plus courir jusqu'a n'etre plus fatiguer."),3)
+    pyxel.text(60,90,str("Cependant, vous pouvez boire une boisson energisante pour avoir de l'endurence illimiter pendant un court temps."),3)
+    
+    pyxel.text(10,100,str("La batterie :"),4)
+    pyxel.blt(10,110,2,64,0,32,16,1)
+    pyxel.text(60,110,str("C'est une ressource essentielle a la survie."),3)
+    pyxel.text(60,120,str("La batterie de votre lampe est utiliser avec le temps ou si vous flashez."),3)
+    pyxel.text(60,130,str("Si vous tomber a 0 de batterie, vous mourrez donc utilisez la avec soin !"),3)
+    pyxel.text(60,140,str("Le seul moyen de regenerer sa batterie est avec des batteries trouvers sur le sol."),3)
+    
+    pyxel.text(10,150,str("La sante :"),4)
+    pyxel.blt(10,160,2,128,16,32,16,1)
+    pyxel.text(60,160,str("Assez simple a comprendre : si vous tombez a 0, vous mourrez."),3)
+    pyxel.text(60,170,str("La sante est baisser par les actions des mobs sur vous, attaque ou explosion."),3)
+    pyxel.text(60,180,str("Le seul moyen de regenerer sa sante est par les coeurs se trouvant par terre."),3)
+    
+    pyxel.text(275,200,str("Les Objets"),4)
+    pyxel.text(10,230,str("La batterie :"),4)
+    pyxel.blt(18,240,2,16,40,16,16,1)
+    pyxel.text(60,240,str("Les batteries seront utilisee des que vous la prennez."),3)
+    pyxel.text(60,250,str("Elle vous recharge votre batterie entierement."),3)
+    
+    pyxel.text(330,230,str("Les coeurs :"),4)
+    pyxel.blt(338,240,2,16,56,16,16,1)
+    pyxel.text(380,240,str("Les coeurs seront utilisee des que vous les prennez."),3)
+    pyxel.text(380,250,str("Il vous redonne un coeur de votre sante."),3)
+    
+    pyxel.text(10,280,str("La boisson :"),4)
+    pyxel.blt(18,290,2,0,56,16,16,1)
+    pyxel.text(60,290,str("La boisson est un objet que vous utilisez quand vous voulez."),3)
+    pyxel.text(60,300,str("Il vous regenere et boost temporairement votre endurence."),3)
+    
+    pyxel.text(330,280,str("Le jambon"),4)
+    pyxel.blt(338,290,2,0,40,16,16,1)
+    pyxel.text(390,290,str("Le jambon est un objet que vous utilisez quand vous voulez."),3)
+    pyxel.text(390,300,str("Vous devez le lancer sur l'arabe pour le faire fuir."),3)
+    
+    pyxel.text(5,340,"<--   Les Mobs",7)
+    pyxel.text(550,340,"Menu Principale   -->",7)
 def mort():
     global start                                                                                 #test de mort 
     if Player ['PV']<1:
@@ -1138,13 +1305,11 @@ class App:
             
         elif start==0:                                                          #Si la partie n'est pas démarrée
             menu()
-
-        elif start==-1:                                                         #Si on est dans le menu des options
-            options()
-            curseur()
         elif start==2:
             if pyxel.btn(pyxel.KEY_SPACE):
                 start=0
+        else:                                                         #Si on est dans le menu des options
+            options()
         GODmode()
         if pyxel.btnp(pyxel.KEY_HOME):
             Jour=Jour+1
@@ -1205,7 +1370,7 @@ class App:
                 pyxel.text(Player['x']+65,Player['y']-75,str(Bot1['PV']//3),7)
         
             DebugMenu()
-        if start==0 or start==-1 or Jour==1:
+        if start>=0 or Jour==1:
             pyxel.clip()
             
 
