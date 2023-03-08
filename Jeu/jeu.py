@@ -29,7 +29,7 @@ et plein d'autre a découvrir !
 
 '''
 global start                                                                    #Met en place La variable Global start 
-start=0                                                                         #Indique si le jeu est commencer ou non (0 pour non)
+start=10                                                                         #Indique si le jeu est commencer ou non (0 pour non)
 global Xmap,Ymap,XResol,YResol,MapMob        
 Xmap=0
 Ymap=0
@@ -63,8 +63,9 @@ def FrameDep(entity,s):                                                         
         entity['Frame'] = 3
         
 def WarioApparition():                                                              #La fonction Wario non fonctionnel pour la early acces
-    if Bot1['Type']=='Wario':
-        return True
+    Bot1['Type']=='Wario'
+    Bot1['x']=100
+    Bot1['y']=100
         
 def Draw32px(entity,u,v,inverse,col):                                               #Fonction permettant d'afficher une entité de 32 pixels et 4 frame d'animations.
     if entity['Sens']=='Droite':                                                    #Regarde si il regarde à Gauche
@@ -130,6 +131,9 @@ def DebugMenu():
                                                                                     ██████╔╝██║░░██║███████╗███████╗███████╗██████╔╝
                                                                                     ╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚══════╝╚═════╝░
 '''
+
+#Le début des 100 lignes de l'enfer
+
 
 Preset1={'Bot1Map':{'Type':'Zombie','x':320,'y':80,'PV':2}                                      #réglage Salle 2
        ,'Bot2Map':{'Type':'Phantom','x':120,'y':160,'PV':1}
@@ -257,6 +261,7 @@ def MapMobSet():                                                                
         Salle(MapMob[Player['Ymob']][Player['Xmob']])
     JambonBot['Type']='Mort'
 
+
 def Salle(m):                                                                                     #cette fonction mets en place les salles selon les réglages donnés.
     Bot1['Type']=m['Bot1Map']['Type']                                                             #Bot1 avec sont Type, x et y de départ
     Bot1['x']=m['Bot1Map']['x']
@@ -285,15 +290,11 @@ Lock=0
 def SPorte():
     global Lock
     if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
-        if (Bot1['Type']=='Mort' or Bot1['Type']=='Golem') and (Bot2['Type']=='Mort' or Bot2['Type']=='Golem') and (Bot3['Type']=='Mort' or Bot3['Type']=='Golem') and (Bot4['Type']=='Mort' or Bot4['Type']=='Golem') :
+        if Bot1['Type']=='Mort' or Bot1['Type']=='Golem' and Bot2['Type']=='Mort' or Bot2['Type']=='Golem' and Bot3['Type']=='Mort' or Bot3['Type']=='Golem' and Bot4['Type']=='Mort' or Bot4['Type']=='Golem' :
             Lock=0
         else :
             Lock=1
-    if pyxel.btn(pyxel.KEY_RCTRL):
-        Lock=0
-    
-        if Lock>1:
-            Lock=0     
+
     
 
     if Lock==1:
@@ -343,21 +344,10 @@ Player['Frappe']['y']=0
 Player['Frappe']['Sens']='Droite'
 Player['Objet']=None
 Player['Energisante']=0
-
 global XYmap
 XYmap=MapMob[Player['Ymob']][Player['Xmob']]
 
-def JoueurComplet():
-    global XYmap
-    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
-    deplacement()
-    Course()
-    mort()
-    BougeMap()
-    PointdeVie()
-    Immunite()
-    Attaque()
-    Objets()
+
     
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
@@ -467,7 +457,7 @@ def Course():                                                                   
     if  Player['Stamina'] <= 0 :                                                #Stamina ne passe pas 0%
         Player['Stamina']= Player['Stamina']+2  
     
-def     drawSprint():
+def  drawSprint():
     if Player['Energisante']==0:
         if Player['Stamina']<=101 and Player['Stamina']>85 and Player['Fatigue']!=1:                   #Si la stamina restante est entre 100% et 80% et que le joueur n'est pas fatiguer :
             pyxel.blt(Player['x']-77,Player['y']-63,2,96,0,32,16,1)                                          #Montrer la barre remplie
@@ -487,7 +477,7 @@ def     drawSprint():
         elif Player['Fatigue']==1:                                                                     #Si le joueur est fatiguer peut importe sa stamina restante :
             pyxel.blt(Player['x']-77,Player['y']-63,2,96,80,32,16,1)                                         #Montrer la barre casser
     else:
-        pyxel.blt(Player['x']-77,Player['y']-63,2,128,32,32,16,1)
+        pyxel.blt(Player['x']-77,Player['y']-63,2,128,32,32,16,1)                                        #Montrer la barre casser
 
 global Devmode
 Devmode=0
@@ -542,6 +532,15 @@ def BougeMap():                                                                 
         Bot2['Type']='Mort'
         Bot3['Type']='Mort'
         Bot4['Type']='Mort'                                                                          #Ont met en place le preset cesser etre sur la map
+
+
+
+
+
+
+
+
+
 
 def Immunite():
     if pyxel.frame_count %10 == 0:                                                            #L'immunité baisse toute les demi-seconde
@@ -703,7 +702,7 @@ def types(entity):                                                              
     if entity['Type']=='Cauchemare':                                            #Détecte si le bot est un Cauchemare
         Cauchemare(entity)
     if entity['Type']=='Wario':                                                 #Wario (Pas early acces)
-        Wario()
+        wario()
     if entity['PV']<=0:
         entity['Type']='Mort'
         if entity==Bot1:
@@ -762,6 +761,7 @@ def Zombie(entity):                                                             
         pyxel.play(0,1)
         
 
+
 def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
     if Player['Frappe']['Status']==False:
         entity['Vitesse']=1.75
@@ -777,7 +777,7 @@ def Arabe(entity):                                                             #
         pyxel.play(0,1)
         
 
-def Mage(entity):                                                             #Fait les caractéristique de Mage
+def Mage(entity):                                                                 #Fait les caractéristique de Mage
     boulelance(entity)
     entity['Vitesse']=0.5
     Draw32px(entity,192,0,1,1)
@@ -821,7 +821,7 @@ def Cauchemare(entity):                                                         
     if pyxel.frame_count%20==0:
         entity['PV']-=1
 
-def Wario():                                                                    #Le wario n'est pas fini pour l'early acces
+def wario():                                                                    #Le wario n'est pas fini pour l'early acces
     boulelance(Bot1)
     Bot2['Type']='Mort'
     Bot3['Type']='Mort'
@@ -967,10 +967,10 @@ JambonBot['x']=0
 JambonBot['y']=0
 JambonBot['Type']='Mort'
 
-
 Levier1={'Status':0}                                                         #statut du levier (on/off)
 Levier2={'Status':0}                                                         #statut du levier (on/off)
 Levier3={'Status':0}                                                         #statut du levier (on/off)
+
 
 
 def typesobj(objet):                                                              #Utilise les différentes fonction selon le type du bot 
@@ -988,7 +988,7 @@ def typesobj(objet):                                                            
         Jambon(objet)
     if objet['Type']=='Coeur':
         Coeur(objet)
-    
+
 def Levier(objet,nb):
     if nb==1:
         LevierDraw(objet,Levier1)
@@ -1020,6 +1020,7 @@ def Jambon(objet):
                 XYmap['ObjetMap']['Type']=Player['Objet']
                 Player['Objet']='Jambon'
     pyxel.blt(objet['x'],objet['y'],2,0,40,16,16,1)
+
     
 def JambonLancer(Jambon,Arabe):
     if Arabe['x']-Jambon['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
@@ -1060,22 +1061,38 @@ def Boisson(objet):
     pyxel.blt(objet['x'],objet['y'],2,0,56,16,16,1)
     
 
+
 def Portail():                                                                #porte
     global Porte
     if  Player['Xmob']==0 and Player['Ymob']==0:                        #si le joueur est dans la salle de la porte 
-        if Porte!=3:                                                        #si trois levier ne sont pas activer  
-            pyxel.blt(288,-6,0,96,0,47,64,3)                               #fermer la porte
+        if Porte!=4:                                                        #si trois levier ne sont pas activer  
+            pyxel.blt(288,-6,0,96,120,64,50,3)                               #fermer la porte
         if Porte==1:
-                pyxel.blt(288,10,0,144,0,60,16,3) 
+            pyxel.blt(288,17,0,96,175,60,8,3) 
         if Porte==2:
-            pyxel.blt(288,10,0,144,16,60,16,3)
+            pyxel.blt(288,17,0,96,191,60,8,3)
         if Porte==3:
-            pyxel.blt(288,-6,0,192,0,64,64,3)
-        
+            pyxel.blt(288,17,0,96,207,60,8,3)
+        if Porte==3:
+            if Player['x']>270 and Player['y']>30 and  Player['x']<370 and Player['y']<65:
+                if pyxel.btnp(pyxel.KEY_E):
+                    Porte=4
+        if Porte==4:
+            pyxel.blt(288,-6,0,176,0,64,70,3)   
+        if pyxel.btnp(pyxel.KEY_RCTRL):
+            Porte=Porte+1
+        if Porte>4:
+            Porte=0
+
+def Boss_Fight():#a continuer 
+    global Porte,start
+    if Porte==4:
+        if Player['x']>295 and Player['y']>0 and  Player['x']<350 and Player['y']<25:
+            start=4
 
 
 
-'''
+'''    
                                                                                 ███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗
                                                                                 ████╗░████║██╔════╝████╗░██║██║░░░██║
                                                                                 ██╔████╔██║█████╗░░██╔██╗██║██║░░░██║
@@ -1085,33 +1102,152 @@ def Portail():                                                                #p
 '''
 global Choix
 Choix=1
+def EarlyAcces(x,y):
+        pyxel.blt(x,y,2,160,112,32,32,1)
+        pyxel.blt(x+33*1,y,2,32,112,32,32,1)
+        pyxel.blt(x+33*2,y,2,128,176,32,32,1)
+        pyxel.blt(x+33*3,y,2,160,144,32,32,1)
+        pyxel.blt(x+33*4,y,2,128,208,32,32,1)
+
+        pyxel.blt(x+33*6,y,2,32,112,32,32,1)
+        pyxel.blt(x+33*7,y,2,96,112,32,32,1)
+        pyxel.blt(x+33*8,y,2,96,112,32,32,1)
+        pyxel.blt(x+33*9,y,2,160,112,32,32,1)
+        pyxel.blt(x+33*10,y,2,162,176,32,32,1)
+
+def HauntedDreams(x,y):
+        pyxel.blt(x,y,2,32,144,32,32,1)
+        pyxel.blt(x+33*1,y,2,32,112,32,32,1)
+        pyxel.blt(x+33*2,y,2,224,176,32,32,1)
+        pyxel.blt(x+33*3,y,2,224,144,32,32,1)
+        pyxel.blt(x+33*4,y,2,192,176,32,32,1)
+        pyxel.blt(x+33*5,y,2,160,112,32,32,1)
+        pyxel.blt(x+33*6,y,2,128,112,32,32,1)
+    
+        pyxel.blt(x+33*8,y,2,128,112,32,32,1)
+        pyxel.blt(x+33*9,y,2,128,176,32,32,1)
+        pyxel.blt(x+33*10,y,2,160,112,32,32,1)
+        pyxel.blt(x+33*11,y,2,32,112,32,32,1)
+        pyxel.blt(x+33*12,y,2,192,144,32,32,1)
+        pyxel.blt(x+33*13,y,2,162,176,32,32,1)
+
+def AnimHD():
+    if pyxel.frame_count >137 and pyxel.frame_count <140:
+        pyxel.pal(7,6)
+    if pyxel.frame_count >140 and pyxel.frame_count <143:
+        pyxel.pal(7,12)  
+    if pyxel.frame_count >143 and pyxel.frame_count <146:
+        pyxel.pal(7,5) 
+    if pyxel.frame_count >146 and pyxel.frame_count <149:
+        pyxel.pal(7,1) 
+    if pyxel.frame_count >149 and pyxel.frame_count <170:
+        pyxel.pal(7,0)
+
+def AnimWario():
+    if pyxel.frame_count >170 and pyxel.frame_count <185 :
+        pyxel.pal()
+        pyxel.blt(280,145,1,32,128,64,64,11)
+    if pyxel.frame_count >185  and pyxel.frame_count <195:
+        pyxel.blt(280,145,1,32,192,64,64,11)
+    if pyxel.frame_count >195  and pyxel.frame_count <205:
+        pyxel.cls(0)
+        pyxel.blt(280,145,1,32,128,64,64,11)
+    if pyxel.frame_count >205  and pyxel.frame_count <215:
+        pyxel.blt(280,145,1,32,192,64,64,11)
+    if pyxel.frame_count >215  and pyxel.frame_count <225:
+        pyxel.cls(0)
+        pyxel.blt(280,145,1,32,128,64,64,11)
+    if pyxel.frame_count >225  and pyxel.frame_count <245:
+        pyxel.blt(280,145,1,32,192,64,64,11)
+    if pyxel.frame_count >245  and pyxel.frame_count <300:
+        pyxel.cls(0)
+        pyxel.blt(280,145,1,32,128,64,64,11)
+
+
+
+
+###################
+def Introduction():
+    global start
+    
+    if pyxel.frame_count <60 :
+        EarlyAcces(160,160)
+        pyxel.text(0,0,'Version 0.73',14)
+    
+    if pyxel.frame_count >90  and pyxel.frame_count <170:
+        pyxel.cls(0)
+        HauntedDreams(90,160)
+    
+    AnimHD()
+    AnimWario()
+    if pyxel.frame_count >260:
+        pyxel.cls(0)
+        pyxel.pal(7,0)
+        start=0
+
+    if pyxel.btnp(pyxel.KEY_SPACE) :
+        start=0
+        pyxel.pal()
+
+
+def menuanime():
+    if pyxel.frame_count >270  and pyxel.frame_count <275:
+       pyxel.pal(7,1)
+    if pyxel.frame_count >275  and pyxel.frame_count <280:
+        pyxel.pal(7,5)
+    if pyxel.frame_count >280  and pyxel.frame_count <285:
+        pyxel.pal(7,12)
+    if pyxel.frame_count >285  and pyxel.frame_count <290:
+        pyxel.pal(7,6)
+    if pyxel.frame_count >290: 
+        pyxel.pal() 
+
+def startgame(y):
+    pyxel.blt(150,y,2,162,176,32,32,1)
+    pyxel.blt(183,y,2,192,176,32,32,1)
+    pyxel.blt(216,y,2,32,112,32,32,1)
+    pyxel.blt(249,y,2,130,176,32,32,1)
+    pyxel.blt(283,y,2,192,176,32,32,1)
+    pyxel.blt(331,y,2,224,112,32,32,1)
+    pyxel.blt(364,y,2,32,112,32,32,1)
+    pyxel.blt(397,y,2,192,144,32,32,1)
+    pyxel.blt(430,y,2,160,112,32,32,1)
+def options(y):
+    pyxel.blt(200,y,2,32,176,32,32,1)
+    pyxel.blt(233,y,2,64,176,32,32,1)
+    pyxel.blt(266,y,2,192,176,32,32,1)
+    pyxel.blt(289,y,2,64,144,32,32,1)
+    pyxel.blt(312,y,2,32,176,32,32,1)
+    pyxel.blt(345,y,2,224,144,32,32,1)
+    pyxel.blt(378,y,2,162,176,32,32,1)
+def quitgames(y):
+    pyxel.blt(170,y,2,96,176,32,32,1)
+    pyxel.blt(203,y,2,224,176,32,32,1)
+    pyxel.blt(226,y,2,64,144,32,32,1)
+    pyxel.blt(249,y,2,192,176,32,32,1)   
+    pyxel.blt(306,y,2,224,112,32,32,1)
+    pyxel.blt(339,y,2,32,112,32,32,1)
+    pyxel.blt(372,y,2,192,144,32,32,1)
+    pyxel.blt(405,y,2,160,112,32,32,1)
+
+
+
+
+
+
+
+###################
 def menu():                                                                     #Le Menu principale dans sont intégralité : Jouer et Quitter pour l'instant
-    global Xsouris,Ysouris,start,Choix
+    global start,Choix
+    ys=75
+    yo=150
+    yq=225
     pyxel.cls(0)
-    pyxel.blt(150,100,2,162,176,32,32,1)
-    pyxel.blt(183,100,2,192,176,32,32,1)
-    pyxel.blt(216,100,2,32,112,32,32,1)
-    pyxel.blt(249,100,2,130,176,32,32,1)
-    pyxel.blt(283,100,2,192,176,32,32,1)
-    pyxel.blt(331,100,2,224,112,32,32,1)
-    pyxel.blt(364,100,2,32,112,32,32,1)
-    pyxel.blt(397,100,2,192,144,32,32,1)
-    pyxel.blt(430,100,2,160,112,32,32,1)
-    pyxel.blt(200,175,2,32,176,32,32,1)
-    pyxel.blt(233,175,2,64,176,32,32,1)
-    pyxel.blt(266,175,2,192,176,32,32,1)
-    pyxel.blt(289,175,2,64,144,32,32,1)
-    pyxel.blt(312,175,2,32,176,32,32,1)
-    pyxel.blt(345,175,2,224,144,32,32,1)
-    pyxel.blt(378,175,2,162,176,32,32,1)    
-    pyxel.blt(170,250,2,96,176,32,32,1)
-    pyxel.blt(203,250,2,224,176,32,32,1)
-    pyxel.blt(226,250,2,64,144,32,32,1)
-    pyxel.blt(249,250,2,192,176,32,32,1)   
-    pyxel.blt(306,250,2,224,112,32,32,1)
-    pyxel.blt(339,250,2,32,112,32,32,1)
-    pyxel.blt(372,250,2,192,144,32,32,1)
-    pyxel.blt(405,250,2,160,112,32,32,1)
+
+    startgame(ys)
+    options(yo)
+    quitgames(yq)
+      
     if pyxel.btnp(pyxel.KEY_DOWN):
         Choix=Choix+1
     if pyxel.btnp(pyxel.KEY_UP):
@@ -1121,40 +1257,77 @@ def menu():                                                                     
     if Choix<=0:
         Choix=3   
     if Choix==1:
-        pyxel.blt(130,110,2,0,8,16,16,0)
-        pyxel.blt(480,110,2,16,8,16,16,0)
+        
+        if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
+            pyxel.blt(130,ys+7,2,0,8,16,16,0)
+            pyxel.blt(465,ys+7,2,16,8,16,16,0)   
+        else :
+            pass
+        
         if pyxel.btn(pyxel.KEY_RETURN): 
             start=1
             Player['PV']=6
+
     if Choix==2:
-        pyxel.blt(180,185,2,0,8,16,16,0)
-        pyxel.blt(418,185,2,16,8,16,16,0)
+        
+        if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
+            pyxel.blt(180,yo+7,2,0,8,16,16,0)
+            pyxel.blt(418,yo+7,2,16,8,16,16,0)
+        else :
+            pass
+
         if pyxel.btn(pyxel.KEY_RETURN): 
             start=-1
+    
     if Choix==3:
-        pyxel.blt(150,260,2,0,8,16,16,0)
-        pyxel.blt(445,260,2,16,8,16,16,0)
+        
+        if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
+            pyxel.blt(150,yq+7,2,0,8,16,16,0)
+            pyxel.blt(445,yq+7,2,16,8,16,16,0)
+        else :
+            pass
+
         if pyxel.btn(pyxel.KEY_RETURN): 
             pyxel.quit()
 
 
-def options():
-    global start
+
+
+
+
+
+
+#############
+global option
+option=1
+##############
+def option():
+    global start,option
     pyxel.cls(0)
-    if start==-1:
+    if option==1:
         PageI()
-    if start==-2:
+    if option==2:
         PageII()
-    if start==-3:
+    if option==3:
         PageIII()
+    if option==4:
+        PageIIII()
     if pyxel.btnp(pyxel.KEY_RIGHT) :
-        if start!=-3:
-            start-=1
-        else:
-            start=0
+        if option!=4 :
+            option+=1
+        else : start=0
     if pyxel.btnp(pyxel.KEY_LEFT):
-        start+=1
-        
+        if option!=1 :
+            option-=1
+        else :
+            start=0
+
+
+
+
+
+
+
 def PageI():
     pyxel.text(275,20,str("Touches"),4)
     pyxel.text(10,50,str("Pour Accelerer Appuyer sur shift gauche"),3)
@@ -1167,6 +1340,8 @@ def PageI():
     pyxel.text(10,170,"R pour utiliser l'objet dans les mains",3)
     pyxel.text(5,340,"<--   Aller au menu",7)
     pyxel.text(580,340,"Les Mobs   -->",7)
+
+
 
 def PageII():
     pyxel.text(275,20,str("Mobs"),4)
@@ -1213,6 +1388,9 @@ def PageII():
     pyxel.text(5,340,"<--   Les Touches",7)
     pyxel.text(550,340,"Les Mechaniques   -->",7)
 
+
+
+
 def PageIII():
     pyxel.text(275,20,str("Mechaniques"),4)
     pyxel.text(10,50,str("L'Endurence :"),4)
@@ -1257,28 +1435,93 @@ def PageIII():
     pyxel.text(390,300,str("Vous devez le lancer sur l'arabe pour le faire fuir."),3)
     
     pyxel.text(5,340,"<--   Les Mobs",7)
+    pyxel.text(550,340,"But   -->",7)
+
+
+
+
+def PageIIII():
+    pyxel.text(275,20,str("But du jeu"),4)
+    pyxel.text(100,50,str("Vous vous réveiller dans une pièce plongé dans le noir et n'avez sur vous qu'un couteau et une lampe torche"),3)
+    pyxel.text(100,70,str("Pour sortir d'ici et retrouvez la lumière vous devrez explorer les différente salle de cette endroit peux acceuillant "),3)
+   
+    pyxel.text(25,80,str("Les Leviers"),4)
+    pyxel.blt(20,90,0,128,72,32,16,14)
+    pyxel.text(65,100,str("Les Leviers sont disperce aleatoirement Ouvre le portail. s'acctive avec E "),3)
+    
+    pyxel.text(25,150,str("La Porte"),4)
+    pyxel.blt(10,160,0,96,120,64,48,3)
+    pyxel.text(80,180.,str("Porte situez a la primeiere Salle, se Deverouille en activant 3 Levier, s'ouvre avec E.  "),3)
+    
+
+    pyxel.text(25,240,str("Les Grilles "),4)
+    pyxel.text(90,270.,str(" Grille qui se fermeront a chaque fois que vous ne serez pas seul dans une salle, videz la salle pour les ouvrirs. "),3)
+    pyxel.blt(10,250,0,176,72,80,48,3)
+    
+    
+    pyxel.text(5,340,"<--   Les Mechanique",7)
     pyxel.text(550,340,"Menu Principale   -->",7)
+
+
+'''INTERFACE A CHANGER '''
 def mort():
     global start                                                                                 #test de mort 
     if Player ['PV']<1:
-        Player['PV']=2    
+        Player['PV']=0    
         start=2
         pyxel.clip()
         pyxel.cls(0)
         pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
-        pyxel.text(280,150,'Vous êtes mort !',7)
+        pyxel.text(280,150,'Vous êtes mort ! ',7)
         if pyxel.btn(pyxel.KEY_SPACE):
             start=0
 
+
+
+
+
+
+
+
+
+
 '''
-image.png
                                                                                 ░█████╗░██████╗░██████╗░
                                                                                 ██╔══██╗██╔══██╗██╔══██╗
                                                                                 ███████║██████╔╝██████╔╝
                                                                                 ██╔══██║██╔═══╝░██╔═══╝░
                                                                                 ██║░░██║██║░░░░░██║░░░░░
                                                                                 ╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░
+
 '''
+def JoueurComplet():
+    global XYmap
+    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
+    deplacement()
+    Course()
+    mort()
+    PointdeVie()
+    Immunite()
+    Attaque()
+
+def BotDraw():
+    types(Bot1)
+    types(Bot2)
+    types(Bot3)
+    types(Bot4)
+
+def JoueurDraw():
+    if Player['Frappe']['Status']!=True :                                                                            
+        Draw32px(Player,0,0,1,1)                                              #affiche le joueur et des animations
+    else:
+        Draw32px(Player,0,128,1,1)                                            #Si le joueur attaque : Animations
+        Draw32px(Player['Frappe'],32,0,1,1)
+    BatterieAffichage()
+    drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
+    PointdeVie()
+
+
+
 class App:
     def __init__(self):                                                         #Initialisation du Jeu 
         pyxel.init(XResol,YResol, title="jeu")                                #Initialisation de la résolution du jeu et de son titre
@@ -1295,27 +1538,44 @@ class App:
                                                                                 ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
         '''
 
-        global start,Jour
+        global start,Jour,XYmap
         if pyxel.btnp(pyxel.KEY_TAB):                                           #Stop le jeu et ouvre le Menu quand on appui sur tab
             start=0
         if pyxel.btnp(pyxel.KEY_U):                                           #Stop le jeu et ouvre le Menu Mort quand on appui sur 
             start=2    
-        if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
-            JoueurComplet()
+        if start==10:
+            Introduction()
             
         elif start==0:                                                          #Si la partie n'est pas démarrée
+            menuanime()
             menu()
+
+        
+        elif start==-1:                                                         #Si on est dans le menu des options
+            option()
+        
+        if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
+            XYmap=MapMob[Player['Ymob']][Player['Xmob']]
+            JoueurComplet()
+            Boss_Fight()
+            BougeMap()
+        
+        
+        
+        
         elif start==2:
             if pyxel.btn(pyxel.KEY_SPACE):
                 start=0
-        else:                                                         #Si on est dans le menu des options
-            options()
+        
         GODmode()
         if pyxel.btnp(pyxel.KEY_HOME):
             Jour=Jour+1
         if Jour>=2 or Jour<0:
             Jour=0
-        
+        if start==4:
+            pyxel.clip()
+            JoueurComplet()
+            Boss_Fight()
 
 
     def draw(self):
@@ -1341,38 +1601,40 @@ class App:
             pyxel.bltm(Xmap,Ymap,0,0,0,6400,3200,14)                                     #imprime la tilemap
             typesobj(Objet)
             Portail()                                                                                #Si l'ennemis est dans le flash : il est visible
-            types(Bot1)
-            types(Bot2)
-            types(Bot3)
-            types(Bot4)
+            BotDraw()
             if Jour==0:
                 Lampe()
                                                                          #affiche qu'une certaine partie de la map a l'écran
-            if Player['Frappe']['Status']!=True :                                                                            
-                Draw32px(Player,0,0,1,1)                                              #affiche le joueur et des animations
-            else:
-                Draw32px(Player,0,128,1,1)                                            #Si le joueur attaque : Animations
-                Draw32px(Player['Frappe'],32,0,1,1)
+            JoueurDraw()
                 
             drawObjets()                                                 #affiche l'objet que le joueur a actuellement
             
-            BatterieAffichage()
+            
             
             if not pyxel.btn(pyxel.KEY_F)   :             #si la touche flash et la battetrie est supérierur a 5
                 Batterie()                                                          #Batterie restante en haut a gauche de l'écran           
             if Jour==0:
                 flash()                                                                   #Ce changement était nessessaire pour que la batterie s'affiche.
             
-            drawSprint()                   #Stamina en haut a gauche (si elle est faible : elle devient rouge)
-            PointdeVie()
+            
             
             if Bot1['Type']=='Cauchemare':
                 pyxel.text(Player['x']+65,Player['y']-75,str(Bot1['PV']//3),7)
         
             DebugMenu()
-        if start>=0 or Jour==1:
+        if start==0 or start==-1 or Jour==1:
             pyxel.clip()
-            
+        if start==4:
+           pyxel.cls(0)
+           pyxel.text(280,160,'TO BE CONTINUED',7)
+           pyxel.text(20,0,'en construction',7)
+           '''
+           arena(XX,YY)
+           pyxel.bltm(XX,YY,1,0,0,6400,3200,15)
+           JoueurDraw()
+           WarioApparition()
+           '''
+
 
 App()
 
