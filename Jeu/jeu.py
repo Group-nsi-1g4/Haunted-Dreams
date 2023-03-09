@@ -134,111 +134,139 @@ def DebugMenu():
 
 #Le début des 100 lignes de l'enfer
 
-
-Preset1={'Bot1Map':{'Type':'Zombie','x':320,'y':80,'PV':2}                                      #réglage Salle 2
+def PresetBot(n):
+    if n==0:
+        Preset={'Bot1Map':{'Type':'Zombie','x':320,'y':80,'PV':2}                                      #réglage Preset 1
        ,'Bot2Map':{'Type':'Phantom','x':120,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Phantom','x':540,'y':160,'PV':1}
        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
-
-Preset2={'Bot1Map':{'Type':'Phantom','x':320,'y':160,'PV':1}                                      #réglage Salle 2
+    elif n==1:
+        Preset={'Bot1Map':{'Type':'Phantom','x':320,'y':160,'PV':1}                                      #réglage Preset 2
        ,'Bot2Map':{'Type':'Mage','x':80,'y':60,'PV':1}
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':1}
        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
-
-Preset3={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':6}                                      #réglage Salle 2
+    elif n==2:
+        Preset={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':6}                                      #réglage Preset 3
        ,'Bot2Map':{'Type':'Golem','x':160,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Golem','x':480,'y':160,'PV':1}
        ,'Bot4Map':{'Type':'Phantom','x':140,'y':40,'PV':1}}
-
-Preset4={'Bot1Map':{'Type':'Zombie','x':60,'y':280,'PV':3}                                      #réglage Salle 2
+    elif n==3:
+        Preset={'Bot1Map':{'Type':'Zombie','x':60,'y':280,'PV':3}                                      #réglage Preset 4
        ,'Bot2Map':{'Type':'Phantom','x':320,'y':300,'PV':1}
        ,'Bot3Map':{'Type':'Zombie','x':320,'y':160,'PV':3}
        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
-
-Preset5={'Bot1Map':{'Type':'Arabe','x':460,'y':160,'PV':1}                                      #réglage Salle 2
+    elif n==4 :
+        Preset={'Bot1Map':{'Type':'Arabe','x':460,'y':160,'PV':1}                                      #réglage Preset 5
        ,'Bot2Map':{'Type':'Zombie','x':280,'y':120,'PV':2}
        ,'Bot3Map':{'Type':'Zombie','x':360,'y':120,'PV':3}
        ,'Bot4Map':{'Type':'Golem','x':320,'y':160,'PV':1}}
-
-Preset6={'Bot1Map':{'Type':'Phantom','x':260,'y':200,'PV':1}                                      #réglage Salle 2
+    elif n==5:
+        Preset={'Bot1Map':{'Type':'Phantom','x':260,'y':200,'PV':1}                                      #réglage Preset 6
        ,'Bot2Map':{'Type':'Phantom','x':380,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Mage','x':460,'y':40,'PV':1}
        ,'Bot4Map':{'Type':'Phantom','x':320,'y':100,'PV':1}}
-
-Preset7={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':1}                                      #réglage Salle 2
+    elif n==6:
+        Preset={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':1}                                      #réglage Preset 7
        ,'Bot2Map':{'Type':'Mage','x':320,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Zombie','x':240,'y':80,'PV':4}
        ,'Bot4Map':{'Type':'Zombie','x':460,'y':240,'PV':1}}
-
-Preset8={'Bot1Map':{'Type':'Golem','x':300,'y':260,'PV':1}                                      #réglage Salle 2
+    else:
+        Preset={'Bot1Map':{'Type':'Golem','x':300,'y':260,'PV':1}                                      #réglage Preset 8
        ,'Bot2Map':{'Type':'Zombie','x':40,'y':160,'PV':4}
        ,'Bot3Map':{'Type':'Phantom','x':280,'y':120,'PV':1}
        ,'Bot4Map':{'Type':'Phantom','x':360,'y':200,'PV':1}}
+    return Preset.copy()
 
-Preset=[Preset1.copy(),Preset2.copy(),Preset3.copy(),Preset4.copy(),Preset5.copy(),Preset6.copy(),Preset7.copy(),Preset8.copy()]
-
-ObjetPreset=[None,'Boisson','Jambon','Batterie','Coeur',None]
+ObjetPreset=[None,'Boisson','Jambon','Batterie','Coeur',None]                                          #Liste des objets possible avec 2 none pour avoir ~1/3 des salle sans objets
 
 MapMob=[]
 
+def LevierAlea(List):
+    Lev1=random.randint(0,16)                                                                      #On choisit une salle par levier qui sont différentes
+    Lev2=random.randint(0,16)
+    while Lev1==Lev2:
+        Lev2=random.randint(0,16)
+    Lev3=random.randint(0,16)
+    while Lev1==Lev3 or Lev2==Lev3:
+        Lev3=random.randint(0,16)
+                                                                                                    #on remplace l'objet de la salle par les levier correspondants      
+    List[Lev1]['ObjetMap']={'Type':'Levier1', 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    List[Lev2]['ObjetMap']={'Type':'Levier2', 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    List[Lev3]['ObjetMap']={'Type':'Levier3', 'x':random.randint(40,600), 'y':random.randint(40,280)}
+    
+def CauchemareAlea(List):
+    Chauchemare=random.randint(0,16)                                                                 #On choisit un salle aleatoire parmis toutes pour mettre le cauchemare seul
+    
+    List[Chauchemare]['Bot1Map']={'Type':'Cauchemare', 'x':320, 'y':160 ,'PV':random.randint(15,30)}
+    List[Chauchemare]['Bot2Map']={'Type':'Mort','x':320,'y':160,'PV':1}
+    List[Chauchemare]['Bot3Map']={'Type':'Mort','x':320,'y':160,'PV':1}
+    List[Chauchemare]['Bot4Map']={'Type':'Mort','x':320,'y':160,'PV':1}
+
 def SalleAlea():
     global MapMob
-    Salle2={}
-    Salle2=Preset[random.randint(0,7)].copy()
+    Salle2=dict()                                                                                                         #Salle2 qui est mise en Preset et donner un objet ou non
+    Salle2=PresetBot(random.randint(0,7))
     Salle2['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle3={}
-    Salle3=Preset[random.randint(0,7)].copy()
+    Salle3={}                                                                                                             #Salle3 qui est mise en Preset et donner un objet ou non
+    Salle3=PresetBot(random.randint(0,7))
     Salle3['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle4={}
-    Salle4=Preset[random.randint(0,7)].copy()
+    Salle4={}                                                                                                             #Salle4 qui est mise en Preset et donner un objet ou non
+    Salle4=PresetBot(random.randint(0,7))
     Salle4['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle5={}
-    Salle5=Preset[random.randint(0,7)].copy()
+    Salle5={}                                                                                                             #Salle5 qui est mise en Preset et donner un objet ou non
+    Salle5=PresetBot(random.randint(0,7))
     Salle5['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle6={}
-    Salle6=Preset[random.randint(0,7)].copy()
+    Salle6={}                                                                                                             #Salle6 qui est mise en Preset et donner un objet ou non
+    Salle6=PresetBot(random.randint(0,7))
     Salle6['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle7={}
-    Salle7=Preset[random.randint(0,7)].copy()
+    Salle7={}                                                                                                             #Salle7 qui est mise en Preset et donner un objet ou non
+    Salle7=PresetBot(random.randint(0,7))
     Salle7['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle8={}
-    Salle8=Preset[random.randint(0,7)].copy()
+    Salle8={}                                                                                                             #Salle8 qui est mise en Preset et donner un objet ou non
+    Salle8=PresetBot(random.randint(0,7))
     Salle8['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle9={}
-    Salle9=Preset[random.randint(0,7)].copy()
+    Salle9={}                                                                                                             #Salle9 qui est mise en Preset et donner un objet ou non
+    Salle9=PresetBot(random.randint(0,7))
     Salle9['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle10={}
-    Salle10=Preset[random.randint(0,7)].copy()
+    Salle10={}                                                                                                              #Salle10 qui est mise en Preset et donner un objet ou non                                                                                                            #Salle2 qui est mise en Preset et donner un objet ou non
+    Salle10=PresetBot(random.randint(0,7))
     Salle10['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle11={}
-    Salle11=Preset[random.randint(0,7)].copy()
+    Salle11={}                                                                                                             #Salle11 qui est mise en Preset et donner un objet ou non
+    Salle11=PresetBot(random.randint(0,7))
     Salle11['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle12={}
-    Salle12=Preset[random.randint(0,7)].copy()
+    Salle12={}                                                                                                             #Salle12 qui est mise en Preset et donner un objet ou non
+    Salle12=PresetBot(random.randint(0,7))
     Salle12['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle13={}
-    Salle13=Preset[random.randint(0,7)].copy()
+    Salle13={}                                                                                                             #Salle13 qui est mise en Preset et donner un objet ou non
+    Salle13=PresetBot(random.randint(0,7))
     Salle13['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle14={}
-    Salle14=Preset[random.randint(0,7)].copy()
+    Salle14={}                                                                                                             #Salle14 qui est mise en Preset et donner un objet ou non
+    Salle14=PresetBot(random.randint(0,7))
     Salle14['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle15={}
-    Salle15=Preset[random.randint(0,7)].copy()
+    Salle15={}                                                                                                             #Salle15 qui est mise en Preset et donner un objet ou non
+    Salle15=PresetBot(random.randint(0,7))
     Salle15['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle16={}
-    Salle16=Preset[random.randint(0,7)].copy()
+    Salle16={}                                                                                                             #Salle16 qui est mise en Preset et donner un objet ou non
+    Salle16=PresetBot(random.randint(0,7))
     Salle16['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle17={}
-    Salle17=Preset[random.randint(0,7)].copy()
+    Salle17={}                                                                                                             #Salle17 qui est mise en Preset et donner un objet ou non
+    Salle17=PresetBot(random.randint(0,7))
     Salle17['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle18={}
-    Salle18=Preset[random.randint(0,7)].copy()
+    Salle18={}                                                                                                             #Salle18 qui est mise en Preset et donner un objet ou non
+    Salle18=PresetBot(random.randint(0,7))
     Salle18['ObjetMap']={'Type':ObjetPreset[random.randint(0,5)], 'x':random.randint(40,600), 'y':random.randint(40,280)}
-    Salle1={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':1}
+    
+    ListMapSalle=[Salle2,Salle3,Salle4,Salle5,Salle6,Salle7,Salle8,Salle9,Salle10,Salle11,Salle12,Salle13,Salle14,Salle15,Salle16,Salle17,Salle18]
+                                                                                                                           #On mets les salles dans une liste pour le cauchemare et les leviers
+    LevierAlea(ListMapSalle)
+    CauchemareAlea(ListMapSalle)
+    
+    Salle1={'Bot1Map':{'Type':'Mort','x':0,'y':0,'PV':1}                                                                 #La salle de départ n'a rien (repos)
            ,'Bot2Map':{'Type':'Mort','x':0,'y':0,'PV':1}
            ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':1}
            ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}
-           ,'ObjetMap':{'Type':None,'x':0,'y':0}}
+           ,'ObjetMap':{'Type':None,'x':320,'y':160}}
+    
     MapMob= [[Salle1 ,Salle2 ,Salle3 ,None]                                             #La map entière (avec les dictionnaires des salles correspondante (None = Pas de bots ou d'objet))
         ,[Salle4 ,Salle5 ,Salle6 ,None]
         ,[Salle7 ,Salle8 ,Salle9 ,None]
@@ -247,7 +275,7 @@ def SalleAlea():
         ,[Salle16,Salle17,Salle18,None]
         ,[None   ,None   ,None   ,None]]
 
-SalleAlea()
+SalleAlea()                                                                            #On fait l'alea des salles avant pour creer les dico salles
 
 def MapMobSet():                                                                                  #Fonction mettant les preset des Mobs des Maps
     global MapMob,Lock
@@ -287,17 +315,17 @@ def Salle(m):                                                                   
 global Lock
 Lock=0
 
-def SPorte():
+def SPorte():                                                                      #Si la salle ou le joueur se situe a que des golem ou morts, on ourvre les grilles.
     global Lock
     if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
-        if Bot1['Type']=='Mort' or Bot1['Type']=='Golem' and Bot2['Type']=='Mort' or Bot2['Type']=='Golem' and Bot3['Type']=='Mort' or Bot3['Type']=='Golem' and Bot4['Type']=='Mort' or Bot4['Type']=='Golem' :
+        if (Bot1['Type']=='Mort' or Bot1['Type']=='Golem') and (Bot2['Type']=='Mort' or Bot2['Type']=='Golem') and (Bot3['Type']=='Mort' or Bot3['Type']=='Golem') and (Bot4['Type']=='Mort' or Bot4['Type']=='Golem') :
             Lock=0
         else :
             Lock=1
 
     
 
-    if Lock==1:
+    if Lock==1:                                                                  #les grilles dont autour des sorties de salles.
         pyxel.blt(277,314,0,176,72,85,42,3) 
         pyxel.blt(602,125,0,176,128,48,80,3)
         pyxel.blt(277,-10,0,176,72,85,42,3)
@@ -342,10 +370,10 @@ Player['Frappe']['Frame']=0
 Player['Frappe']['x']=0
 Player['Frappe']['y']=0
 Player['Frappe']['Sens']='Droite'
-Player['Objet']=None
-Player['Energisante']=0
+Player['Objet']=None                                                             #L'objet que le joueur a (None pour aucun)
+Player['Energisante']=0                                                          #Le temps de l'effet de la boisson energisante
 global XYmap
-XYmap=MapMob[Player['Ymob']][Player['Xmob']]
+XYmap=MapMob[Player['Ymob']][Player['Xmob']]                                     #L'emplacement du joueur sur la carte en liste double.
 
 
     
@@ -483,14 +511,14 @@ global Devmode
 Devmode=0
 
 def GODmode():
-    global Devmode,Jour,debug
+    global Devmode,Jour,debug                                                          #Si on appuis sur "FIN", le devmode est actif : Jour, PV infini, Stalina infini.
     if pyxel.btnp(pyxel.KEY_END):
         Devmode=Devmode+1
         Jour=Jour+1
     if Devmode>1 or Devmode<0:
         Devmode=0
     if Devmode==1:    
-        Player['Stamina']=100
+        Player['Energisante']=10
         Player['PV']=6
         debug=1
 
@@ -576,42 +604,42 @@ def Attaque():                                                                  
         Player['StamRegen']=0.5
     
 def drawObjets():
-    if Player['Objet']=='Jambon':
+    if Player['Objet']=='Jambon':                                                            #montre le Jambon dans les mains du joueur du bon coté
         if Player['Sens']=='Droite':
             pyxel.blt(Player['x'],Player['y']-8,2,0,40,16,16,1)
         else:
             pyxel.blt(Player['x']-16,Player['y']-8,2,0,40,-16,16,1)
     if JambonBot['Type']=='Lancer':
         pyxel.blt(JambonBot['x'],JambonBot['y'],2,0,40,16,16,1)
-    if Player['Objet']=='Boisson':
+    if Player['Objet']=='Boisson':                                                            #montre la Boisson dans les mains du joueur du bon coté
         if Player['Sens']=='Droite':
             pyxel.blt(Player['x'],Player['y']-8,2,0,56,16,16,1)
         else:
             pyxel.blt(Player['x']-16,Player['y']-8,2,0,56,-16,16,1)
 
 def Objets():
-    if Player['Objet']=='Jambon':
+    if Player['Objet']=='Jambon':                                                              #Si le joueur a du Jambon dans la main : il peut le lancer
         if pyxel.btnp(pyxel.KEY_R) :
             JambonBot['Type']='Lancer'
-            JambonBot['x']=Player['x']-8
+            JambonBot['x']=Player['x']-8                                                             #Le jambon lancer prend les coos du joueur
             JambonBot['y']=Player['y']-8
-            Player['Objet']=None
-    if JambonBot['Type']=='Lancer':
-        if Bot1['Type']=='Arabe':
+            Player['Objet']=None                                                                     #Le joueur n'a plus de jambon (parce que il l'a lancer)
+    if JambonBot['Type']=='Lancer':                                                            #Si il y a un Jambon lancer: Il regarde si un des bots est arabe
+        if Bot1['Type']=='Arabe':                                                                    #Si il trouve il fonce sur lui.
             JambonLancer(JambonBot,Bot1)
-        if Bot2['Type']=='Arabe':
+        elif Bot2['Type']=='Arabe':
             JambonLancer(JambonBot,Bot2)
-        if Bot3['Type']=='Arabe':
+        elif Bot3['Type']=='Arabe':
             JambonLancer(JambonBot,Bot3)
-        else:
+        elif Bot4['Type']=='Arabe':
             JambonLancer(JambonBot,Bot4)
-    if Player['Objet']=='Boisson':
+    if Player['Objet']=='Boisson':                                                            #Si le joueur a une boisson dans la main : il peut la boire
         if pyxel.btnp(pyxel.KEY_R) :
-            Player['Energisante']=10
-    if Player['Energisante']>0 and pyxel.frame_count%20==0:
+            Player['Energisante']=10                                                                     #Sela boost le joueur pendant un sertain temps
+            Player['Objet']=None
+    if Player['Energisante']>0 and pyxel.frame_count%20==0:                                    #Dès que le timer commence : il n'a plus d'objets et son boost est un temps ou il a stamina infinie.
         Player['Energisante']-=1
         Player['Stamina']=100
-        Player['Objet']=None
         
 
 
@@ -626,7 +654,7 @@ def Objets():
 global StunCauch
 StunCauch=0
 
-Bot1=dict()
+Bot1=dict()                                                       #le dico du bot1 avec son type et ses PVs
 Bot1['x']=0                                                                    #Indique l'emplacement X du Bot1
 Bot1['y']=0                                                                    #Indique l'emplacement Y du Bot1
 Bot1['Sens']='Droite'
@@ -636,7 +664,7 @@ Bot1['Vitesse']=0
 Bot1['PV']=0
 
 
-Bot2=dict()
+Bot2=dict()                                                       #le dico du bot2 avec son type et ses PVs
 Bot2['x']=0                                                                    #Indique l'emplacement X du Bot2
 Bot2['y']=0                                                                    #Indique l'emplacement Y du Bot2
 Bot2['Sens']='Droite'
@@ -645,7 +673,7 @@ Bot2['Type']='Mort'
 Bot2['Vitesse']=0
 Bot2['PV']=0
 
-Bot3=dict()
+Bot3=dict()                                                       #le dico du bot3 avec son type et ses PVs
 Bot3['x']=0                                                                    #Indique l'emplacement X du Bot3
 Bot3['y']=0                                                                    #Indique l'emplacement Y du Bot3
 Bot3['Sens']='Droite'
@@ -654,7 +682,7 @@ Bot3['Type']='Mort'
 Bot3['Vitesse']=0
 Bot3['PV']=0
 
-Bot4=dict()
+Bot4=dict()                                                       #le dico du bot4 avec son type et ses PVs
 Bot4['x']=0                                                                    #Indique l'emplacement X du Bot4
 Bot4['y']=0                                                                    #Indique l'emplacement Y du Bot4
 Bot4['Sens']='Droite'
@@ -664,7 +692,7 @@ Bot4['Vitesse']=0
 Bot4['PV']=0
 
 
-bouledefeu=dict()
+bouledefeu=dict()                                                  #le dico boule de feu avec si elle est lancer ou non et les bases
 bouledefeu['x']=0
 bouledefeu['y']=0
 bouledefeu['Type']='Mort'
@@ -705,7 +733,7 @@ def types(entity):                                                              
         wario()
     if entity['PV']<=0:
         entity['Type']='Mort'
-        if entity==Bot1:
+        if entity==Bot1:                                                        #Dès qu'un bots a 0 PVs, il meurt dans le jeu et la map (pour ne pas qu'il revienne d'entre les morts)
             XYmap['Bot1Map']['Type']='Mort'
         if entity==Bot2:
             XYmap['Bot2Map']['Type']='Mort'
@@ -731,7 +759,7 @@ def boulelance(entity):
                     bouledefeu['Type']='Mort'
         if Player['Frappe']['Status']==True and Player['Frappe']['x']<bouledefeu['x']+30 and Player['Frappe']['x']>bouledefeu['x']-30 and Player['Frappe']['y']>bouledefeu['y']-32 and Player['Frappe']['y']<bouledefeu['y']+32:
             bouledefeu['Type']='Mort'                                                #Si le joueur réussit a tapper la boule de feu : elle disparait
-            pyxel.play(0,4)
+            pyxel.play(1,4)
     
 def Phantom(entity):                                                            #Fait les caractéristique du Fantome
     entity['Vitesse']=random.uniform(0.05,1)+random.uniform(0.05,1)             #Sa vitesse change aléatoirement entre 0.1 et 2.
@@ -743,7 +771,7 @@ def Phantom(entity):                                                            
         pyxel.play(0,1)
     if Detectflash(entity):                                                     #Si le Phantom se fait Flash : Il devient Mort
         entity['PV']=0
-        pyxel.play(0,3)
+        pyxel.play(1,3)
         
 def Zombie(entity):                                                             #Fait les caractéristique du Zombie
     if Player['Frappe']['Status']==False:
@@ -757,8 +785,8 @@ def Zombie(entity):                                                             
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         if entity['Vitesse']==1.25:
             entity['PV']-=1
-        entity['Vitesse']=-2                                                   #Si le zombie se fait tapper : il recul
-        pyxel.play(0,1)
+            pyxel.play(1,1)
+        entity['Vitesse']=-2                                                   #Si le zombie se fait tapper : il recul et prend un dégat
         
 
 
@@ -773,8 +801,9 @@ def Arabe(entity):                                                             #
         Player['Immune']=5
         entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Comme un Kamikaze)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
-        entity['Vitesse']=-0.75                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
-        pyxel.play(0,1)
+        if entity['Vitesse']==1.75:
+            pyxel.play(1,1)
+        entity['Vitesse']=-0.75                                                 #Si l'arabe se fait tapper : il recul (moins loin que le zombie)
         
 
 def Mage(entity):                                                                 #Fait les caractéristique de Mage
@@ -787,7 +816,7 @@ def Mage(entity):                                                               
         Player['Immune']=3
         pyxel.play(0,1)
     if pyxel.frame_count % 50 == 0 :                                            #Toutes les 2.5 secondes, le mage fait :
-        pyxel.play(0,7)                                                             #un son
+        pyxel.play(1,7)                                                             #un son
         bouledefeu['Type']='Lancer'                                                 #lance la boule de feu
         bouledefeu['vx']=(Player['x']-entity['x'])*0.05                             #trouve la direction pour la boule de feu
         bouledefeu['vy']=(Player['y']-entity['y'])*0.05
@@ -795,7 +824,7 @@ def Mage(entity):                                                               
         bouledefeu['x']=entity['x']
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         entity['PV']=0                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
-        pyxel.play(0,1)
+        pyxel.play(1,1)
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
     entity['Vitesse']=0.05                                                        #Il est immobile
@@ -829,7 +858,7 @@ def wario():                                                                    
     if pyxel.frame_count%36==18:
         pyxel.play(1,9)
     if pyxel.frame_count % 50 == 0 :
-        pyxel.play(0,7)
+        pyxel.play(1,7)
         bouledefeu['Type']='Lancer'
         bouledefeu['vx']=(Player['x']-Bot1['x'])*0.075
         bouledefeu['vy']=(Player['y']-Bot1['y'])*0.075
@@ -953,16 +982,16 @@ def flash():                                                                    
 
 
 
-global Porte
+global Porte                                                                    #Variable porte comptant le nombre de levier actifs
 Porte=0
 
-Objet=dict()
+Objet=dict()                                                                   #L'objet de la salle avec type et les bases
 Objet['x']=0
 Objet['y']=0
 Objet['Type']=None
 Objet['Rammasser']=0
 
-JambonBot=dict()
+JambonBot=dict()                                                               #Le jambon a tête chercheuse
 JambonBot['x']=0
 JambonBot['y']=0
 JambonBot['Type']='Mort'
@@ -990,7 +1019,7 @@ def typesobj(objet):                                                            
         Coeur(objet)
 
 def Levier(objet,nb):
-    if nb==1:
+    if nb==1:                                                                  #Si l'objet est un levier : lequelles ? 1 ,2 ou 3 ?
         LevierDraw(objet,Levier1)
         LevierConfig(objet,Levier1)
     elif nb==2:
@@ -1014,10 +1043,10 @@ def LevierConfig(objet,L):                                            #Permet l'
                 Porte+=1
 
 def Jambon(objet):
-    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du jambon : il peut le ramasser 
             if pyxel.btnp(pyxel.KEY_E) :
                 Objet['Type']=Player['Objet']
-                XYmap['ObjetMap']['Type']=Player['Objet']
+                XYmap['ObjetMap']['Type']=Player['Objet']                                 #Le jambon rammassé prend la place de l'objet dans les mains du joueur (si il en a un)
                 Player['Objet']='Jambon'
     pyxel.blt(objet['x'],objet['y'],2,0,40,16,16,1)
 
@@ -1037,25 +1066,24 @@ def JambonLancer(Jambon,Arabe):
         pyxel.play(0,3)
         
 def Coeur(objet):
-    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
-            if pyxel.btnp(pyxel.KEY_E) :
-                objet['Type']=None
-                XYmap['ObjetMap']['Type']=None
-                Player['PV']+=2
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du coueur, il le prend automatiquement
+            objet['Type']=None
+            XYmap['ObjetMap']['Type']=None
+            Player['PV']+=2
     pyxel.blt(objet['x'],objet['y'],2,16,56,16,16,1)
 
 def Pile(objet):
-    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret de la pile : il peut la prendre 
             if pyxel.btnp(pyxel.KEY_E) :
                 objet['Type']=None
-                XYmap['ObjetMap']['Type']=None
+                XYmap['ObjetMap']['Type']=None                                                           #elle rend toute la batterie et ne prend pas la place de la main
                 Player['Batterie']=100
     pyxel.blt(objet['x'],objet['y'],2,16,40,16,16,1)
     
 def Boisson(objet):
-    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du levier 
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret de la boisson
             if pyxel.btnp(pyxel.KEY_E) :
-                Objet['Type']=Player['Objet']
+                Objet['Type']=Player['Objet']                                                           #comme le jambon il prend la place de la main
                 XYmap['ObjetMap']['Type']=Player['Objet']
                 Player['Objet']='Boisson'
     pyxel.blt(objet['x'],objet['y'],2,0,56,16,16,1)
@@ -1075,11 +1103,11 @@ def Portail():                                                                #p
             pyxel.blt(288,17,0,96,207,60,8,3)
         if Porte==3:
             if Player['x']>270 and Player['y']>30 and  Player['x']<370 and Player['y']<65:
-                if pyxel.btnp(pyxel.KEY_E):
+                if pyxel.btnp(pyxel.KEY_E):                            #il peut ouvrir la porte si elle est deverouillée (3 leviers actifs)
                     Porte=4
         if Porte==4:
             pyxel.blt(288,-6,0,176,0,64,70,3)   
-        if pyxel.btnp(pyxel.KEY_RCTRL):
+        if pyxel.btnp(pyxel.KEY_RCTRL):    #debug
             Porte=Porte+1
         if Porte>4:
             Porte=0
@@ -1102,7 +1130,7 @@ def Boss_Fight():#a continuer
 '''
 global Choix
 Choix=1
-def EarlyAcces(x,y):
+def EarlyAcces(x,y):                   #Chaque lettres du mot 'Early Acces' au milieu de l'écran
         pyxel.blt(x,y,2,160,112,32,32,1)
         pyxel.blt(x+33*1,y,2,32,112,32,32,1)
         pyxel.blt(x+33*2,y,2,128,176,32,32,1)
@@ -1115,7 +1143,7 @@ def EarlyAcces(x,y):
         pyxel.blt(x+33*9,y,2,160,112,32,32,1)
         pyxel.blt(x+33*10,y,2,162,176,32,32,1)
 
-def HauntedDreams(x,y):
+def HauntedDreams(x,y):                   #Chaque lettres du mot 'HauntedDreams' au milieu de l'écran
         pyxel.blt(x,y,2,32,144,32,32,1)
         pyxel.blt(x+33*1,y,2,32,112,32,32,1)
         pyxel.blt(x+33*2,y,2,224,176,32,32,1)
@@ -1131,7 +1159,7 @@ def HauntedDreams(x,y):
         pyxel.blt(x+33*12,y,2,192,144,32,32,1)
         pyxel.blt(x+33*13,y,2,162,176,32,32,1)
 
-def AnimHD():
+def AnimHD():                                      #Un effet de fondu avec les 4 bleu puis le noir.
     if pyxel.frame_count >137 and pyxel.frame_count <140:
         pyxel.pal(7,6)
     if pyxel.frame_count >140 and pyxel.frame_count <143:
@@ -1143,7 +1171,7 @@ def AnimHD():
     if pyxel.frame_count >149 and pyxel.frame_count <170:
         pyxel.pal(7,0)
 
-def AnimWario():
+def AnimWario():                                         #animation de Wario rigolant avec des tempo précis
     if pyxel.frame_count >170 and pyxel.frame_count <185 :
         pyxel.pal()
         pyxel.blt(280,145,1,32,128,64,64,11)
@@ -1168,32 +1196,32 @@ def AnimWario():
 
 ###################
 def Introduction():
-    global start
+    global start                                 #Dès le demarrage du jeu
     
     if pyxel.frame_count <60 :
         EarlyAcces(160,160)
-        pyxel.text(0,0,'Version 0.73',14)
+        pyxel.text(0,0,'Version 0.75',14)             #on montre la version
     
     if pyxel.frame_count >90  and pyxel.frame_count <170:
         pyxel.cls(0)
-        HauntedDreams(90,160)
+        HauntedDreams(90,160)                        #on fait l'animation du nom du jeu
     
     AnimHD()
     AnimWario()
     if pyxel.frame_count >260:
         pyxel.cls(0)
-        pyxel.pal(7,0)
+        pyxel.pal(7,0)                               #puis le fondu avec Wario et on met le menu principale
         start=0
 
     if pyxel.btnp(pyxel.KEY_SPACE) :
         start=0
-        pyxel.pal()
+        pyxel.pal()                           #le menu s'affiche instantanémant si on appuis sur ESPACE
 
 
 def menuanime():
     if pyxel.frame_count >270  and pyxel.frame_count <275:
        pyxel.pal(7,1)
-    if pyxel.frame_count >275  and pyxel.frame_count <280:
+    if pyxel.frame_count >275  and pyxel.frame_count <280: #fondu inversé (commence du noir et fini blanc)
         pyxel.pal(7,5)
     if pyxel.frame_count >280  and pyxel.frame_count <285:
         pyxel.pal(7,12)
@@ -1202,7 +1230,7 @@ def menuanime():
     if pyxel.frame_count >290: 
         pyxel.pal() 
 
-def startgame(y):
+def startgame(y):                      #chaque lettres du 'Start Game' precisement placés au milieu de l'écran
     pyxel.blt(150,y,2,162,176,32,32,1)
     pyxel.blt(183,y,2,192,176,32,32,1)
     pyxel.blt(216,y,2,32,112,32,32,1)
@@ -1212,7 +1240,7 @@ def startgame(y):
     pyxel.blt(364,y,2,32,112,32,32,1)
     pyxel.blt(397,y,2,192,144,32,32,1)
     pyxel.blt(430,y,2,160,112,32,32,1)
-def options(y):
+def options(y):                      #chaque lettres du 'Options' precisement placés au milieu de l'écran (en dessous de Start)
     pyxel.blt(200,y,2,32,176,32,32,1)
     pyxel.blt(233,y,2,64,176,32,32,1)
     pyxel.blt(266,y,2,192,176,32,32,1)
@@ -1220,7 +1248,7 @@ def options(y):
     pyxel.blt(312,y,2,32,176,32,32,1)
     pyxel.blt(345,y,2,224,144,32,32,1)
     pyxel.blt(378,y,2,162,176,32,32,1)
-def quitgames(y):
+def quitgames(y):                      #chaque lettres du 'Quit Game' precisement placés au milieu de l'écran (tout en bas)
     pyxel.blt(170,y,2,96,176,32,32,1)
     pyxel.blt(203,y,2,224,176,32,32,1)
     pyxel.blt(226,y,2,64,144,32,32,1)
@@ -1237,21 +1265,21 @@ def quitgames(y):
 
 
 ###################
-def menu():                                                                     #Le Menu principale dans sont intégralité : Jouer et Quitter pour l'instant
+def menu():                                                                     #Le Menu principale dans sont intégralité
     global start,Choix
     ys=75
     yo=150
-    yq=225
+    yq=225                                         #hauteur de chaqu'un des mots (Start, Options et Quit)
     pyxel.cls(0)
 
     startgame(ys)
     options(yo)
-    quitgames(yq)
+    quitgames(yq)                                  #On place les mots
       
     if pyxel.btnp(pyxel.KEY_DOWN):
         Choix=Choix+1
     if pyxel.btnp(pyxel.KEY_UP):
-        Choix=Choix-1
+        Choix=Choix-1                              #On peut choisir le bouton avec les flèches directionnelles
     if Choix>=4:
         Choix=1
     if Choix<=0:
@@ -1260,35 +1288,35 @@ def menu():                                                                     
         
         if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
             pyxel.blt(130,ys+7,2,0,8,16,16,0)
-            pyxel.blt(465,ys+7,2,16,8,16,16,0)   
+            pyxel.blt(465,ys+7,2,16,8,16,16,0)      #Le choix selectionné a des flèches clignotantes
         else :
             pass
         
         if pyxel.btn(pyxel.KEY_RETURN): 
-            start=1
+            start=1                                  #On appuis sur entree quand le curseur est sur Start : les PV sont mis et on commence le jeu
             Player['PV']=6
-
+            
     if Choix==2:
         
         if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
             pyxel.blt(180,yo+7,2,0,8,16,16,0)
-            pyxel.blt(418,yo+7,2,16,8,16,16,0)
+            pyxel.blt(418,yo+7,2,16,8,16,16,0)      #Le choix selectionné a des flèches clignotantes
         else :
             pass
 
         if pyxel.btn(pyxel.KEY_RETURN): 
-            start=-1
+            start=-1                                  #On appuis sur entree quand le curseur est sur Options : on entre dans les options
     
     if Choix==3:
         
         if pyxel.frame_count % 30 >= 0 and pyxel.frame_count % 30 < (30//4) :
             pyxel.blt(150,yq+7,2,0,8,16,16,0)
-            pyxel.blt(445,yq+7,2,16,8,16,16,0)
+            pyxel.blt(445,yq+7,2,16,8,16,16,0)      #Le choix selectionné a des flèches clignotantes
         else :
             pass
 
         if pyxel.btn(pyxel.KEY_RETURN): 
-            pyxel.quit()
+            pyxel.quit()                                  #On appuis sur entree quand le curseur est sur Quit : on quitte le jeu
 
 
 
@@ -1301,11 +1329,11 @@ def menu():                                                                     
 global option
 option=1
 ##############
-def option():
+def optionMenu():
     global start,option
     pyxel.cls(0)
     if option==1:
-        PageI()
+        PageI()                                #Il y a 4 page avec des paragraphe de textes : chaque page est passable comme un livre
     if option==2:
         PageII()
     if option==3:
@@ -1314,13 +1342,16 @@ def option():
         PageIIII()
     if pyxel.btnp(pyxel.KEY_RIGHT) :
         if option!=4 :
-            option+=1
-        else : start=0
+            option+=1                            #Quand on va a droite, on passe a la page de droite jusqu'a la fin qui te remet au menu
+        else :
+            start=0
+            option=1
     if pyxel.btnp(pyxel.KEY_LEFT):
-        if option!=1 :
+        if option!=1 :                           #idem pour l'inverse vers la gauche
             option-=1
         else :
             start=0
+            option=1
 
 
 
@@ -1328,7 +1359,7 @@ def option():
 
 
 
-def PageI():
+def PageI():                              #paragraphe de la page 1 sur les Touches
     pyxel.text(275,20,str("Touches"),4)
     pyxel.text(10,50,str("Pour Accelerer Appuyer sur shift gauche"),3)
     pyxel.text(10,70,"zqsd et fleche directionnel pour se deplacer ",3)
@@ -1343,7 +1374,7 @@ def PageI():
 
 
 
-def PageII():
+def PageII():                              #paragraphe de la page 2 sur les Ennemis (on importe des images et met un fond pour mieux voir les bots)
     pyxel.text(275,20,str("Mobs"),4)
     pyxel.circ(26,66,18,1)
     pyxel.text(50,50,str("Le Zombie :"),4)
@@ -1391,7 +1422,7 @@ def PageII():
 
 
 
-def PageIII():
+def PageIII():                              #paragraphe de la page 3 sur les Mechaniques (On importe aussi les images et on choisit des coos precises pour tous caler)
     pyxel.text(275,20,str("Mechaniques"),4)
     pyxel.text(10,50,str("L'Endurence :"),4)
     pyxel.blt(10,60,2,96,0,32,16,1)
@@ -1440,18 +1471,18 @@ def PageIII():
 
 
 
-def PageIIII():
+def PageIIII():                              #paragraphe de la page 4 sur le but du jeu (le plus important)
     pyxel.text(275,20,str("But du jeu"),4)
     pyxel.text(100,50,str("Vous vous réveiller dans une pièce plongé dans le noir et n'avez sur vous qu'un couteau et une lampe torche"),3)
     pyxel.text(100,70,str("Pour sortir d'ici et retrouvez la lumière vous devrez explorer les différente salle de cette endroit peux acceuillant "),3)
    
     pyxel.text(25,80,str("Les Leviers"),4)
     pyxel.blt(20,90,0,128,72,32,16,14)
-    pyxel.text(65,100,str("Les Leviers sont disperce aleatoirement Ouvre le portail. s'acctive avec E "),3)
+    pyxel.text(65,100,str("Les Leviers sont disperce aleatoirement ils ouvrent le portail si assez sont actives. s'acctive avec E "),3)
     
     pyxel.text(25,150,str("La Porte"),4)
     pyxel.blt(10,160,0,96,120,64,48,3)
-    pyxel.text(80,180.,str("Porte situez a la primeiere Salle, se Deverouille en activant 3 Levier, s'ouvre avec E.  "),3)
+    pyxel.text(80,180.,str("Porte situez a la primeiere Salle, se Deverouille en activant 3 Leviers, s'ouvre avec E.  "),3)
     
 
     pyxel.text(25,240,str("Les Grilles "),4)
@@ -1465,7 +1496,7 @@ def PageIIII():
 
 '''INTERFACE A CHANGER '''
 def mort():
-    global start                                                                                 #test de mort 
+    global start                                                                                 #Si les PV sont inferieur a 1 : on arrete le jeu et on affiche l'écran de mort 
     if Player ['PV']<1:
         Player['PV']=0    
         start=2
@@ -1476,14 +1507,35 @@ def mort():
         if pyxel.btn(pyxel.KEY_SPACE):
             start=0
 
-
-
-
-
-
-
-
-
+def recommence():                                                         #Le jeu restart completement (WIP (Les Ymap et Xmap sont le prblm))
+    global debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol 
+    debug=0
+    Lock=0
+    Porte=0
+    Jour=0
+    Devmode=0
+    Coup=0
+    Player=dict()
+    Player['y']=100                                                                 #Indique l'emplacement Y du Joueur
+    Player['x']=100                                                                 #Indique l'emplacement X du Joueur
+    Player['Stamina']=100                                                           #Indique la Stamina du Joueur  
+    Player['Batterie']= 100                                                        
+    Player['Fatigue']= 0
+    Player['PV']=6
+    Player['Xmob']=0
+    Player['Ymob']=0
+    Player['Objet']=None                                                             #L'objet que le joueur a (None pour aucun)
+    Player['Energisante']=0                                                          #Le temps de l'effet de la boisson energisante
+    Levier1={'Status':0}
+    Levier2={'Status':0}
+    Levier3={'Status':0}      
+    Xmap=0
+    Ymap=0
+    XResol=640
+    YResol=350
+    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
+    MapMobSet()
+    SalleAlea()
 
 '''
                                                                                 ░█████╗░██████╗░██████╗░
@@ -1493,9 +1545,9 @@ def mort():
                                                                                 ██║░░██║██║░░░░░██║░░░░░
                                                                                 ╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░
 
-'''
+'''  
 def JoueurComplet():
-    global XYmap
+    global XYmap                                      #regroupement de toutes les fonctions permettant au joueur de fonctionner
     XYmap=MapMob[Player['Ymob']][Player['Xmob']]
     deplacement()
     Course()
@@ -1503,9 +1555,10 @@ def JoueurComplet():
     PointdeVie()
     Immunite()
     Attaque()
+    Objets()
 
 def BotDraw():
-    types(Bot1)
+    types(Bot1)                                     #Active les types des 4 bots
     types(Bot2)
     types(Bot3)
     types(Bot4)
@@ -1552,7 +1605,7 @@ class App:
 
         
         elif start==-1:                                                         #Si on est dans le menu des options
-            option()
+            optionMenu()
         
         if start==1:                                                            #Si la partie est démarrée, lancement des fonction ci dessous:
             XYmap=MapMob[Player['Ymob']][Player['Xmob']]
@@ -1563,8 +1616,9 @@ class App:
         
         
         
-        elif start==2:
+        elif start==2:                                      #le game over : si on appui sur espace : on recommence (a finir)
             if pyxel.btn(pyxel.KEY_SPACE):
+                recommence()
                 start=0
         
         GODmode()
@@ -1618,14 +1672,14 @@ class App:
             
             
             
-            if Bot1['Type']=='Cauchemare':
+            if Bot1['Type']=='Cauchemare':                                 #dès que le cauchemare est présent : on montre un timer.
                 pyxel.text(Player['x']+65,Player['y']-75,str(Bot1['PV']//3),7)
         
             DebugMenu()
         if start==0 or start==-1 or Jour==1:
             pyxel.clip()
         if start==4:
-           pyxel.cls(0)
+           pyxel.cls(0)                                                #si le joueur s'échape, ont mets un placeholder
            pyxel.text(280,160,'TO BE CONTINUED',7)
            pyxel.text(20,0,'en construction',7)
            '''
