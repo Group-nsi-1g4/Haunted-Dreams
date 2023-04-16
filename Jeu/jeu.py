@@ -6,27 +6,33 @@ import pyxel,random                                                             
                                                                                 ██║░░░██║░░░██║░░░██║██║░░░░░██║░░░██║░░░██╔══██║██║██╔══██╗██╔══╝░░░╚═══██╗
                                                                                 ╚██████╔╝░░░██║░░░██║███████╗██║░░░██║░░░██║░░██║██║██║░░██║███████╗██████╔╝
                                                                                 ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░
-                                                                                Autres fonctions multitâches ou détectant des choses.
+                                                                                
 Bonjour, le jeu n'est pas dutout fini, il reste énormement de chose a faire, ceci dit c'est une demo fonctionnel de ce que nous immaginions pour le jeu.
-merci d'être indulgent 
-et désoler du manque de commenttaire (spécifiquement le menu)
-beaucoup de méchanique de jeu reste a programmer et a aprofondire (exemple : les attaque du joueur)
+merci d'être indulgent
+
+beaucoup de méchanique de jeu reste a programmer et a aprofondire
 si vous avez des suggestions elle sont les bien venu
 on espère que le jeu vous plaira  
 
 coeur <3
-touche actuelle  (peuvent être changé):
-zqsd et flèche directionnel pour se déplacer 
-F pour le flash (rester appuyer, consomme beaucoup de batterie et permet d'impacter certain mob )
-shift pour courrir (consomme de l'endurence)
-tab pour retourner au menu
-ALT pour frapper (consomme de l'endurence)
 
-touche devlopeur
-debut/home pour mettre le jour 
-W pour mettre la vie au max 
-et plein d'autre a découvrir ! 
+touches non expliquées :
 
+flèches directionnels pour bouger dans le menu.
+Entrée pouir selectionner dans le menu
+Tab pour mettre pause
+
+touches developpeurs :
+"Fin" pour activer le debug mode (invincible / jour / autre indications en haut a gauche)
+"Home" pour activer le mode jour (pas besoin de flashlight et consomme peut de puissance de votre pc)
+
+Si vous regardez le code :
+
+J'ai essayer de faire fonctionner la musique sans réussir et j'ai abandonner pour le moment.
+Ce code est environ 1000 ligne écrite à la main / un peut de copier/collage (sans utiliser les outils comme Chat GPT ou autre aide)
+                                                                                ^ (On est toujours mineurs quand même)
+                                                                                
+Si vous voulez modifier le code, bonne chance. Vous en aurez besoin.
 '''
 global start                                                                    #Met en place La variable Global start 
 start=10                                                                         #Indique si le jeu est commencer ou non (0 pour non)
@@ -37,6 +43,18 @@ XResol=640
 YResol=350
 MapMob=[[random.randint(1,3),random.randint(1,3),random.randint(1,3)] for _ in range(6)]
 MapMob[0][0]=0
+
+
+def MusiqueJouer(interger):
+    pyxel.stop()
+    if Player['Music']==True:
+        pyxel.playm(interger,0,True)
+    
+def Alterne(obj):
+    if obj == True:
+        return False
+    elif obj == False :
+        return True
 
 def Detectdeplace() :                                                               #Fonction retournant True si le joueur se déplace
     if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):                         #Test en Bas
@@ -49,7 +67,7 @@ def Detectdeplace() :                                                           
         return True
 
 def Detectflash(entity):                                                            #Detecte si le joueur flash proche d'une entité quelquonque
-    if pyxel.btn(pyxel.KEY_F) and (Player['x']<entity['x']+48 and Player['x']>entity['x']-48 and Player['y']>entity['y']-48 and Player['y']<entity['y']+48) and Player['Batterie']>=5 :
+    if pyxel.btn(pyxel.KEY_F) and (Player['x']<entity['x']+48 and Player['x']>entity['x']-48 and Player['y']>entity['y']-48 and Player['y']<entity['y']+48) and Player['Batterie']>=5 and Player['Frappe']['Status']==False:
         return True
     
 def FrameDep(entity,s):                                                             #Fonction permetant de changer les Sprites d'entités par intervale de s ticks 
@@ -274,8 +292,10 @@ def SalleAlea():
         ,[Salle13,Salle14,Salle15,None]
         ,[Salle16,Salle17,Salle18,None]
         ,[None   ,None   ,None   ,None]]
+    
+    return MapMob
 
-SalleAlea()                                                                            #On fait l'alea des salles avant pour creer les dico salles
+MapMob=SalleAlea()                                                                            #On fait l'alea des salles avant pour creer les dico salles
 
 def MapMobSet():                                                                                  #Fonction mettant les preset des Mobs des Maps
     global MapMob,Lock
@@ -372,6 +392,7 @@ Player['Frappe']['y']=0
 Player['Frappe']['Sens']='Droite'
 Player['Objet']=None                                                             #L'objet que le joueur a (None pour aucun)
 Player['Energisante']=0                                                          #Le temps de l'effet de la boisson energisante
+Player['Music']=True
 global XYmap
 XYmap=MapMob[Player['Ymob']][Player['Xmob']]                                     #L'emplacement du joueur sur la carte en liste double.
 
@@ -750,7 +771,7 @@ def boulelance(entity):
         bouledefeu['x']+=bouledefeu['vx']                                            #Elle va a une direction donnée
         bouledefeu['y']+=bouledefeu['vy']
         if Player['x']<bouledefeu['x']+14 and Player['x']>bouledefeu['x']-14 and Player['y']>bouledefeu['y']-14 and Player['y']<bouledefeu['y']+14 and Player['Immune'] == 0:
-            pyxel.play(0,10)                                                         #Infliger des dégats si le joueur est proche (+ Son)
+            pyxel.play(2,10)                                                         #Infliger des dégats si le joueur est proche (+ Son)
             Player['PV']-=1
             bouledefeu['Type']='Mort'                                                   #Meur si elle réussit a faire des dégats
         for i in range(int(bouledefeu['x']),int(bouledefeu['vx'])):
@@ -759,7 +780,7 @@ def boulelance(entity):
                     bouledefeu['Type']='Mort'
         if Player['Frappe']['Status']==True and Player['Frappe']['x']<bouledefeu['x']+30 and Player['Frappe']['x']>bouledefeu['x']-30 and Player['Frappe']['y']>bouledefeu['y']-32 and Player['Frappe']['y']<bouledefeu['y']+32:
             bouledefeu['Type']='Mort'                                                #Si le joueur réussit a tapper la boule de feu : elle disparait
-            pyxel.play(1,4)
+            pyxel.play(1,9)
     
 def Phantom(entity):                                                            #Fait les caractéristique du Fantome
     entity['Vitesse']=random.uniform(0.05,1)+random.uniform(0.05,1)             #Sa vitesse change aléatoirement entre 0.1 et 2.
@@ -768,7 +789,7 @@ def Phantom(entity):                                                            
     if Player['x']<entity['x']+30 and Player['x']>entity['x']-30 and Player['y']>entity['y']-30 and Player['y']<entity['y']+30 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
         Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
-        pyxel.play(0,1)
+        pyxel.play(2,1)
     if Detectflash(entity):                                                     #Si le Phantom se fait Flash : Il devient Mort
         entity['PV']=0
         pyxel.play(1,3)
@@ -781,11 +802,11 @@ def Zombie(entity):                                                             
     if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
         Player['PV']-=1                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
-        pyxel.play(0,1)
+        pyxel.play(2,1)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         if entity['Vitesse']==1.25:
             entity['PV']-=1
-            pyxel.play(1,1)
+            pyxel.play(1,9)
         entity['Vitesse']=-2                                                   #Si le zombie se fait tapper : il recul et prend un dégat
         
 
@@ -796,13 +817,13 @@ def Arabe(entity):                                                             #
     Draw32px(entity,96,0,1,1)
     bot(entity)
     if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28:
-        pyxel.play(0,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
+        pyxel.play(2,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['PV']-=4
         Player['Immune']=5
         entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Comme un Kamikaze)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         if entity['Vitesse']==1.75:
-            pyxel.play(1,1)
+            pyxel.play(1,9)
         entity['Vitesse']=-0.75                                                 #Si l'arabe se fait tapper : il recul (moins loin que le zombie)
         
 
@@ -814,7 +835,7 @@ def Mage(entity):                                                               
     if Player['x']<entity['x']+26 and Player['x']>entity['x']-26 and Player['y']>entity['y']-28 and Player['y']<entity['y']+28 and pyxel.frame_count %5==0 and Player['Immune'] == 0:
         Player['PV']-=2                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['Immune']=3
-        pyxel.play(0,1)
+        pyxel.play(2,1)
     if pyxel.frame_count % 50 == 0 :                                            #Toutes les 2.5 secondes, le mage fait :
         pyxel.play(1,7)                                                             #un son
         bouledefeu['Type']='Lancer'                                                 #lance la boule de feu
@@ -824,7 +845,7 @@ def Mage(entity):                                                               
         bouledefeu['x']=entity['x']
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         entity['PV']=0                                                 #Si le zombie se fait tapper : il recul (moins loin que le zombie)
-        pyxel.play(1,1)
+        pyxel.play(1,9)
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
     entity['Vitesse']=0.05                                                        #Il est immobile
@@ -832,7 +853,7 @@ def Golem(entity):                                                             #
     bot(entity)
     if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
         Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
-        pyxel.play(0,4)
+        pyxel.play(2,4)
     
 def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
     global StunCauch
@@ -844,7 +865,7 @@ def Cauchemare(entity):                                                         
         StunCauch-=1                                                            #Timer du Stun qui baisse
     if Player['x']<entity['x']+16 and Player['x']>entity['x']-16 and Player['y']>entity['y']-25 and Player['y']<entity['y']+25 and pyxel.frame_count %2==0:
         Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
-        pyxel.play(0,5)
+        pyxel.play(2,5)
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
     if pyxel.frame_count%20==0:
@@ -868,7 +889,7 @@ def wario():                                                                    
     bot(Bot1)
     if Player['x']<Bot1['x']+36 and Player['x']>Bot1['x']-36 and Player['y']>Bot1['y']-40 and Player['y']<Bot1['y']+40 and pyxel.frame_count %20==0:
         Player['PV']-=1.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
-        pyxel.play(0,4)
+        pyxel.play(2,4)
 
 
 global Xsouris,Ysouris                                                          #Met en place la variable Global Xsouris, Ysouris 
@@ -968,7 +989,7 @@ def LampeLum():
 
 
 def flash():                                                                    #Flash les enemie 
-        if pyxel.btn(pyxel.KEY_F):                                              #si la touche F est pressé alors 
+        if pyxel.btn(pyxel.KEY_F) and Player['Batterie']>5 and Player['Frappe']['Status']==False:                                              #si la touche F est pressé alors 
                 Player['Batterie']=Player['Batterie']-0.7                       #enlève 20% de batterie par seconde de flash 
                 Player['Vue']=Player['Vue']+5                                   #augmente la vue par 5 a chaque seconde 
                 if Player['Vue']>85:                                            #permet de ne pas dépassé le clip 
@@ -1041,6 +1062,7 @@ def LevierConfig(objet,L):                                            #Permet l'
             if pyxel.btnp(pyxel.KEY_E) and L['Status']!=1:
                 L['Status']=1                                           #active le levier
                 Porte+=1
+                pyxel.play(2,12)
 
 def Jambon(objet):
     if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du jambon : il peut le ramasser 
@@ -1063,7 +1085,7 @@ def JambonLancer(Jambon,Arabe):
     if Arabe['x']<Jambon['x']+28 and Arabe['x']>Jambon['x']-28 and Arabe['y']>Jambon['y']-28 and Arabe['y']<Jambon['y']+28:
         Jambon['Type']='Mort'
         Arabe['PV']=0
-        pyxel.play(0,3)
+        pyxel.play(2,3)
         
 def Coeur(objet):
     if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du coueur, il le prend automatiquement
@@ -1175,17 +1197,20 @@ def AnimWario():                                         #animation de Wario rig
     if pyxel.frame_count >170 and pyxel.frame_count <185 :
         pyxel.pal()
         pyxel.blt(280,145,1,32,128,64,64,11)
-    if pyxel.frame_count >185  and pyxel.frame_count <195:
+    if pyxel.frame_count >185  and pyxel.frame_count <188:
+        pyxel.play(1,11)
         pyxel.blt(280,145,1,32,192,64,64,11)
     if pyxel.frame_count >195  and pyxel.frame_count <205:
         pyxel.cls(0)
         pyxel.blt(280,145,1,32,128,64,64,11)
-    if pyxel.frame_count >205  and pyxel.frame_count <215:
+    if pyxel.frame_count >205  and pyxel.frame_count <208:
+        pyxel.play(1,11)
         pyxel.blt(280,145,1,32,192,64,64,11)
     if pyxel.frame_count >215  and pyxel.frame_count <225:
         pyxel.cls(0)
         pyxel.blt(280,145,1,32,128,64,64,11)
-    if pyxel.frame_count >225  and pyxel.frame_count <245:
+    if pyxel.frame_count >225 and pyxel.frame_count <228:
+        pyxel.play(1,13)
         pyxel.blt(280,145,1,32,192,64,64,11)
     if pyxel.frame_count >245  and pyxel.frame_count <300:
         pyxel.cls(0)
@@ -1208,14 +1233,16 @@ def Introduction():
     
     AnimHD()
     AnimWario()
-    if pyxel.frame_count >260:
+    if pyxel.frame_count >260 and pyxel.frame_count <280:
+        start=0
         pyxel.cls(0)
         pyxel.pal(7,0)                               #puis le fondu avec Wario et on met le menu principale
-        start=0
+        MusiqueJouer(1)
 
     if pyxel.btnp(pyxel.KEY_SPACE) :
         start=0
         pyxel.pal()                           #le menu s'affiche instantanémant si on appuis sur ESPACE
+        MusiqueJouer(1)
 
 
 def menuanime():
@@ -1295,6 +1322,8 @@ def menu():                                                                     
         if pyxel.btn(pyxel.KEY_RETURN): 
             start=1                                  #On appuis sur entree quand le curseur est sur Start : les PV sont mis et on commence le jeu
             Player['PV']=6
+            #MusiqueJouer(0)
+            pyxel.stop(0)
             
     if Choix==2:
         
@@ -1498,17 +1527,16 @@ def PageIIII():                              #paragraphe de la page 4 sur le but
 def mort():
     global start                                                                                 #Si les PV sont inferieur a 1 : on arrete le jeu et on affiche l'écran de mort 
     if Player ['PV']<1:
+        pyxel.stop()
         Player['PV']=0    
         start=2
         pyxel.clip()
         pyxel.cls(0)
         pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
         pyxel.text(280,150,'Vous êtes mort ! ',7)
-        if pyxel.btn(pyxel.KEY_SPACE):
-            start=0
 
-def recommence():                                                         #Le jeu restart completement (WIP (Les Ymap et Xmap sont le prblm))
-    global debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol 
+def recommence():                                                         #Le jeu restart completement (WIP (SalleAlea et qlqch sont le prblm))
+    global start,debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol,MapMob,Player
     debug=0
     Lock=0
     Porte=0
@@ -1518,14 +1546,28 @@ def recommence():                                                         #Le je
     Player=dict()
     Player['y']=100                                                                 #Indique l'emplacement Y du Joueur
     Player['x']=100                                                                 #Indique l'emplacement X du Joueur
-    Player['Stamina']=100                                                           #Indique la Stamina du Joueur  
-    Player['Batterie']= 100                                                        
+    Player['Vitesse']=2                                                             #Indique la Vitesse du Joueur
+    Player['Stamina']=100                                                           #Indique la Stamina du Joueur
+    Player['Vue']=2                                                                 #Indique la Visibilité du Joueur
+    Player['Sens']='Droite'                                                         #Indique Le sens du Joueur
+    Player['Batterie']= 100                                                         #Indique la Batterie du Joueur
+    Player['Frame']= 0
     Player['Fatigue']= 0
+    Player['StamDepletion']=1                                                       #rapidité a laquel la stamina se perd (course uniquement)
+    Player['StamRegen']=0.5                                                         #rapidité a laquel la stamina se regenere
     Player['PV']=6
+    Player['Immune']=0
     Player['Xmob']=0
     Player['Ymob']=0
+    Player['Frappe']=dict()                                                         #Tous Player['frappe'][qqose] sont pour l'attaque du joueur.
+    Player['Frappe']['Status']=False
+    Player['Frappe']['Frame']=0
+    Player['Frappe']['x']=0
+    Player['Frappe']['y']=0
+    Player['Frappe']['Sens']='Droite'
     Player['Objet']=None                                                             #L'objet que le joueur a (None pour aucun)
     Player['Energisante']=0                                                          #Le temps de l'effet de la boisson energisante
+    Player['Music']=True
     Levier1={'Status':0}
     Levier2={'Status':0}
     Levier3={'Status':0}      
@@ -1533,9 +1575,11 @@ def recommence():                                                         #Le je
     Ymap=0
     XResol=640
     YResol=350
-    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
     MapMobSet()
-    SalleAlea()
+    MapMob=SalleAlea()
+    XYmap=MapMob[Player['Ymob']][Player['Xmob']]
+    MusiqueJouer(1)
+    start=0
 
 '''
                                                                                 ░█████╗░██████╗░██████╗░
@@ -1556,6 +1600,8 @@ def JoueurComplet():
     Immunite()
     Attaque()
     Objets()
+    if pyxel.btnp(pyxel.KEY_M):
+        Alterne(Player['Music'])
 
 def BotDraw():
     types(Bot1)                                     #Active les types des 4 bots
@@ -1592,7 +1638,8 @@ class App:
         '''
 
         global start,Jour,XYmap
-        if pyxel.btnp(pyxel.KEY_TAB):                                           #Stop le jeu et ouvre le Menu quand on appui sur tab
+        if pyxel.btnp(pyxel.KEY_TAB):                                         #Stop le jeu et ouvre le Menu quand on appui sur tab
+            MusiqueJouer(1)
             start=0
         if pyxel.btnp(pyxel.KEY_U):                                           #Stop le jeu et ouvre le Menu Mort quand on appui sur 
             start=2    
@@ -1619,7 +1666,6 @@ class App:
         elif start==2:                                      #le game over : si on appui sur espace : on recommence (a finir)
             if pyxel.btn(pyxel.KEY_SPACE):
                 recommence()
-                start=0
         
         GODmode()
         if pyxel.btnp(pyxel.KEY_HOME):
@@ -1682,6 +1728,7 @@ class App:
            pyxel.cls(0)                                                #si le joueur s'échape, ont mets un placeholder
            pyxel.text(280,160,'TO BE CONTINUED',7)
            pyxel.text(20,0,'en construction',7)
+           pyxel.stop()
            '''
            arena(XX,YY)
            pyxel.bltm(XX,YY,1,0,0,6400,3200,15)
