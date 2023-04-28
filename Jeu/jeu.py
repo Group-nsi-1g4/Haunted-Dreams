@@ -1425,9 +1425,9 @@ def PageII():                              #paragraphe de la page 2 sur les Enne
     pyxel.circ(42,286,34,2)
     pyxel.text(82,250,str("Le Golem :"),4)
     pyxel.blt(10,254,1,192,128,64,64,4)
-    pyxel.text(92,260,str("Se mastodonte Bbouge extremement lentement mais vous bloque votre chemin."),3)
-    pyxel.text(92,270,str("Il ne peut pas etre tuer mais vous attaque si vous vous raprochez trop de lui."),3)
-    pyxel.text(92,280,str("Si un mastodonte est present, il y a surement quelquechose de cacher deriere lui."),3)
+    pyxel.text(92,260,str("Ennemi Très Rare : Se mastodonte est seul dans une salle si vous le rencontrer."),3)
+    pyxel.text(92,270,str("Vous devriez l'esquiver quand il commence a charger sur vous."),3)
+    pyxel.text(92,280,str("Il est invulnerable a vos coups mais peut mourir en chargeant trop de fois dans un mur."),3)
     
     
     pyxel.text(5,340,"<--   Les Touches",7)
