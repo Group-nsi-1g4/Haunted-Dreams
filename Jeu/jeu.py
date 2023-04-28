@@ -7,32 +7,7 @@ import pyxel,random                                                             
                                                                                 ╚██████╔╝░░░██║░░░██║███████╗██║░░░██║░░░██║░░██║██║██║░░██║███████╗██████╔╝
                                                                                 ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░
                                                                                 
-Bonjour, le jeu n'est pas dutout fini, il reste énormement de chose a faire, ceci dit c'est une demo fonctionnel de ce que nous immaginions pour le jeu.
-merci d'être indulgent
-
-beaucoup de méchanique de jeu reste a programmer et a aprofondire
-si vous avez des suggestions elle sont les bien venu
-on espère que le jeu vous plaira  
-
-coeur <3
-
-touches non expliquées :
-
-flèches directionnels pour bouger dans le menu.
-Entrée pouir selectionner dans le menu
-Tab pour mettre pause
-
-touches developpeurs :
-"Fin" pour activer le debug mode (invincible / jour / autre indications en haut a gauche)
-"Home" pour activer le mode jour (pas besoin de flashlight et consomme peut de puissance de votre pc)
-
-Si vous regardez le code :
-
-J'ai essayer de faire fonctionner la musique sans réussir et j'ai abandonner pour le moment.
-Ce code est environ 1000 ligne écrite à la main / un peut de copier/collage (sans utiliser les outils comme Chat GPT ou autre aide)
-                                                                                ^ (On est toujours mineurs quand même)
-                                                                                
-Si vous voulez modifier le code, bonne chance. Vous en aurez besoin.
+FAIRE LE COMMENTAIRE
 '''
 global start                                                                    #Met en place La variable Global start 
 start=10                                                                         #Indique si le jeu est commencer ou non (0 pour non)
@@ -397,7 +372,7 @@ global XYmap
 XYmap=MapMob[Player['Ymob']][Player['Xmob']]                                     #L'emplacement du joueur sur la carte en liste double.
 
 
-    
+#Pas beau mais fonctionel     
 def deplacement():                                                              #Déplacement Du joueur                                                                             
     if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=1 and pyxel.pget(Player['x']-8,Player['y']+14)!=1 and pyxel.pget(Player['x']-7,Player['y']+14)!=1 and pyxel.pget(Player['x']-6,Player['y']+14)!=1 and pyxel.pget(Player['x']-5,Player['y']+14)!=1 and pyxel.pget(Player['x']-4,Player['y']+14)!=1 and pyxel.pget(Player['x']-3,Player['y']+14)!=1 and pyxel.pget(Player['x']-2,Player['y']+14)!=1 and pyxel.pget(Player['x']-1,Player['y']+14)!=1 and pyxel.pget(Player['x']+9,Player['y']+14)!=1 and pyxel.pget(Player['x']+8,Player['y']+14)!=1 and pyxel.pget(Player['x']+7,Player['y']+14)!=1 and pyxel.pget(Player['x']+6,Player['y']+14)!=1 and pyxel.pget(Player['x']+5,Player['y']+14)!=1 and pyxel.pget(Player['x'],Player['y']+14)!=1 and pyxel.pget(Player['x']+1,Player['y']+14)!=1 and pyxel.pget(Player['x']+2,Player['y']+14)!=1 and pyxel.pget(Player['x']+3,Player['y']+14)!=1 and pyxel.pget(Player['x']+4,Player['y']+14)!=1):   
         if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
@@ -420,44 +395,7 @@ def deplacement():                                                              
         FrameDep(Player,24)
     else:                                                                                   #Sinon : il ne bouge pas
         Player['Frame']= 0
-''' Ne marche pas doit être continuer (jsp dutout pk ça marche pas je vais tout casser )
-def HitboxJBas():
-    for X in range(-10,9):
-        pyxel.pset(Player['x']+X,Player['y']+13,7)
-        p=pyxel.pset(Player['x']+X,Player['y']+14,7)
-        if p==1:
-            return True
-        else: 
-            return False
 
-def HitboxJHaut():
-    for X in range(-10,9):
-        pyxel.pset(Player['x']+X,Player['y']-15,7)
-        p=pyxel.pget(Player['x']+X,Player['y']-16)
-        if p==1:
-            return True
-        else: 
-            return False 
-
-def HitboxJDroite():
-    for X in range(-16,14):
-        pyxel.pset(Player['x']+X,Player['y']+9,7)
-        p=pyxel.pget(Player['x']+X,Player['y']+14)
-        if p==1:
-            return True
-        else: 
-            return False 
-
-def HitboxJGauche():
-    for X in range(-16,14):
-        pyxel.pset(Player['x']+X,Player['y']-10,7)
-        p=pyxel.pget(Player['x']+X,Player['y']+14)
-        if p==1:
-            return True
-        else: 
-            return False 
-
-'''
 def PointdeVie():
     global Devmode
     if Player['PV']>=6:                                                   #Montre 3 coueur pour 6 pv
@@ -479,12 +417,17 @@ def PointdeVie():
         pyxel.blt(Player['x']-75,Player['y']-80,2,128,16,6,16,1)
 
 
-    if pyxel.btn(pyxel.KEY_W):                                            #Touche de test
-        Player['PV']=6
+    if pyxel.btnp(pyxel.KEY_W):                                            #Touche de test
+        Player['PV']-=1
     if Player['PV']>1 and Player['PV']<6:                                 #le joueur regenere ses PVs petit a petit
         Player['PV']=Player['PV']+0.001
     
-
+    
+    
+def Regen():
+    global Lock
+    if Lock==0 and Player['PV']<6:
+        Player['PV']+=0.04
 
 def Course():                                                                   #Course et système de Stamina
     if pyxel.btn(pyxel.KEY_SHIFT) and Player['Fatigue'] != 1:                      #Le joueur cours si il n'est pas fatiguer
@@ -854,17 +797,18 @@ def Golem(entity):                                                             #
     if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
         Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
         pyxel.play(2,4)
-    
+global peur 
+peur=0
 def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
-    global StunCauch
-    entity['Vitesse']=3.25
+    global StunCauch, peur
+    entity['Vitesse']=3
     Draw32px(entity,160,0,1,1)
     if StunCauch<=0:                                                            #Si le Cauchemare n'est pas Stun (Flash) alors il peut bouger
         bot(entity)
     elif pyxel.frame_count%10==0:
         StunCauch-=1                                                            #Timer du Stun qui baisse
     if Player['x']<entity['x']+16 and Player['x']>entity['x']-16 and Player['y']>entity['y']-25 and Player['y']<entity['y']+25 and pyxel.frame_count %2==0:
-        Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
+        peur+=1                                                       #Infliger des dégats si le joueur est proche (+ Son)
         pyxel.play(2,5)
     if Detectflash(entity) and pyxel.frame_count%5==0 :
         StunCauch+=3                                                            #Si le Cauchemare se fait Flash : Il devient immobile pendant 3x secondes
@@ -937,8 +881,8 @@ def Batterie():                                                                 
         Player['Vue']=20
     if pyxel.btn(pyxel.KEY_B):                                                  #Test de la batterie avec des touches
         Player['Batterie']=100
-    if pyxel.btn(pyxel.KEY_N):
-        Player['Batterie']=Player['Batterie']-10
+   
+        
   
 
 def BatterieAffichage():                                                                 #Diminue la luminosité de la lampe torche en fonction de la Batterie
@@ -1524,25 +1468,101 @@ def PageIIII():                              #paragraphe de la page 4 sur le but
 
 
 '''INTERFACE A CHANGER '''
+global Mort,timer1
+Mort=False
+timer1=0
 def mort():
-    global start                                                                                 #Si les PV sont inferieur a 1 : on arrete le jeu et on affiche l'écran de mort 
+    global start,Mort,timer1                                                                                 #Si les PV sont inferieur a 1 : on arrete le jeu et on affiche l'écran de mort 
     if Player ['PV']<1:
-        pyxel.stop()
+        Mort=True
+    if Mort==True:
         Player['PV']=0    
         start=2
+        timer1+=1
+        pyxel.clip()
+        
+        
+def morttext():
+    pyxel.text(230,300,'Appui sur espace pour retourner au menu',7)
+
+    
+    pyxel.blt(181,150,2,224,112,32,32,1)
+    pyxel.blt(214,150,2,32,112,32,32,1)
+    pyxel.blt(247,150,2,192,144,32,32,1)
+    pyxel.blt(280,150,2,160,112,32,32,1)
+
+    pyxel.blt(346,150,2,32,176,32,32,1)
+    pyxel.blt(379,150,2,32,208,32,32,1)
+    pyxel.blt(412,150,2,160,112,32,32,1)
+    pyxel.blt(445,150,2,128,176,32,32,1)
+
+
+def mortanime():
+    global timer1
+    Y=0
+    pyxel.cls(0)
+    if timer1 >0  and timer1 <5:
+       pyxel.pal(7,1)
+    if timer1 >5  and timer1 <10: #fondu inversé (commence du noir et fini blanc)
+        pyxel.pal(7,5)
+    if timer1 >10  and timer1 <15:
+        pyxel.pal(7,12)
+    if timer1 >15  and timer1 <20:
+        pyxel.pal(7,6)
+    if timer1 >25 and timer1 <30: 
+        pyxel.pal()
+    if timer1 >30 and timer1 <35:
+        pyxel.blt(280,Y+(timer1),1,32,128,64,64,11)
+    if timer1 >35 and timer1 <40:
+        pyxel.blt(280,Y+(timer1),1,32,192,64,64,11)
+    if timer1 >40 and timer1 <45:
+        pyxel.play(1,11)
+        pyxel.blt(280,Y+(timer1),1,32,128,64,64,11)
+    
+    if timer1 >60 and timer1 <65:
+        pyxel.blt(50,Y+(timer1),1,32,128,64,64,11)
+    if timer1 >65 and timer1 <70:
+        pyxel.blt(50,Y+(timer1),1,32,192,64,64,11)
+    if timer1 >70 and timer1 <75:
+        pyxel.play(1,11)
+        pyxel.blt(50,Y+(timer1),1,32,128,64,64,11)
+    
+    if timer1 >95 and timer1 <100:
+        pyxel.blt(500,Y+(timer1),1,32,128,64,64,11)
+    if timer1 >100 and timer1 <105:
+        pyxel.blt(500,Y+(timer1),1,32,192,64,64,11)
+    if timer1 >105 and timer1 <110:
+        pyxel.play(1,13)
+        pyxel.blt(500,Y+(timer1),1,32,128,64,64,11)
+
+def screamer():
+    global peur, start
+    f=6
+    if pyxel.btn(pyxel.KEY_N):
+        peur+=1
+    if peur>3:
+        start=69
         pyxel.clip()
         pyxel.cls(0)
-        pyxel.text(230,200,'Appui sur espace pour retourner au menu',7)
-        pyxel.text(280,150,'Vous êtes mort ! ',7)
+        if pyxel.frame_count % f >= 0 and pyxel.frame_count % f < (f//4):
+            pyxel.cls(7)
+            pyxel.bltm(0,0,2,0,0,640,360,1)
+            pyxel.play(2,5)
+        else:
+            pyxel.cls(0)
+            pyxel.bltm(0,0,2,0,0,640,360,1)
+            pyxel.play(2,5)
 
 def recommence():                                                         #Le jeu restart completement (WIP (SalleAlea et qlqch sont le prblm))
-    global start,debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol,MapMob,Player
+    global start,debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol,MapMob,Player,peur,Mort
     debug=0
     Lock=0
     Porte=0
     Jour=0
     Devmode=0
     Coup=0
+    peur=0
+    Mort=False
     Player=dict()
     Player['y']=100                                                                 #Indique l'emplacement Y du Joueur
     Player['x']=100                                                                 #Indique l'emplacement X du Joueur
@@ -1600,6 +1620,8 @@ def JoueurComplet():
     Immunite()
     Attaque()
     Objets()
+    Regen()
+    screamer()
     if pyxel.btnp(pyxel.KEY_M):
         Alterne(Player['Music'])
 
@@ -1661,11 +1683,18 @@ class App:
             BougeMap()
         
         
-        
-        
-        elif start==2:                                      #le game over : si on appui sur espace : on recommence (a finir)
+        elif start==69:
+            screamer()
             if pyxel.btn(pyxel.KEY_SPACE):
                 recommence()
+        
+        elif start==2 :                                   #le game over : si on appui sur espace : on recommence (a finir)
+            mort()
+            mortanime()
+            morttext()
+            if pyxel.btn(pyxel.KEY_SPACE):
+                recommence()
+        
         
         GODmode()
         if pyxel.btnp(pyxel.KEY_HOME):
@@ -1729,49 +1758,6 @@ class App:
            pyxel.text(280,160,'TO BE CONTINUED',7)
            pyxel.text(20,0,'en construction',7)
            pyxel.stop()
-           '''
-           arena(XX,YY)
-           pyxel.bltm(XX,YY,1,0,0,6400,3200,15)
-           JoueurDraw()
-           WarioApparition()
-           '''
 
 
 App()
-
-'''
-code de côté au cas ou 
-            XX=(str('X : '))+(str(Xsouris))                                     
-            YY=(str('Y : '))+(str(Ysouris))                                     
-            pyxel.text(Player['x']-75,Player['y']-75,XX,2)                                                #Position Y du curseur en haut a droite de l'écran                                   
-            pyxel.text(Player['x']-45,Player['y']-75,YY,2)                                               #Position Y du curseur en haut a droite de l'écran 
-
-    if (pyxel.pget(Player['x']-10,Player['y']+14)!=1 and pyxel.pget(Player['x']-9,Player['y']+14)!=5 and pyxel.pget(Player['x']-8,Player['y']+14)!=5 and pyxel.pget(Player['x']-7,Player['y']+14)!=5 and pyxel.pget(Player['x']-6,Player['y']+14)!=5 and pyxel.pget(Player['x']-5,Player['y']+14)!=5 and pyxel.pget(Player['x']-4,Player['y']+14)!=5 and pyxel.pget(Player['x']-3,Player['y']+14)!=5 and pyxel.pget(Player['x']-2,Player['y']+14)!=5 and pyxel.pget(Player['x']-1,Player['y']+14)!=5 and pyxel.pget(Player['x']+9,Player['y']+14)!=5 and pyxel.pget(Player['x']+8,Player['y']+14)!=5 and pyxel.pget(Player['x']+7,Player['y']+14)!=5 and pyxel.pget(Player['x']+6,Player['y']+14)!=5 and pyxel.pget(Player['x']+5,Player['y']+14)!=5 and pyxel.pget(Player['x'],Player['y']+14)!=5 and pyxel.pget(Player['x']+1,Player['y']+14)!=5 and pyxel.pget(Player['x']+2,Player['y']+14)!=5 and pyxel.pget(Player['x']+3,Player['y']+14)!=5 and pyxel.pget(Player['x']+4,Player['y']+14)!=5):
-     if (pyxel.pget(Player['x']-10,Player['y']-16)!=5 , 1 and pyxel.pget(Player['x']-9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-4,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']-1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+9,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+8,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+7,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+6,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+5,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x'],Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+1,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+2,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+3,Player['y']-16)!=5 ,1 and pyxel.pget(Player['x']+4,Player['y']-16)!=5 ,1): 
-
-    for i in range (-10,9):
-        p=pyxel.pget(Player['x']+i,Player['y']-16,)
-        if p==4:
-            
-            return True
-    for i in range (-10,9):
-        p=pyxel.pget(Player['x']+i,Player['y']+14)
-        if p==4:
-            
-            return True
-             
-    for y in range(-16,14):
-            p=pyxel.pget(Player['x']-10,Player['y']+y,)
-            if p==4:
-                
-                return True 
-    for y in range(-16,14):
-            p=pyxel.pget(Player['x']+9,Player['y']+y,)
-            if p==4:
-                
-                return True
-    return False  
-
-
-
-'''
