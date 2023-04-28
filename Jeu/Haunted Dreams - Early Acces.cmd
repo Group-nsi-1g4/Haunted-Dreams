@@ -1,1 +1,1 @@
-python media.pyxres run
+python jeu.py run
