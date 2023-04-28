@@ -113,6 +113,11 @@ def DebugMenu():
         pyxel.text(0,90,str('YPointeur:')+str(pyxel.mouse_y),7)
         pyxel.text(0,100,str('BOT:')+str(Bot1['Type'])+str(Bot2['Type'])+str(Bot3['Type'])+str(Bot4['Type']),7)
         pyxel.pset(pyxel.mouse_x,pyxel.mouse_y,7)
+        if pyxel.btnp(pyxel.KEY_K) :
+            Bot1['Type']='Mort'
+            Bot2['Type']='Mort'
+            Bot3['Type']='Mort'
+            Bot4['Type']='Mort'
 
 
         
@@ -125,7 +130,7 @@ def DebugMenu():
                                                                                     ╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚══════╝╚═════╝░
 '''
 
-#Le début des 100 lignes de l'enfer
+#Le début des 200 lignes de l'enfer
 
 def PresetBot(n):
     if n==0:
@@ -139,10 +144,10 @@ def PresetBot(n):
        ,'Bot3Map':{'Type':'Mort','x':0,'y':0,'PV':1}
        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
     elif n==2:
-        Preset={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':6}                                      #réglage Preset 3
-       ,'Bot2Map':{'Type':'Golem','x':160,'y':160,'PV':1}
-       ,'Bot3Map':{'Type':'Golem','x':480,'y':160,'PV':1}
-       ,'Bot4Map':{'Type':'Phantom','x':140,'y':40,'PV':1}}
+        Preset={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':8}                                      #réglage Preset 3
+       ,'Bot2Map':{'Type':'Mort','x':160,'y':160,'PV':1}
+       ,'Bot3Map':{'Type':'Mort','x':480,'y':160,'PV':1}
+       ,'Bot4Map':{'Type':'Mort','x':140,'y':40,'PV':1}}
     elif n==3:
         Preset={'Bot1Map':{'Type':'Zombie','x':60,'y':280,'PV':3}                                      #réglage Preset 4
        ,'Bot2Map':{'Type':'Phantom','x':320,'y':300,'PV':1}
@@ -152,19 +157,19 @@ def PresetBot(n):
         Preset={'Bot1Map':{'Type':'Arabe','x':460,'y':160,'PV':1}                                      #réglage Preset 5
        ,'Bot2Map':{'Type':'Zombie','x':280,'y':120,'PV':2}
        ,'Bot3Map':{'Type':'Zombie','x':360,'y':120,'PV':3}
-       ,'Bot4Map':{'Type':'Golem','x':320,'y':160,'PV':1}}
+       ,'Bot4Map':{'Type':'Phantom','x':320,'y':160,'PV':1}}
     elif n==5:
         Preset={'Bot1Map':{'Type':'Phantom','x':260,'y':200,'PV':1}                                      #réglage Preset 6
        ,'Bot2Map':{'Type':'Phantom','x':380,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Mage','x':460,'y':40,'PV':1}
        ,'Bot4Map':{'Type':'Phantom','x':320,'y':100,'PV':1}}
     elif n==6:
-        Preset={'Bot1Map':{'Type':'Golem','x':320,'y':160,'PV':1}                                      #réglage Preset 7
+        Preset={'Bot1Map':{'Type':'Zombie','x':320,'y':160,'PV':2}                                      #réglage Preset 7
        ,'Bot2Map':{'Type':'Mage','x':320,'y':160,'PV':1}
        ,'Bot3Map':{'Type':'Zombie','x':240,'y':80,'PV':4}
        ,'Bot4Map':{'Type':'Zombie','x':460,'y':240,'PV':1}}
     else:
-        Preset={'Bot1Map':{'Type':'Golem','x':300,'y':260,'PV':1}                                      #réglage Preset 8
+        Preset={'Bot1Map':{'Type':'Mort','x':300,'y':260,'PV':1}                                      #réglage Preset 8
        ,'Bot2Map':{'Type':'Zombie','x':40,'y':160,'PV':4}
        ,'Bot3Map':{'Type':'Phantom','x':280,'y':120,'PV':1}
        ,'Bot4Map':{'Type':'Phantom','x':360,'y':200,'PV':1}}
@@ -313,9 +318,10 @@ Lock=0
 def SPorte():                                                                      #Si la salle ou le joueur se situe a que des golem ou morts, on ourvre les grilles.
     global Lock
     if Player['x']>33 and Player['x']<600 and Player['y']>33 and Player['y']<315 :
-        if (Bot1['Type']=='Mort' or Bot1['Type']=='Golem') and (Bot2['Type']=='Mort' or Bot2['Type']=='Golem') and (Bot3['Type']=='Mort' or Bot3['Type']=='Golem') and (Bot4['Type']=='Mort' or Bot4['Type']=='Golem') :
+        if Bot1['Type']=='Mort'  and Bot2['Type']=='Mort'  and Bot3['Type']=='Mort'  and Bot4['Type']=='Mort' and Lock==1 :
             Lock=0
-        else :
+            pyxel.play(2,14)
+        elif  Bot1['Type']!='Mort'  or Bot2['Type']!='Mort'  or Bot3['Type']!='Mort'  or Bot4['Type']!='Mort':
             Lock=1
 
     
@@ -434,6 +440,8 @@ def Course():                                                                   
         Player['Vitesse']=4
         Player['Stamina']= Player['Stamina']-Player['StamDepletion']               #il perd de la stamina
         FrameDep(Player,12)
+        if pyxel.frame_count%10==0:
+            pyxel.play(3,15)
         if Player['Stamina']<=5:                                                   #Si il a - de 5 stamina : il devient fatiguer
             Player['Fatigue']= 1
     else:
@@ -550,6 +558,7 @@ def Attaque():                                                                  
         Player['Stamina']-=30
         Coup=3
         Player['Frappe']['Status']=True
+        pyxel.play(2,17)
     if Player['Frappe']['Status']==True :                                                         #Dès qu'il tappe : le compteur est mis a jour et les frames d'animations et calculs commence 
         if pyxel.frame_count%10==0:
             Coup-=1
@@ -663,6 +672,11 @@ bouledefeu['Type']='Mort'
 bouledefeu['Sens']='Droite'
 bouledefeu['Frame']=0
 
+GolemBot=dict()
+GolemBot['vx']=0
+GolemBot['vy']=0
+
+
 def bot(entity):                                                                 #Fait en sorte que les bots pourusivent le joueur en fonction de leur vitesse 
     if Player['x']-entity['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
         entity['Sens']='Droite'
@@ -680,7 +694,7 @@ def bot(entity):                                                                
         
         
 def types(entity):                                                              #Utilise les différentes fonction selon le type du bot
-    global XYmap
+    global XYmap, StunCauch
     if entity['Type']=='Phantom':                                               #Détecte si le bot est un Fantome
         Phantom(entity)
     if entity['Type']=='Zombie':                                                #Détecte si le bot est un Zombie
@@ -696,6 +710,7 @@ def types(entity):                                                              
     if entity['Type']=='Wario':                                                 #Wario (Pas early acces)
         wario()
     if entity['PV']<=0:
+        StunCauch=0
         entity['Type']='Mort'
         if entity==Bot1:                                                        #Dès qu'un bots a 0 PVs, il meurt dans le jeu et la map (pour ne pas qu'il revienne d'entre les morts)
             XYmap['Bot1Map']['Type']='Mort'
@@ -791,12 +806,38 @@ def Mage(entity):                                                               
         pyxel.play(1,9)
 
 def Golem(entity):                                                             #Fait les caractéristique du golem
-    entity['Vitesse']=0.05                                                        #Il est immobile
+    global StunCauch
+    entity['Vitesse']=0                                                          #Il est "immobile"
+    if StunCauch > -10  and StunCauch < 0:                                       #Quand il est en cooldown
+        if pyxel.frame_count%10==0:
+            StunCauch-=random.uniform(0.5,1.5)                                      #reduit le timer
+    elif StunCauch==0: 
+        StunCauch-=0.5                                                             #Quand il a fini sont rush : il reprend un timer mais pers un point de vie
+        entity['PV']-=1
+    elif StunCauch <= -10 :
+        GolemBot['vx']=(Player['x']-entity['x'])*0.05                             #Dès que sont timer fini: prend la pos du joueur et se met en rush
+        GolemBot['vy']=(Player['y']-entity['y'])*0.05
+        entity['x']+=GolemBot['vx']*3                                            #Il va a une direction donnée
+        entity['y']+=GolemBot['vy']*3
+        StunCauch=1
+    elif StunCauch==1:
+        if entity['x']<30 or entity['y']<30:                                     #quand il est en rush: il fonce vers les pos trouver
+            StunCauch=0
+            GolemBot['vx']=0
+            GolemBot['vy']=0
+        if entity['x']>600 or entity['y']>315:                                  #si il touche un mur: il a fini son rush
+            StunCauch=0
+            GolemBot['vx']=0
+            GolemBot['vy']=0
+        entity['x']+=GolemBot['vx']                                            #Il va a une direction donnée
+        entity['y']+=GolemBot['vy']
     Draw64px(entity,192,128,4)
     bot(entity)
-    if Player['x']<entity['x']+36 and Player['x']>entity['x']-36 and Player['y']>entity['y']-50 and Player['y']<entity['y']+50 and pyxel.frame_count %10==0:
-        Player['PV']-=0.5                                                       #Infliger des dégats si le joueur est proche (+ Son)
+    if Player['x']<entity['x']+28 and Player['x']>entity['x']-28 and Player['y']>entity['y']-38 and Player['y']<entity['y']+38 and Player['Immune'] == 0:
+        Player['PV']-=2                                                      #Infliger des dégats si le joueur est proche (+ Son)
         pyxel.play(2,4)
+        Player['Immune']=3
+        
 global peur 
 peur=0
 def Cauchemare(entity):                                                             #Fait les caractéristique du Cauchemare
@@ -1502,6 +1543,7 @@ def mortanime():
     Y=0
     pyxel.cls(0)
     if timer1 >0  and timer1 <5:
+       pyxel.play(1,16)
        pyxel.pal(7,1)
     if timer1 >5  and timer1 <10: #fondu inversé (commence du noir et fini blanc)
         pyxel.pal(7,5)
@@ -1554,8 +1596,9 @@ def screamer():
             pyxel.play(2,5)
 
 def recommence():                                                         #Le jeu restart completement (WIP (SalleAlea et qlqch sont le prblm))
-    global start,debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol,MapMob,Player,peur,Mort
+    global start,debug,Lock,Porte,Jour,Devmode,Xmap,Ymap,XResol,YResol,MapMob,Player,peur,Mort,timer1
     debug=0
+    timer1=0
     Lock=0
     Porte=0
     Jour=0
