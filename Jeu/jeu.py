@@ -154,7 +154,7 @@ def PresetBot(n):
        ,'Bot3Map':{'Type':'Zombie','x':320,'y':160,'PV':3}
        ,'Bot4Map':{'Type':'Mort','x':0,'y':0,'PV':1}}
     elif n==4 :
-        Preset={'Bot1Map':{'Type':'Arabe','x':460,'y':160,'PV':1}                                      #réglage Preset 5
+        Preset={'Bot1Map':{'Type':'kamikaze','x':460,'y':160,'PV':1}                                      #réglage Preset 5
        ,'Bot2Map':{'Type':'Zombie','x':280,'y':120,'PV':2}
        ,'Bot3Map':{'Type':'Zombie','x':360,'y':120,'PV':3}
        ,'Bot4Map':{'Type':'Phantom','x':320,'y':160,'PV':1}}
@@ -175,7 +175,7 @@ def PresetBot(n):
        ,'Bot4Map':{'Type':'Phantom','x':360,'y':200,'PV':1}}
     return Preset.copy()
 
-ObjetPreset=[None,'Boisson','Jambon','Batterie','Coeur',None]                                          #Liste des objets possible avec 2 none pour avoir ~1/3 des salle sans objets
+ObjetPreset=[None,'Boisson','Seringue','Batterie','Coeur',None]                                          #Liste des objets possible avec 2 none pour avoir ~1/3 des salle sans objets
 
 MapMob=[]
 
@@ -287,7 +287,7 @@ def MapMobSet():                                                                
         Objet['Type']=None
     else:                                                                                          #La salle 1
         Salle(MapMob[Player['Ymob']][Player['Xmob']])
-    JambonBot['Type']='Mort'
+    SeringueBot['Type']='Mort'
 
 
 def Salle(m):                                                                                     #cette fonction mets en place les salles selon les réglages donnés.
@@ -577,13 +577,13 @@ def Attaque():                                                                  
         Player['StamRegen']=0.5
     
 def drawObjets():
-    if Player['Objet']=='Jambon':                                                            #montre le Jambon dans les mains du joueur du bon coté
+    if Player['Objet']=='Seringue':                                                            #montre la Seringue dans les mains du joueur du bon coté
         if Player['Sens']=='Droite':
             pyxel.blt(Player['x'],Player['y']-8,2,0,40,16,16,1)
         else:
             pyxel.blt(Player['x']-16,Player['y']-8,2,0,40,-16,16,1)
-    if JambonBot['Type']=='Lancer':
-        pyxel.blt(JambonBot['x'],JambonBot['y'],2,0,40,16,16,1)
+    if SeringueBot['Type']=='Lancer':
+        pyxel.blt(SeringueBot['x'],SeringueBot['y'],2,0,40,16,16,1)
     if Player['Objet']=='Boisson':                                                            #montre la Boisson dans les mains du joueur du bon coté
         if Player['Sens']=='Droite':
             pyxel.blt(Player['x'],Player['y']-8,2,0,56,16,16,1)
@@ -591,21 +591,21 @@ def drawObjets():
             pyxel.blt(Player['x']-16,Player['y']-8,2,0,56,-16,16,1)
 
 def Objets():
-    if Player['Objet']=='Jambon':                                                              #Si le joueur a du Jambon dans la main : il peut le lancer
+    if Player['Objet']=='Seringue':                                                              #Si le joueur a une Seringue dans la main : il peut la lancer
         if pyxel.btnp(pyxel.KEY_R) :
-            JambonBot['Type']='Lancer'
-            JambonBot['x']=Player['x']-8                                                             #Le jambon lancer prend les coos du joueur
-            JambonBot['y']=Player['y']-8
-            Player['Objet']=None                                                                     #Le joueur n'a plus de jambon (parce que il l'a lancer)
-    if JambonBot['Type']=='Lancer':                                                            #Si il y a un Jambon lancer: Il regarde si un des bots est arabe
-        if Bot1['Type']=='Arabe':                                                                    #Si il trouve il fonce sur lui.
-            JambonLancer(JambonBot,Bot1)
-        elif Bot2['Type']=='Arabe':
-            JambonLancer(JambonBot,Bot2)
-        elif Bot3['Type']=='Arabe':
-            JambonLancer(JambonBot,Bot3)
-        elif Bot4['Type']=='Arabe':
-            JambonLancer(JambonBot,Bot4)
+            SeringueBot['Type']='Lancer'
+            SeringueBot['x']=Player['x']-8                                                             #La Seringue lancer prend les coos du joueur
+            SeringueBot['y']=Player['y']-8
+            Player['Objet']=None                                                                     #Le joueur n'a plus de Seringue (parce que il l'a lancer)
+    if SeringueBot['Type']=='Lancer':                                                            #Si il y a une Seringue lancer: Il regarde si un des bots est kamikaze
+        if Bot1['Type']=='kamikaze':                                                                    #Si il trouve il fonce sur lui.
+            SeringueLancer(SeringueBot,Bot1)
+        elif Bot2['Type']=='kamikaze':
+            SeringueLancer(SeringueBot,Bot2)
+        elif Bot3['Type']=='kamikaze':
+            SeringueLancer(SeringueBot,Bot3)
+        elif Bot4['Type']=='kamikaze':
+            SeringueLancer(SeringueBot,Bot4)
     if Player['Objet']=='Boisson':                                                            #Si le joueur a une boisson dans la main : il peut la boire
         if pyxel.btnp(pyxel.KEY_R) :
             Player['Energisante']=10                                                                     #Sela boost le joueur pendant un sertain temps
@@ -699,8 +699,8 @@ def types(entity):                                                              
         Phantom(entity)
     if entity['Type']=='Zombie':                                                #Détecte si le bot est un Zombie
         Zombie(entity)
-    if entity['Type']=='Arabe':                                                 #Détecte si le bot est un Arabe
-        Arabe(entity)
+    if entity['Type']=='kamikaze':                                                 #Détecte si le bot est un kamikaze
+        kamikaze(entity)
     if entity['Type']=='Mage':                                                  #Détecte si le bot est un Mage
         Mage(entity)
     if entity['Type']=='Golem':                                                 #Détecte si le bot est un Golem
@@ -769,7 +769,7 @@ def Zombie(entity):                                                             
         
 
 
-def Arabe(entity):                                                             #Fait les caractéristique de l'Arabe
+def kamikaze(entity):                                                             #Fait les caractéristique du kamikaze
     if Player['Frappe']['Status']==False:
         entity['Vitesse']=1.75
     Draw32px(entity,96,0,1,1)
@@ -778,11 +778,11 @@ def Arabe(entity):                                                             #
         pyxel.play(2,6)                                                         #Infliger des dégats si le joueur est proche (+ Son)
         Player['PV']-=4
         Player['Immune']=5
-        entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Comme un Kamikaze)
+        entity['PV']=0                                                              #Meur si il réussit a faire des dégats (Il s'explose)
     if Player['Frappe']['Status']==True and Player['Frappe']['x']<entity['x']+30 and Player['Frappe']['x']>entity['x']-30 and Player['Frappe']['y']>entity['y']-32 and Player['Frappe']['y']<entity['y']+32:
         if entity['Vitesse']==1.75:
             pyxel.play(1,9)
-        entity['Vitesse']=-0.75                                                 #Si l'arabe se fait tapper : il recul (moins loin que le zombie)
+        entity['Vitesse']=-0.75                                                 #Si le kamikaze se fait tapper : il recul (moins loin que le zombie)
         
 
 def Mage(entity):                                                                 #Fait les caractéristique de Mage
@@ -997,10 +997,10 @@ Objet['y']=0
 Objet['Type']=None
 Objet['Rammasser']=0
 
-JambonBot=dict()                                                               #Le jambon a tête chercheuse
-JambonBot['x']=0
-JambonBot['y']=0
-JambonBot['Type']='Mort'
+SeringueBot=dict()                                                               #Le Seringue a tête chercheuse
+SeringueBot['x']=0
+SeringueBot['y']=0
+SeringueBot['Type']='Mort'
 
 Levier1={'Status':0}                                                         #statut du levier (on/off)
 Levier2={'Status':0}                                                         #statut du levier (on/off)
@@ -1019,8 +1019,8 @@ def typesobj(objet):                                                            
         Boisson(objet)
     if objet['Type']=='Batterie':                                               #Détecte si l'objet est une batterie
         Pile(objet)
-    if objet['Type']=='Jambon':                                                 #Détecte si l'objet est du jambon
-        Jambon(objet)
+    if objet['Type']=='Seringue':                                                 #Détecte si l'objet est une Seringue
+        Seringue(objet)
     if objet['Type']=='Coeur':
         Coeur(objet)
 
@@ -1049,27 +1049,27 @@ def LevierConfig(objet,L):                                            #Permet l'
                 Porte+=1
                 pyxel.play(2,12)
 
-def Jambon(objet):
-    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret du jambon : il peut le ramasser 
+def Seringue(objet):
+    if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret de la Seringue : il peut la ramasser 
             if pyxel.btnp(pyxel.KEY_E) :
                 Objet['Type']=Player['Objet']
-                XYmap['ObjetMap']['Type']=Player['Objet']                                 #Le jambon rammassé prend la place de l'objet dans les mains du joueur (si il en a un)
-                Player['Objet']='Jambon'
+                XYmap['ObjetMap']['Type']=Player['Objet']                                 #La Seringue rammassée prend la place de l'objet dans les mains du joueur (si il en a un)
+                Player['Objet']='Seringue'
     pyxel.blt(objet['x'],objet['y'],2,0,40,16,16,1)
 
     
-def JambonLancer(Jambon,Arabe):
-    if Arabe['x']-Jambon['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
-        Jambon['x']=Jambon['x']+2
-    elif Arabe['x']-Jambon['x'] <= 0:                                                 #si le joueur est a gauche : le bot va a gauche
-        Jambon['x']=Jambon['x']-2
-    elif Arabe['y']-Jambon['y'] >= 0:                                                 #si le joueur est en haut : le bot va en haut
-        Jambon['y']=Jambon['y']+2
-    elif Arabe['y']-Jambon['y'] <= 0:                                                 #si le joueur est en bas : le bot va en bas
-        Jambon['y']=Jambon['y']-2
-    if Arabe['x']<Jambon['x']+28 and Arabe['x']>Jambon['x']-28 and Arabe['y']>Jambon['y']-28 and Arabe['y']<Jambon['y']+28:
-        Jambon['Type']='Mort'
-        Arabe['PV']=0
+def SeringueLancer(Seringue,kamikaze):
+    if kamikaze['x']-Seringue['x'] >= 0:                                                 #si le joueur est a droite : le bot va a droite
+        Seringue['x']=Seringue['x']+2
+    elif kamikaze['x']-Seringue['x'] <= 0:                                                 #si le joueur est a gauche : le bot va a gauche
+        Seringue['x']=Seringue['x']-2
+    elif kamikaze['y']-Seringue['y'] >= 0:                                                 #si le joueur est en haut : le bot va en haut
+        Seringue['y']=Seringue['y']+2
+    elif kamikaze['y']-Seringue['y'] <= 0:                                                 #si le joueur est en bas : le bot va en bas
+        Seringue['y']=Seringue['y']-2
+    if kamikaze['x']<Seringue['x']+28 and kamikaze['x']>Seringue['x']-28 and kamikaze['y']>Seringue['y']-28 and kamikaze['y']<Seringue['y']+28:
+        Seringue['Type']='Mort'
+        kamikaze['PV']=0
         pyxel.play(2,3)
         
 def Coeur(objet):
@@ -1090,7 +1090,7 @@ def Pile(objet):
 def Boisson(objet):
     if Player['x']>objet['x']-30 and Player['x']<objet['x']+30 and Player['y']>objet['y']-30 and Player['y']<objet['y']+30: #si le joueur est pret de la boisson
             if pyxel.btnp(pyxel.KEY_E) :
-                Objet['Type']=Player['Objet']                                                           #comme le jambon il prend la place de la main
+                Objet['Type']=Player['Objet']                                                           #comme la Seringue il prend la place de la main
                 XYmap['ObjetMap']['Type']=Player['Objet']
                 Player['Objet']='Boisson'
     pyxel.blt(objet['x'],objet['y'],2,0,56,16,16,1)
@@ -1403,10 +1403,10 @@ def PageII():                              #paragraphe de la page 2 sur les Enne
     pyxel.text(60,110,str("Les Phantomes n'aiment vraiment pas la lumiere forte donc flasher le pour qu'il parte"),3)
     
     pyxel.circ(26,146,18,1)
-    pyxel.text(50,130,str("L'Arabe :"),4)
+    pyxel.text(50,130,str("Le kamikaze :"),4)
     pyxel.blt(10,130,1,96,0,32,32,1)
     pyxel.text(60,140,str("Ennemis rare, il s'explose sur vous vous causant d'enorme degats."),3)
-    pyxel.text(60,150,str("Meme si vous pouver le taper, il partira uniquement si vous lui lancer du jambon."),3)
+    pyxel.text(60,150,str("Meme si vous pouver le taper, il partira uniquement si vous l'endormer."),3)
     
     pyxel.circ(26,186,18,1)
     pyxel.text(50,170,str("Le Mage :"),4)
@@ -1474,10 +1474,10 @@ def PageIII():                              #paragraphe de la page 3 sur les Mec
     pyxel.text(60,290,str("La boisson est un objet que vous utilisez quand vous voulez."),3)
     pyxel.text(60,300,str("Il vous regenere et boost temporairement votre endurence."),3)
     
-    pyxel.text(330,280,str("Le jambon"),4)
+    pyxel.text(330,280,str("La Seringue"),4)
     pyxel.blt(338,290,2,0,40,16,16,1)
-    pyxel.text(390,290,str("Le jambon est un objet que vous utilisez quand vous voulez."),3)
-    pyxel.text(390,300,str("Vous devez le lancer sur l'arabe pour le faire fuir."),3)
+    pyxel.text(390,290,str("La Seringue est un objet que vous utilisez quand vous voulez."),3)
+    pyxel.text(390,300,str("Vous devez le lancer sur le kamikaze pour l'endormir."),3)
     
     pyxel.text(5,340,"<--   Les Mobs",7)
     pyxel.text(550,340,"But   -->",7)
